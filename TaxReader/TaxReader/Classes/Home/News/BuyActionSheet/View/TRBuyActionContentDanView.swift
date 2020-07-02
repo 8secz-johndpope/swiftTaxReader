@@ -8,7 +8,11 @@
 
 import UIKit
 
+typealias TRBuyActionContentDanViewBlock = (_ valueModelArray: [TRProductGetIssueNumberDataBatchModel]?) ->Void
+
 class TRBuyActionContentDanView: UIView {
+    
+    var selectedItemValueModelArrayBlock: TRBuyActionContentDanViewBlock?
     
     var dataArray: [TRProductGetIssueNumberDataBatchModel]?
     var dataArraySelectedModel: NSMutableArray = NSMutableArray.init()
@@ -73,6 +77,10 @@ class TRBuyActionContentDanView: UIView {
             }
             
             self.dataArray = dataArray
+            for _ in 0..<self.dataArray!.count {
+                let kongModel = TRProductGetIssueNumberDataBatchModel.init()
+                self.dataArraySelectedModel.add(kongModel)
+            }
         }
     }
 }
@@ -102,25 +110,28 @@ extension TRBuyActionContentDanView: UICollectionViewDataSource, UICollectionVie
 extension TRBuyActionContentDanView: TRBuyActionDanCollectionViewCellDelegate {
     func collectionViewItemButtonDidSelectRowAt(button: UIButton) {
         let buttonTag = button.tag
-        var model: TRProductGetIssueNumberDataBatchModel = (self.dataArray?[buttonTag])!
-        print("buttonTag = \(buttonTag) isSelected = \(model.isSelected) dataArraySelectedModel = \(self.dataArraySelectedModel.count)")
+        let model: TRProductGetIssueNumberDataBatchModel = (self.dataArray?[buttonTag])!
+        print("buttonTag = \(buttonTag) isSelected = \(model.isSelected) count = \(self.dataArraySelectedModel.count)")
         
-        if (model.isSelected ) {
-            self.dataArraySelectedModel.remove(model)
-            model.isSelected = false
-        }else {
-            self.dataArraySelectedModel.add(model)
-            model.isSelected = true
+        if button.isSelected {
+            self.dataArraySelectedModel.replaceObject(at: buttonTag, with: model)
+        } else {
+            let kongModel = TRProductGetIssueNumberDataBatchModel.init()
+            self.dataArraySelectedModel.replaceObject(at: buttonTag, with: kongModel)
         }
-        
-        self.dataArray?.remove(at: buttonTag)
-        self.dataArray?.insert(model, at: buttonTag)
         
         print("count = \(self.dataArraySelectedModel.count)")
+        
+        var valueModelArray: [TRProductGetIssueNumberDataBatchModel]? = []
         for lindex in 0..<self.dataArraySelectedModel.count {
             let model: TRProductGetIssueNumberDataBatchModel = self.dataArraySelectedModel[lindex] as! TRProductGetIssueNumberDataBatchModel
-            print("ProdIssue = \(model.ProdIssue)")
+            if model.ProdID != 0 {
+                valueModelArray?.append(model)
+            }
         }
+        
+        guard let selectedItemValueModelArrayBlock = selectedItemValueModelArrayBlock else { return }
+        selectedItemValueModelArrayBlock(valueModelArray)
     }
 }
 

@@ -19,6 +19,7 @@ class TRBuyActionSheetViewController: UIViewController {
     weak var delegate: TRBuyActionSheetViewControllerDelegate?
     
     var productIssueNumberDataModel: TRProductGetIssueNumberDataModel?
+    var dataArrayDanValueModel: [TRProductGetIssueNumberDataBatchModel]?
     
     fileprivate var coverVeiw = UIView()
     fileprivate var contentView = UIView()
@@ -50,6 +51,9 @@ class TRBuyActionSheetViewController: UIViewController {
     lazy var buyContentView: TRBuyActionContentView = {
         let view = TRBuyActionContentView.init(frame: .zero)
         view.isHasCurrentPian = self.isHasCurrentPian
+        view.selectedItemValueModelArrayBlock = {[unowned self](valueModelArray) in
+            self.dataArrayDanValueModel = valueModelArray
+        }
         
         return view
     }()
@@ -225,7 +229,7 @@ extension TRBuyActionSheetViewController {
             dataArrayProductID?.append(ProductID)
             dataArrayProductCount?.append(ProductCount)
         case 2:
-            let dataArrBatchModel: [TRProductGetIssueNumberDataBatchModel]? = dataModel?.BatchProduct
+            let dataArrBatchModel: [TRProductGetIssueNumberDataBatchModel]? = self.dataArrayDanValueModel
             for lindex in 0..<dataArrBatchModel!.count {
                 let model: TRProductGetIssueNumberDataBatchModel? = dataArrBatchModel?[lindex]
                 let ProductID = "\(model?.ProdID ?? 0)"

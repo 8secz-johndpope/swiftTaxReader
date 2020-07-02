@@ -8,7 +8,12 @@
 
 import UIKit
 
+typealias TRBuyActionContentViewBlock = (_ valueModelArray: [TRProductGetIssueNumberDataBatchModel]?) ->Void
+
 class TRBuyActionContentView: UIView {
+    
+    var selectedItemValueModelArrayBlock: TRBuyActionContentViewBlock?
+    
     lazy var trContentView: UIView = {
         let view = UIView.init(frame: .zero)
         view.backgroundColor = UIColor.green
@@ -34,7 +39,10 @@ class TRBuyActionContentView: UIView {
 
     lazy var trContentDanView: TRBuyActionContentDanView = {
         let view = TRBuyActionContentDanView.init(frame: .zero)
-        
+        view.selectedItemValueModelArrayBlock = {[unowned self](valueModelArray) in
+            guard let selectedItemValueModelArrayBlock = self.selectedItemValueModelArrayBlock else { return }
+            selectedItemValueModelArrayBlock(valueModelArray)
+        }
         return view
     }()
 

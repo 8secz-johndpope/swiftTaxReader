@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="TROrderCodeTableViewCell" customModule="TaxReader" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p6a-bC-xOY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xg-eV-Xg3">
+                                <rect key="frame" x="8" y="8" width="39.5" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OiA-ZL-u3d">
+                                <rect key="frame" x="212" y="17" width="100" height="30"/>
+                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="W80-FJ-tmb"/>
+                                    <constraint firstAttribute="width" constant="100" id="Z2X-3g-zn2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="复制激活码"/>
+                                <connections>
+                                    <action selector="trCopyCodeButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4sA-Tv-JbB"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rp-du-IXK">
+                                <rect key="frame" x="8" y="36" width="39.5" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="OiA-ZL-u3d" secondAttribute="trailing" constant="8" id="BAC-DD-BuC"/>
+                            <constraint firstItem="6xg-eV-Xg3" firstAttribute="top" secondItem="p6a-bC-xOY" secondAttribute="top" constant="8" id="NJo-8v-rLi"/>
+                            <constraint firstItem="2Rp-du-IXK" firstAttribute="height" secondItem="6xg-eV-Xg3" secondAttribute="height" id="Psi-RF-vm2"/>
+                            <constraint firstItem="6xg-eV-Xg3" firstAttribute="leading" secondItem="p6a-bC-xOY" secondAttribute="leading" constant="8" id="T8p-3u-UrY"/>
+                            <constraint firstItem="OiA-ZL-u3d" firstAttribute="centerY" secondItem="p6a-bC-xOY" secondAttribute="centerY" id="WJd-fK-lON"/>
+                            <constraint firstItem="2Rp-du-IXK" firstAttribute="leading" secondItem="p6a-bC-xOY" secondAttribute="leading" constant="8" id="del-sC-JfY"/>
+                            <constraint firstItem="2Rp-du-IXK" firstAttribute="top" secondItem="6xg-eV-Xg3" secondAttribute="bottom" constant="8" id="jXl-rY-rFu"/>
+                            <constraint firstAttribute="bottom" secondItem="2Rp-du-IXK" secondAttribute="bottom" constant="8" id="s6d-rY-8Tv"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="p6a-bC-xOY" secondAttribute="bottom" id="6Z2-x9-nb1"/>
+                    <constraint firstItem="p6a-bC-xOY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EH9-Ie-MHQ"/>
+                    <constraint firstItem="p6a-bC-xOY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Mul-4b-tZ8"/>
+                    <constraint firstAttribute="trailing" secondItem="p6a-bC-xOY" secondAttribute="trailing" id="jpr-k4-fC4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="trCopyCodeButton" destination="OiA-ZL-u3d" id="7O7-xL-EOG"/>
+                <outlet property="trDetailTitleLabel" destination="2Rp-du-IXK" id="tVT-h0-LOr"/>
+                <outlet property="trTitleLabel" destination="6xg-eV-Xg3" id="njL-8r-KQ1"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="92"/>
+        </tableViewCell>
+    </objects>
+</document>

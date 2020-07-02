@@ -1,0 +1,6 @@
+framework module Pods_TaxReader {
+  umbrella header "Pods-TaxReader-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TRBuyActionDanCollectionViewCell" customModule="TaxReader" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nW-gq-JS1">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c64-Mz-UZ5">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="-4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="[1]" image="check-btn.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="selected" image="check-btn-checked.png"/>
+                                <connections>
+                                    <action selector="trBatchButtonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="gj6-l2-2Ko"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="c64-Mz-UZ5" secondAttribute="bottom" id="6Cn-7G-2sJ"/>
+                            <constraint firstAttribute="trailing" secondItem="c64-Mz-UZ5" secondAttribute="trailing" id="A1o-Am-vYm"/>
+                            <constraint firstItem="c64-Mz-UZ5" firstAttribute="top" secondItem="1nW-gq-JS1" secondAttribute="top" id="GCZ-ru-m8l"/>
+                            <constraint firstItem="c64-Mz-UZ5" firstAttribute="leading" secondItem="1nW-gq-JS1" secondAttribute="leading" id="wjf-Co-0oh"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="1nW-gq-JS1" secondAttribute="bottom" id="RCU-01-74F"/>
+                <constraint firstItem="1nW-gq-JS1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="TWz-Ft-jHl"/>
+                <constraint firstItem="1nW-gq-JS1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="caE-0T-FzX"/>
+                <constraint firstAttribute="trailing" secondItem="1nW-gq-JS1" secondAttribute="trailing" id="wdg-SD-hXB"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="trBatchButton" destination="c64-Mz-UZ5" id="8v7-Xw-FiR"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="127.90178571428571"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="check-btn-checked.png" width="20" height="20"/>
+        <image name="check-btn.png" width="20" height="20"/>
+    </resources>
+</document>

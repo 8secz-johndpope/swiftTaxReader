@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreenImage" translatesAutoresizingMaskIntoConstraints="NO" id="Pn5-wb-I0c">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="税务期刊交流平台" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnN-oy-eAn">
+                                <rect key="frame" x="114" y="434.5" width="186.5" height="27.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="gk7-Zo-7MR">
+                                <rect key="frame" x="44" y="320.5" width="326" height="98"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="tnN-oy-eAn" firstAttribute="top" secondItem="gk7-Zo-7MR" secondAttribute="bottom" constant="16" id="1EJ-mP-sGh"/>
+                            <constraint firstItem="tnN-oy-eAn" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="1oE-Lg-Qf5"/>
+                            <constraint firstItem="gk7-Zo-7MR" firstAttribute="leading" secondItem="OmI-pB-ex3" secondAttribute="leading" constant="44" id="9MH-v3-L5c"/>
+                            <constraint firstItem="Pn5-wb-I0c" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="DPF-JC-jqN"/>
+                            <constraint firstItem="tnN-oy-eAn" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="UAY-rZ-IsZ"/>
+                            <constraint firstAttribute="trailing" secondItem="Pn5-wb-I0c" secondAttribute="trailing" id="Wnv-8z-ZiR"/>
+                            <constraint firstItem="Pn5-wb-I0c" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="XL7-h5-gF8"/>
+                            <constraint firstItem="OmI-pB-ex3" firstAttribute="trailing" secondItem="gk7-Zo-7MR" secondAttribute="trailing" constant="44" id="bTi-EN-XmQ"/>
+                            <constraint firstItem="gk7-Zo-7MR" firstAttribute="centerX" secondItem="tnN-oy-eAn" secondAttribute="centerX" id="fx9-et-Dde"/>
+                            <constraint firstAttribute="bottom" secondItem="Pn5-wb-I0c" secondAttribute="bottom" id="ttH-g0-qbF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OmI-pB-ex3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LaunchScreenImage" width="1280" height="2277"/>
+        <image name="logo" width="477.5" height="98"/>
+    </resources>
+</document>

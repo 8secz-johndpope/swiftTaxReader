@@ -16,9 +16,9 @@ let appsecret: String = "c4ca4238a0b923820dcc509a6f75849b"
 let appIp: String = "http://210.12.84.109"
 
 // API 接口调用
-let appAPI: String = "http://210.12.84.109/API"       // 线上
+//let appAPI: String = "http://210.12.84.109/API"       // 线上
 //let appAPI: String = "http://192.168.5.133:81/API"    // DMC 国投
-//let appAPI: String = "http://172.25.75.47:83"         // DMC 得实
+let appAPI: String = "http://172.25.75.47:83"         // DMC 得实
 
 // 来源（Android=10,IOS=20,PC=30）
 let UseFrom: String = "20"

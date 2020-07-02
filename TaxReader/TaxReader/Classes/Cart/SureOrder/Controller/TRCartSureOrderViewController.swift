@@ -381,7 +381,7 @@ extension TRCartSureOrderViewController {
             case .PAYMAX_CODE_ERROR_DEAL:
                 break
             case .PAYMAX_CODE_FAILURE:
-                self.pushToPaySuccessVc()
+                break
             case .PAYMAX_CODE_ERROR_CONNECT:
                 break
             case .PAYMAX_CODE_CHANNEL_WRONG:
@@ -398,6 +398,9 @@ extension TRCartSureOrderViewController {
                 break
             }
         }
+        
+        
+        self.pushToPaySuccessVc()
     }
     
     func payWeixin(orderCreateData: TROrderCreateDataModel) {
@@ -437,6 +440,16 @@ extension TRCartSureOrderViewController {
 //        /** 商家根据微信开放平台文档对数据做的签名 */
 //        @property (nonatomic, retain) NSString *sign;
         
+        if !WXApi.isWXAppInstalled() {
+            MBProgressHUD.showWithText(text: "没有安装微信", view: self.view)
+            return
+        }
+        
+        if !WXApi.isWXAppSupport() {
+            MBProgressHUD.showWithText(text: "不支持微信支付", view: self.view)
+            return
+        }
+        
         //调起微信支付
         let req = PayReq.init()
         req.partnerId = orderCreateData.mch_id
@@ -448,19 +461,17 @@ extension TRCartSureOrderViewController {
         let appid = orderCreateData.appid ?? ""
         let noncestr = orderCreateData.nonce_str ?? ""
         let package = "Sign=WXPay"
-        let partnerid = orderCreateData.prepay_id ?? ""
+        let partnerid = orderCreateData.mch_id ?? ""
         let prepayid = orderCreateData.prepay_id ?? ""
         let timestamp = "\(req.timeStamp)"
         let keyString = "key=zhongguoshuiwuzazhishe63886786KF"
         
         let signString = "appid=\(appid)&noncestr=\(noncestr)&package=\(package)&partnerid=\(partnerid)&prepayid=\(prepayid)&timestamp=\(timestamp)&\(keyString)"
         let sign = signString.md5Encrypt()
-        
         req.sign = sign
         
         WXApi.send(req)
     }
-    
     
     func pushToPaySuccessVc() {
         let nextVc = TRPaySuccessViewController(orderID: "")

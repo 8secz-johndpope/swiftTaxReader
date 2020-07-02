@@ -25,6 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate {
         return WXApi.handleOpen(url, delegate: WXApiManager.shared())
     }
     
+    func onResp(_ resp: BaseResp!) {
+        switch resp.errCode {
+        case 0:
+            print("支付成功")
+        default:
+            print("支付失败")
+        }
+    }
 
     // MARK: UISceneSession Lifecycle
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

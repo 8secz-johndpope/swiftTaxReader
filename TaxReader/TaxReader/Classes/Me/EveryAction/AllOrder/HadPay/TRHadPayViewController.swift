@@ -159,13 +159,16 @@ extension TRHadPayViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension TRHadPayViewController: TROrderTableViewCellDelegate{
+extension TRHadPayViewController: TROrderTableViewCellDelegate {
     func cellInvoiceButtonDidSelected(button: UIButton, cell: TROrderTableViewCell) {
-        print("查看发票")
+        let nextVc = TRInvoiceTicketViewController()
+        self.navigationController?.pushViewController(nextVc, animated: true)
     }
     
     func cellCodeButtonDidSelected(button: UIButton, cell: TROrderTableViewCell) {
-        print("复制激活码")
+        
+        let nextVc = TROrderCodeViewController(orderDetailID: "\(cell.detailModel?.OrderDetailID ?? 0)")
+        self.navigationController?.pushViewController(nextVc, animated: true)
     }
 }
 

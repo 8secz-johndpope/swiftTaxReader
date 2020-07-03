@@ -31,7 +31,7 @@ PODS:
 DEPENDENCIES:
   - BTCaptchaView (~> 1.0.4)
   - Chrysan (from `https://github.com/Harley-xk/Chrysan.git`)
-  - CryptoSwift (~> 1.0)
+  - CryptoSwift
   - DNSPageView (~> 1.0.1)
   - ESTabBarController-swift (~> 2.7)
   - FSPagerView (~> 0.8.2)
@@ -107,6 +107,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   ZZCryptManager: 4c493d59337f4c17d34bce04684ca5641903b9f7
 
-PODFILE CHECKSUM: d2f13a59370eb655b69d63139148ad0af26ca184
+PODFILE CHECKSUM: a2289dea6078746066e5532736d8fc521f6eab3a
 
 COCOAPODS: 1.9.1

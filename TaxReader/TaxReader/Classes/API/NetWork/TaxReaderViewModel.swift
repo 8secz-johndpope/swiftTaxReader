@@ -104,6 +104,7 @@ class TaxReaderViewModel: NSObject {
     var orderFindModel: TROrderFindModel?
     var orderActivityCodeModel: TROrderActivityCodeModel?
     var orderFindDetailModel: TROrderFindDetailModel?
+    var orderCreateModel: TROrderCreateModel?
     
     // cart
     var cartInfoModel: TRCartInfoModel?
@@ -990,6 +991,28 @@ extension TaxReaderViewModel {
                 
                 if let mappedObject = JSONDeserializer<TROrderActivityCodeModel>.deserializeFrom(json: json.description) {
                     self.orderActivityCodeModel = mappedObject
+                }
+
+                self.updateBlock?()
+            }
+        }
+    }
+    
+    func refreshDataSource_OrderSecpay(OrderForm: String,PayModel: String, OrderID: String) {
+        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.orderSecpay(OrderForm: OrderForm, PayModel: PayModel, OrderID: OrderID)) { (result) in
+            if case let .success(response) = result {
+                let data = try? response.mapJSON()
+                
+                guard let returnData = data else {
+                    print("returnData nil")
+                    return
+                }
+                
+                let json = JSON(returnData)
+                print("orderSecpay = \(json.description)")
+                
+                if let mappedObject = JSONDeserializer<TROrderCreateModel>.deserializeFrom(json: json.description) {
+                    self.orderCreateModel = mappedObject
                 }
 
                 self.updateBlock?()

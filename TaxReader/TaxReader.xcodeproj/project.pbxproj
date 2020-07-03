@@ -97,6 +97,7 @@
 		4F1912D52484EBDA00BA7C3D /* TaxReaderUserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1912D42484EBDA00BA7C3D /* TaxReaderUserAPI.swift */; };
 		4F1912D72485E7AC00BA7C3D /* TRMeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1912D62485E7AC00BA7C3D /* TRMeFooterView.swift */; };
 		4F1912D92485EA9900BA7C3D /* TRUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1912D82485EA9900BA7C3D /* TRUserInfoModel.swift */; };
+		4F2907F224AECE7300AC08DA /* TROrderSecpayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2907F124AECE7300AC08DA /* TROrderSecpayModel.swift */; };
 		4F39756A24763ED500F67AEA /* TRLAreaInlandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39756924763ED500F67AEA /* TRLAreaInlandViewController.swift */; };
 		4F3975722476402B00F67AEA /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39756C2476402A00F67AEA /* NetworkTools.swift */; };
 		4F3975732476402B00F67AEA /* test1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4F39756D2476402A00F67AEA /* test1.txt */; };
@@ -548,6 +549,7 @@
 		4F1912D42484EBDA00BA7C3D /* TaxReaderUserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxReaderUserAPI.swift; sourceTree = "<group>"; };
 		4F1912D62485E7AC00BA7C3D /* TRMeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRMeFooterView.swift; sourceTree = "<group>"; };
 		4F1912D82485EA9900BA7C3D /* TRUserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRUserInfoModel.swift; sourceTree = "<group>"; };
+		4F2907F124AECE7300AC08DA /* TROrderSecpayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TROrderSecpayModel.swift; sourceTree = "<group>"; };
 		4F39756924763ED500F67AEA /* TRLAreaInlandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRLAreaInlandViewController.swift; sourceTree = "<group>"; };
 		4F39756C2476402A00F67AEA /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
 		4F39756D2476402A00F67AEA /* test1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.txt; sourceTree = "<group>"; };
@@ -1499,6 +1501,7 @@
 				4F0E3F1C249B628A005FC4B5 /* TROrderActivityCodeModel.swift */,
 				4F62147524A3145F00020082 /* TROrderCreateModel.swift */,
 				4FFCE10024A977BE00AC5033 /* TROrderFindDetailModel.swift */,
+				4F2907F124AECE7300AC08DA /* TROrderSecpayModel.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -3370,6 +3373,7 @@
 				4F051FF8249E757800676780 /* AFSecurityPolicy.m in Sources */,
 				4FE277D0244833B400E60E09 /* TRAddressNameTFTableViewCell.swift in Sources */,
 				4FDDCCFB248F85CA0062A630 /* JJMenuDelegate.swift in Sources */,
+				4F2907F224AECE7300AC08DA /* TROrderSecpayModel.swift in Sources */,
 				4FC0539924752224000D5CD0 /* TRAreaNetModel.swift in Sources */,
 				4F5F665B248A1E2000443388 /* TROrderFooterView.swift in Sources */,
 				4F9CA04D249E0BF200B55FE1 /* TRReadTypeDetailView.swift in Sources */,

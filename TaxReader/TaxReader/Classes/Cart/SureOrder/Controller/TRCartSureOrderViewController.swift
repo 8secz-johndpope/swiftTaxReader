@@ -299,17 +299,17 @@ extension TRCartSureOrderViewController {
 
         networkBodyViewModel.updateBlock = {[unowned self] in
             print(self.networkBodyViewModel.orderCreateModel?.msg ?? "")
-            if payModel == "5" {
-                self.payAliLKL()
+            if payModel == PayModelAliLKL {
+                self.payAliLKL(orderCreateData: self.networkBodyViewModel.orderCreateModel?.data ?? TROrderCreateDataModel.init())
             }
-            if payModel == "22" {
+            if payModel == PayModelWeixin {
                 self.payWeixin(orderCreateData: self.networkBodyViewModel.orderCreateModel?.data ?? TROrderCreateDataModel.init())
             }
         }
         networkBodyViewModel.refreshDataSource_OrderCreate(URLPath: urlstring, parmeters: parmeters)
     }
     
-    func payAliLKL() {
+    func payAliLKL(orderCreateData: TROrderCreateDataModel) {
         /* demo的值
         {
             code = 000000;
@@ -350,17 +350,16 @@ extension TRCartSureOrderViewController {
                 message = "\U4ea4\U6613\U6210\U529f";
             }
          */
-        let orderCreateDataModel: TROrderCreateDataModel? = self.networkBodyViewModel.orderCreateModel?.data
         let dataObject:NSMutableDictionary = NSMutableDictionary.init()
-        dataObject.setValue(orderCreateDataModel?.h5JumpUrl, forKey: "h5JumpUrl")
-        dataObject.setValue(orderCreateDataModel?.merchantId, forKey: "merchantId")
-        dataObject.setValue(orderCreateDataModel?.orderId, forKey: "orderId")
-        dataObject.setValue("\(orderCreateDataModel?.returnCode ?? 0)", forKey: "returnCode")
-        dataObject.setValue(orderCreateDataModel?.returnMessage, forKey: "returnMessage")
-        dataObject.setValue(orderCreateDataModel?.secretKey, forKey: "secretKey")
+        dataObject.setValue(orderCreateData.h5JumpUrl, forKey: "h5JumpUrl")
+        dataObject.setValue(orderCreateData.merchantId, forKey: "merchantId")
+        dataObject.setValue(orderCreateData.orderId, forKey: "orderId")
+        dataObject.setValue("\(orderCreateData.returnCode)", forKey: "returnCode")
+        dataObject.setValue(orderCreateData.returnMessage, forKey: "returnMessage")
+        dataObject.setValue(orderCreateData.secretKey, forKey: "secretKey")
         dataObject.setValue("1", forKey: "success")
-        dataObject.setValue(orderCreateDataModel?.token, forKey: "token")
-        dataObject.setValue(orderCreateDataModel?.tradeNo, forKey: "tradeNo")
+        dataObject.setValue(orderCreateData.token, forKey: "token")
+        dataObject.setValue(orderCreateData.tradeNo, forKey: "tradeNo")
         dataObject.setValue("ALIPAYAPP", forKey: "tradeType")
         dataObject.setValue("", forKey: "xcxReqpath")
         dataObject.setValue("", forKey: "xcxUsername")

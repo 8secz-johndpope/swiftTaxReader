@@ -10,8 +10,13 @@ import UIKit
 
 class TRNewsDetailViewController: TRBaseViewController {
     
-    var getDocumentFilepath: String?
     var productIssueNumberDataModel: TRProductGetIssueNumberDataModel?
+    var documentFilepath: String?
+    var removeDianpath: String?
+    var appIpDownloadpath: String?
+    var filepath: String?
+    
+    var isCurrentPDFDownload: Bool? = false
     
     var PubIssueID: String?
     convenience init(PubIssueID: String?) {
@@ -25,14 +30,6 @@ class TRNewsDetailViewController: TRBaseViewController {
         view.navBackButtonClick = {[weak self]() in
             self?.navigationController?.popViewController(animated: true)
         }
-        
-        return view
-    }()
-    
-    lazy var dropView: TRNewsDetailDropView = {
-        let view = TRNewsDetailDropView.init(frame: .zero)
-        view.backgroundColor = UIColor.init(red: 217 / 255, green: 219 / 255, blue: 254 / 255, alpha: 1)
-        view.trTitleButton.addTarget(self, action: #selector(titleButtonClick(button:)), for: .touchUpInside)
         
         return view
     }()
@@ -56,6 +53,14 @@ class TRNewsDetailViewController: TRBaseViewController {
         return view
     }()
     
+    lazy var dropView: TRNewsDetailDropView = {
+        let view = TRNewsDetailDropView.init(frame: .zero)
+        view.backgroundColor = UIColor.init(red: 217 / 255, green: 219 / 255, blue: 254 / 255, alpha: 1)
+        view.trTitleButton.addTarget(self, action: #selector(titleButtonClick(button:)), for: .touchUpInside)
+        
+        return view
+    }()
+    
     lazy var catalogView: TRNewsDetailCatalogView = {
         let view = TRNewsDetailCatalogView.init(frame: .zero)
         view.backgroundColor = UIColor.green
@@ -70,17 +75,10 @@ class TRNewsDetailViewController: TRBaseViewController {
             make.top.left.right.equalToSuperview()
             make.height.equalTo(LXNavBarHeight)
         }
-        
-        self.view.addSubview(self.dropView)
-        self.dropView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.navView.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(44)
-        }
-        
+                
         self.view.addSubview(self.introView)
         self.introView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.dropView.snp.bottom)
+            make.top.equalTo(self.navView.snp.bottom)
             make.left.right.equalToSuperview()
             make.height.equalTo(180)
         }
@@ -92,9 +90,16 @@ class TRNewsDetailViewController: TRBaseViewController {
             make.height.equalTo(49)
         }
         
+        self.view.addSubview(self.dropView)
+        self.dropView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.funcView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(44)
+        }
+        
         self.view.addSubview(self.catalogView)
         self.catalogView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.funcView.snp.bottom)
+            make.top.equalTo(self.dropView.snp.bottom)
             make.left.right.bottom.equalToSuperview()
         }
     }
@@ -130,7 +135,13 @@ extension TRNewsDetailViewController {
             self.catalogView.dataArrayPubIssueCata = self.networkViewModel.productDetailModel?.data?.PubIssueCata
             
             // 根据接口数据判断当前期刊是否被收藏
-            self.funcView.button2.isSelected = ((self.networkViewModel.productDetailModel?.data?.IsFavorite) != nil)
+            self.funcView.button2.isSelected = ((self.networkViewModel.productDetailModel?.data?.IsFavorite) == nil)
+            self.documentFilepath = self.getDocumentFilePath(dataModel: self.networkViewModel.productDetailModel?.data)
+            self.removeDianpath = self.getRemoveDianPath(dataModel: self.networkViewModel.productDetailModel?.data)
+            self.appIpDownloadpath = self.getAppIpDownloadPathPath(dataModel: self.networkViewModel.productDetailModel?.data)
+            self.filepath = self.getFilePath(dataModel: self.networkViewModel.productDetailModel?.data)
+            self.isCurrentPDFDownload = self.judgePDFDownload(filePath: self.documentFilepath ?? "")
+            self.funcView.button3.isSelected = self.judgePDFDownload(filePath: self.documentFilepath ?? "")
             
             // 调用订阅下的弹框数据
             let dataModel: TRProductDetailDataModel? = self.networkViewModel.productDetailModel?.data
@@ -160,7 +171,7 @@ extension TRNewsDetailViewController {
     /// Initializes a document with the name of the pdf in the file system
     private func document(_ name: String) -> PDFDocument? {
         //guard let documentURL = Bundle.main.url(forResource: name, withExtension: "pdf") else { return nil }
-        return PDFDocument(url: URL.init(fileURLWithPath: self.getDocumentFilepath ?? ""))
+        return PDFDocument(url: URL.init(fileURLWithPath: self.documentFilepath ?? ""))
     }
     
     /// Initializes a document with the data of the pdf
@@ -217,10 +228,10 @@ extension TRNewsDetailViewController: TRNewsDetailCatalogViewDelegate {
 }
 
 extension TRNewsDetailViewController: TRNewsDetailFuncViewDelegate {
-    func buttonReadDidSelected(button: UIButton) {
-        let IsSubscribe = self.networkViewModel.productDetailModel?.data?.IsSubscribe ?? false
-        let PubIssueFreePDFPath = self.networkViewModel.productDetailModel?.data?.PubIssueFreePDF
-        let PubIssuePDFPath = self.networkViewModel.productDetailModel?.data?.PubIssuePDF
+    func getDocumentFilePath(dataModel: TRProductDetailDataModel?) -> String? {
+        let IsSubscribe = dataModel?.IsSubscribe ?? false
+        let PubIssueFreePDFPath = dataModel?.PubIssueFreePDF
+        let PubIssuePDFPath = dataModel?.PubIssuePDF
         let downloadPath = IsSubscribe ? PubIssuePDFPath : PubIssueFreePDFPath
         let appIpDownloadPath = "\(appIp)\(downloadPath ?? "")"
         print(appIpDownloadPath)
@@ -234,36 +245,182 @@ extension TRNewsDetailViewController: TRNewsDetailFuncViewDelegate {
         print("filePath = \(filePath)")
         
         // 要检查的文件目录
-        let getFilePath = documentPath.appendingPathComponent("/\(removeDian).pdf")
-        self.getDocumentFilepath = getFilePath
+        let documentFilePath = documentPath.appendingPathComponent("/\(removeDian).pdf")
         
+        return documentFilePath
+    }
+    
+    func getRemoveDianPath(dataModel: TRProductDetailDataModel?) -> String? {
+        let IsSubscribe = dataModel?.IsSubscribe ?? false
+        let PubIssueFreePDFPath = dataModel?.PubIssueFreePDF
+        let PubIssuePDFPath = dataModel?.PubIssuePDF
+        let downloadPath = IsSubscribe ? PubIssuePDFPath : PubIssueFreePDFPath
+        let appIpDownloadPath = "\(appIp)\(downloadPath ?? "")"
+        print(appIpDownloadPath)
+        
+        // 下载
+        let removeMao = appIpDownloadPath.replacingOccurrences(of: ":", with: "")
+        let removeKong = removeMao.replacingOccurrences(of: "/", with: "")
+        let removeDian = removeKong.replacingOccurrences(of: ".", with: "")
+        
+        return removeDian
+    }
+    
+    func getAppIpDownloadPathPath(dataModel: TRProductDetailDataModel?) -> String? {
+        let IsSubscribe = dataModel?.IsSubscribe ?? false
+        let PubIssueFreePDFPath = dataModel?.PubIssueFreePDF
+        let PubIssuePDFPath = dataModel?.PubIssuePDF
+        let downloadPath = IsSubscribe ? PubIssuePDFPath : PubIssueFreePDFPath
+        let appIpDownloadPath = "\(appIp)\(downloadPath ?? "")"
+        print(appIpDownloadPath)
+        
+        return appIpDownloadPath
+    }
+    
+    func getFilePath(dataModel: TRProductDetailDataModel?) -> String? {
+        let IsSubscribe = dataModel?.IsSubscribe ?? false
+        let PubIssueFreePDFPath = dataModel?.PubIssueFreePDF
+        let PubIssuePDFPath = dataModel?.PubIssuePDF
+        let downloadPath = IsSubscribe ? PubIssuePDFPath : PubIssueFreePDFPath
+        let appIpDownloadPath = "\(appIp)\(downloadPath ?? "")"
+        print(appIpDownloadPath)
+        
+        // 下载
+        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
+        let removeMao = appIpDownloadPath.replacingOccurrences(of: ":", with: "")
+        let removeKong = removeMao.replacingOccurrences(of: "/", with: "")
+        let removeDian = removeKong.replacingOccurrences(of: ".", with: "")
+        let filePath = documentPath as String + ("/\(removeDian).pdf")
+        print("filePath = \(filePath)")
+        
+        return filePath
+    }
+    
+    func judgePDFDownload(filePath: String) -> Bool {
         let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: getFilePath) {
+        if fileManager.fileExists(atPath: filePath) {
             print("文件abc.doc存在")
-            showLocalPDFDocument(doctmentName: removeDian)
-        }
-        else {
+            return true
+        }else {
             print("文件abc.doc不存在")
+            return false
+        }
+    }
+    
+    func buttonReadDidSelected(button: UIButton) {
+//        let IsSubscribe = self.networkViewModel.productDetailModel?.data?.IsSubscribe ?? false
+//        let PubIssueFreePDFPath = self.networkViewModel.productDetailModel?.data?.PubIssueFreePDF
+//        let PubIssuePDFPath = self.networkViewModel.productDetailModel?.data?.PubIssuePDF
+//        let downloadPath = IsSubscribe ? PubIssuePDFPath : PubIssueFreePDFPath
+//        let appIpDownloadPath = "\(appIp)\(downloadPath ?? "")"
+//        print(appIpDownloadPath)
+//
+//        // 下载
+//        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
+//        let removeMao = appIpDownloadPath.replacingOccurrences(of: ":", with: "")
+//        let removeKong = removeMao.replacingOccurrences(of: "/", with: "")
+//        let removeDian = removeKong.replacingOccurrences(of: ".", with: "")
+//        let filePath = documentPath as String + ("/\(removeDian).pdf")
+//        print("filePath = \(filePath)")
+//
+//        // 要检查的文件目录
+//        let getFilePath = documentPath.appendingPathComponent("/\(removeDian).pdf")
+//        self.getDocumentFilepath = getFilePath
+        
+//        let fileManager = FileManager.default
+//        if fileManager.fileExists(atPath: self.documentFilepath ?? "") {
+//            print("文件abc.doc存在")
+//            showLocalPDFDocument(doctmentName: self.removeDianpath ?? "")
+//        }
+//        else {
+//            print("文件abc.doc不存在")
+//            let hud = MBProgressHUD.showAdded(to: view, animated: true)
+//            hud.mode = MBProgressHUDMode.indeterminate;
+//            hud.label.text = "下载中";
+//            hud.label.numberOfLines = 0;
+//            hud.label.textAlignment = NSTextAlignment.left;
+//            hud.bezelView.style = MBProgressHUDBackgroundStyle.solidColor;
+//            hud.contentColor = UIColor.white;
+//            hud.bezelView.backgroundColor = UIColor.black.withAlphaComponent(0.7);
+//
+//            RequestNetWork.downLoad(withURL: self.appIpDownloadpath ?? "", progress: { (downloadProgress) in
+//                print("下载的进度：\((downloadProgress?.fractionCompleted ?? 0) * 100)")
+//            }, destination: { (targetPath, response) -> URL? in
+//                return URL.init(fileURLWithPath: self.filepath ?? "")
+//            }, downLoadSuccess: { (response, filePath) in
+//                hud.hide(animated: true, afterDelay: 0.2)
+//                print("response = \(response) filePath = \(String(describing: filePath))")
+//                self.showLocalPDFDocument(doctmentName: self.removeDianpath ?? "")
+//            }) { (error) in
+//                hud.hide(animated: true, afterDelay: 0.2)
+//                print("error = \(error)")
+//            }
+//        }
+
+        
+        if self.isCurrentPDFDownload ?? false {
+            showLocalPDFDocument(doctmentName: self.removeDianpath ?? "")
+        }else {
+//            // 下载
+//            let hud = MBProgressHUD.showAdded(to: view, animated: true)
+//            hud.mode = MBProgressHUDMode.indeterminate;
+//            hud.label.text = "下载中";
+//            hud.label.numberOfLines = 0;
+//            hud.label.textAlignment = NSTextAlignment.left;
+//            hud.bezelView.style = MBProgressHUDBackgroundStyle.solidColor;
+//            hud.contentColor = UIColor.white;
+//            hud.bezelView.backgroundColor = UIColor.black.withAlphaComponent(0.7);
+//
+//            RequestNetWork.downLoad(withURL: self.appIpDownloadpath ?? "", progress: { (downloadProgress) in
+//                print("下载的进度：\((downloadProgress?.fractionCompleted ?? 0) * 100)")
+//            }, destination: { (targetPath, response) -> URL? in
+//                return URL.init(fileURLWithPath: self.filepath ?? "")
+//            }, downLoadSuccess: { (response, filePath) in
+//                hud.hide(animated: true, afterDelay: 0.2)
+//                print("response = \(response) filePath = \(String(describing: filePath))")
+//                self.showLocalPDFDocument(doctmentName: self.removeDianpath ?? "")
+//            }) { (error) in
+//                hud.hide(animated: true, afterDelay: 0.2)
+//                print("error = \(error)")
+//            }
+            
             let hud = MBProgressHUD.showAdded(to: view, animated: true)
-            hud.mode = MBProgressHUDMode.indeterminate;
-            hud.label.text = "下载中";
+            hud.mode = MBProgressHUDMode.determinateHorizontalBar;
+            hud.label.text = "Loading...";
             hud.label.numberOfLines = 0;
             hud.label.textAlignment = NSTextAlignment.left;
             hud.bezelView.style = MBProgressHUDBackgroundStyle.solidColor;
             hud.contentColor = UIColor.white;
             hud.bezelView.backgroundColor = UIColor.black.withAlphaComponent(0.7);
             
-            RequestNetWork.downLoad(withURL: appIpDownloadPath, progress: { (downloadProgress) in
-                print("下载的进度：\((downloadProgress?.fractionCompleted ?? 0) * 100)")
-            }, destination: { (targetPath, response) -> URL? in
-                return URL.init(fileURLWithPath: "\(filePath)")
-            }, downLoadSuccess: { (response, filePath) in
-                hud.hide(animated: true, afterDelay: 0.2)
-                print("response = \(response) filePath = \(String(describing: filePath))")
-                self.showLocalPDFDocument(doctmentName: removeDian)
-            }) { (error) in
-                hud.hide(animated: true, afterDelay: 0.2)
-                print("error = \(error)")
+            DispatchQueue.global(qos: .background).async {
+                var progress = 0.0
+                RequestNetWork.downLoad(withURL: self.appIpDownloadpath ?? "", progress: { (downloadProgress) in
+                    let progreeNumber = ((downloadProgress?.fractionCompleted ?? 0) * 100)
+                    let showProgressNumber = ((Int)(progreeNumber*100))/100
+                    print("下载的进度：\((downloadProgress?.fractionCompleted ?? 0) * 100)")
+                    
+                    if progress < 1.0 {
+                        progress = (downloadProgress?.fractionCompleted ?? 0) * 1
+                        DispatchQueue.main.async {
+                            hud.label.text = "下载的进度：\(showProgressNumber)%";
+                            hud.progress = Float(progress)
+                        }
+                    }
+                }, destination: { (targetPath, response) -> URL? in
+                    return URL.init(fileURLWithPath: self.filepath ?? "")
+                }, downLoadSuccess: { (response, filePath) in
+                    DispatchQueue.main.async {
+                        hud.hide(animated: true)
+                    }
+                    print("response = \(response) filePath = \(String(describing: filePath))")
+                    self.showLocalPDFDocument(doctmentName: self.removeDianpath ?? "")
+                }) { (error) in
+                    DispatchQueue.main.async {
+                        hud.hide(animated: true)
+                    }
+                    print("error = \(error)")
+                }
             }
         }
     }
@@ -300,31 +457,76 @@ extension TRNewsDetailViewController: TRNewsDetailFuncViewDelegate {
     }
     
     func buttonDownloadDidSelected(button: UIButton) {
-        let IsSubscribe = self.networkViewModel.productDetailModel?.data?.IsSubscribe ?? false
-        let PubIssueFreePDFPath = self.networkViewModel.productDetailModel?.data?.PubIssueFreePDF
-        let PubIssuePDFPath = self.networkViewModel.productDetailModel?.data?.PubIssuePDF
-        let downloadPath = IsSubscribe ? PubIssuePDFPath : PubIssueFreePDFPath
-        let appIpDownloadPath = "\(appIp)\(downloadPath ?? "")"
-        print(appIpDownloadPath)
-        
-        
-        // 下载
-        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
-        let removeMao = appIpDownloadPath.replacingOccurrences(of: ":", with: "")
-        let removeKong = removeMao.replacingOccurrences(of: "/", with: "")
-        let removeDian = removeKong.replacingOccurrences(of: ".", with: "")
-        let filePath = documentPath as String + ("/\(removeDian).pdf")
-        print("filePath = \(filePath)")
-        
-        RequestNetWork.downLoad(withURL: appIpDownloadPath, progress: { (downloadProgress) in
-            print("下载的进度：\((downloadProgress?.fractionCompleted ?? 0) * 100)")
-        }, destination: { (targetPath, response) -> URL? in
-            return URL.init(fileURLWithPath: "\(filePath)")
-        }, downLoadSuccess: { (response, filePath) in
-            print("response = \(response) filePath = \(String(describing: filePath))")
-        }) { (error) in
-            print("error = \(error)")
+        if self.isCurrentPDFDownload ?? false {
+            MBProgressHUD.showWithText(text: "当前文件已下载", view: self.view)
+            return
         }
+        
+//        let IsSubscribe = self.networkViewModel.productDetailModel?.data?.IsSubscribe ?? false
+//        let PubIssueFreePDFPath = self.networkViewModel.productDetailModel?.data?.PubIssueFreePDF
+//        let PubIssuePDFPath = self.networkViewModel.productDetailModel?.data?.PubIssuePDF
+//        let downloadPath = IsSubscribe ? PubIssuePDFPath : PubIssueFreePDFPath
+//        let appIpDownloadPath = "\(appIp)\(downloadPath ?? "")"
+//        print(appIpDownloadPath)
+//
+//
+//        // 下载
+//        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
+//        let removeMao = appIpDownloadPath.replacingOccurrences(of: ":", with: "")
+//        let removeKong = removeMao.replacingOccurrences(of: "/", with: "")
+//        let removeDian = removeKong.replacingOccurrences(of: ".", with: "")
+//        let filePath = documentPath as String + ("/\(removeDian).pdf")
+//        print("filePath = \(filePath)")
+        
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud.mode = MBProgressHUDMode.determinateHorizontalBar;
+        hud.label.text = "Loading...";
+        hud.label.numberOfLines = 0;
+        hud.label.textAlignment = NSTextAlignment.left;
+        hud.bezelView.style = MBProgressHUDBackgroundStyle.solidColor;
+        hud.contentColor = UIColor.white;
+        hud.bezelView.backgroundColor = UIColor.black.withAlphaComponent(0.7);
+        
+        DispatchQueue.global(qos: .background).async {
+            var progress = 0.0
+            RequestNetWork.downLoad(withURL: self.appIpDownloadpath ?? "", progress: { (downloadProgress) in
+                let progreeNumber = ((downloadProgress?.fractionCompleted ?? 0) * 100)
+                let showProgressNumber = ((Int)(progreeNumber*100))/100
+                print("下载的进度：\((downloadProgress?.fractionCompleted ?? 0) * 100)")
+                
+                if progress < 1.0 {
+                    progress = (downloadProgress?.fractionCompleted ?? 0) * 1
+                    DispatchQueue.main.async {
+                        hud.label.text = "下载的进度：\(showProgressNumber)%";
+                        hud.progress = Float(progress)
+                    }
+                }
+            }, destination: { (targetPath, response) -> URL? in
+                return URL.init(fileURLWithPath: self.filepath ?? "")
+            }, downLoadSuccess: { (response, filePath) in
+                DispatchQueue.main.async {
+                    hud.hide(animated: true)
+                }
+                print("response = \(response) filePath = \(String(describing: filePath))")
+            }) { (error) in
+                DispatchQueue.main.async {
+                    hud.hide(animated: true)
+                }
+                print("error = \(error)")
+            }
+        }
+        
+//        RequestNetWork.downLoad(withURL: self.appIpDownloadpath ?? "", progress: { (downloadProgress) in
+//            print("下载的进度：\((downloadProgress?.fractionCompleted ?? 0) * 100)")
+//        }, destination: { (targetPath, response) -> URL? in
+//            return URL.init(fileURLWithPath: self.filepath ?? "")
+//        }, downLoadSuccess: { (response, filePath) in
+//            hud.hide(animated: true, afterDelay: 0.2)
+//            print("response = \(response) filePath = \(String(describing: filePath))")
+//        }) { (error) in
+//            hud.hide(animated: true, afterDelay: 0.2)
+//            print("error = \(error)")
+//        }
     }
     
     

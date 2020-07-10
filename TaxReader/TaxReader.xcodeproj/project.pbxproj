@@ -211,6 +211,8 @@
 		4FADEC00246A394100AC76D8 /* FMHomeVipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FADEBFD246A394100AC76D8 /* FMHomeVipViewModel.swift */; };
 		4FADEC01246A394100AC76D8 /* FMHomeVipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FADEBFF246A394100AC76D8 /* FMHomeVipModel.swift */; };
 		4FADEC04246A399000AC76D8 /* FMHomeVipAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FADEC03246A399000AC76D8 /* FMHomeVipAPI.swift */; };
+		4FB5F2E224B85A60008C2C8A /* TRCatalogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB5F2E024B85A60008C2C8A /* TRCatalogTableViewCell.swift */; };
+		4FB5F2E324B85A60008C2C8A /* TRCatalogTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FB5F2E124B85A60008C2C8A /* TRCatalogTableViewCell.xib */; };
 		4FC0533B2474B91B000D5CD0 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FC053352474B91B000D5CD0 /* area.plist */; };
 		4FC0533C2474B91B000D5CD0 /* EWAddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC053362474B91B000D5CD0 /* EWAddressModel.swift */; };
 		4FC0533D2474B91B000D5CD0 /* EWAddressPickViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC053372474B91B000D5CD0 /* EWAddressPickViewTableViewCell.swift */; };
@@ -290,7 +292,6 @@
 		4FDE6F692463EC7B00D8EF9A /* TRRegisterPwdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDE6F682463EC7B00D8EF9A /* TRRegisterPwdView.swift */; };
 		4FDE6F6B2463EC9F00D8EF9A /* TRRegisterAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDE6F6A2463EC9F00D8EF9A /* TRRegisterAreaView.swift */; };
 		4FDE6F6D2463ECBD00D8EF9A /* TRRegisterAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDE6F6C2463ECBD00D8EF9A /* TRRegisterAgreementView.swift */; };
-		4FE27792243F158F00E60E09 /* TRCatalogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE27791243F158F00E60E09 /* TRCatalogTableViewCell.swift */; };
 		4FE27794243F172500E60E09 /* TRCatalogHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE27793243F172500E60E09 /* TRCatalogHeaderView.swift */; };
 		4FE2779724405A6D00E60E09 /* TRMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE2779624405A6D00E60E09 /* TRMeViewController.swift */; };
 		4FE2779A24405C0D00E60E09 /* TRMeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE2779924405C0D00E60E09 /* TRMeTableViewCell.swift */; };
@@ -663,6 +664,8 @@
 		4FADEBFD246A394100AC76D8 /* FMHomeVipViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMHomeVipViewModel.swift; sourceTree = "<group>"; };
 		4FADEBFF246A394100AC76D8 /* FMHomeVipModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMHomeVipModel.swift; sourceTree = "<group>"; };
 		4FADEC03246A399000AC76D8 /* FMHomeVipAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMHomeVipAPI.swift; sourceTree = "<group>"; };
+		4FB5F2E024B85A60008C2C8A /* TRCatalogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCatalogTableViewCell.swift; sourceTree = "<group>"; };
+		4FB5F2E124B85A60008C2C8A /* TRCatalogTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TRCatalogTableViewCell.xib; sourceTree = "<group>"; };
 		4FC053352474B91B000D5CD0 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		4FC053362474B91B000D5CD0 /* EWAddressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EWAddressModel.swift; sourceTree = "<group>"; };
 		4FC053372474B91B000D5CD0 /* EWAddressPickViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EWAddressPickViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -749,7 +752,6 @@
 		4FDE6F682463EC7B00D8EF9A /* TRRegisterPwdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRRegisterPwdView.swift; sourceTree = "<group>"; };
 		4FDE6F6A2463EC9F00D8EF9A /* TRRegisterAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRRegisterAreaView.swift; sourceTree = "<group>"; };
 		4FDE6F6C2463ECBD00D8EF9A /* TRRegisterAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRRegisterAgreementView.swift; sourceTree = "<group>"; };
-		4FE27791243F158F00E60E09 /* TRCatalogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCatalogTableViewCell.swift; sourceTree = "<group>"; };
 		4FE27793243F172500E60E09 /* TRCatalogHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCatalogHeaderView.swift; sourceTree = "<group>"; };
 		4FE2779624405A6D00E60E09 /* TRMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRMeViewController.swift; sourceTree = "<group>"; };
 		4FE2779924405C0D00E60E09 /* TRMeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRMeTableViewCell.swift; sourceTree = "<group>"; };
@@ -1426,7 +1428,8 @@
 			children = (
 				4FE27793243F172500E60E09 /* TRCatalogHeaderView.swift */,
 				4F3EF645243F115A0017C803 /* TRNewsDetailCatalogView.swift */,
-				4FE27791243F158F00E60E09 /* TRCatalogTableViewCell.swift */,
+				4FB5F2E024B85A60008C2C8A /* TRCatalogTableViewCell.swift */,
+				4FB5F2E124B85A60008C2C8A /* TRCatalogTableViewCell.xib */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -3093,6 +3096,7 @@
 				4FC0539024750E24000D5CD0 /* Checkmark@3x.png in Resources */,
 				4FFC4819247B8327005B5D84 /* LXExampleXibTableViewCell.xib in Resources */,
 				4F62147324A2E35300020082 /* apple.pdf in Resources */,
+				4FB5F2E324B85A60008C2C8A /* TRCatalogTableViewCell.xib in Resources */,
 				4FC0538F24750E24000D5CD0 /* bwm_hud_info.png in Resources */,
 				4F62146C24A2E25100020082 /* PDFReader.storyboard in Resources */,
 				4F0206512477AC170082773E /* cancel@2x.png in Resources */,
@@ -3341,6 +3345,7 @@
 				4F051FF7249E757800676780 /* AFNetworkReachabilityManager.m in Sources */,
 				4FFCE0F924A897BA00AC5033 /* TROrderDetailViewController.swift in Sources */,
 				4F4D4C6C24500F700004FD13 /* TRCartFooterView.swift in Sources */,
+				4FB5F2E224B85A60008C2C8A /* TRCatalogTableViewCell.swift in Sources */,
 				4F4D4C6E245010AA0004FD13 /* TRCartToolView.swift in Sources */,
 				4F81C05E2491CAC30070727A /* TRTicketTypeListPersonView.swift in Sources */,
 				4F051FC9249E1E2600676780 /* UIImage+GKDecoder.m in Sources */,
@@ -3494,7 +3499,6 @@
 				4FFCE0FF24A8A06800AC5033 /* TROrderDetailFooterView.swift in Sources */,
 				4F0881032473AAA700A1B119 /* TRAreaForeignViewController.swift in Sources */,
 				4F0E3F14249B5248005FC4B5 /* TRUserBindCodeModel.swift in Sources */,
-				4FE27792243F158F00E60E09 /* TRCatalogTableViewCell.swift in Sources */,
 				4FDE6F6D2463ECBD00D8EF9A /* TRRegisterAgreementView.swift in Sources */,
 				4FF873F1242DA86A00524AF5 /* WRCustomNavigationBar.swift in Sources */,
 				4F6214AB24A5649300020082 /* TRBuyActionContentDanView.swift in Sources */,
@@ -3711,7 +3715,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PBZHU7TMH4;
+				DEVELOPMENT_TEAM = TWVWD8B6X3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TaxReader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -3805,7 +3809,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PBZHU7TMH4;
+				DEVELOPMENT_TEAM = TWVWD8B6X3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TaxReader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

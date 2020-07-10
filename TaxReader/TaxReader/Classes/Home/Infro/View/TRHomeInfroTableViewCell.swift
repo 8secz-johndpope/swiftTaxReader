@@ -16,7 +16,7 @@ class TRHomeInfroTableViewCell: UITableViewCell {
     
     var dataArray:[TRArticleGettopnewsDataModel]?
     
-    private let TRHomeInfroTitleTableViewCellID = "TRHomeInfroTitleTableViewCell"
+    private let TRCatalogTableViewCellID = "TRCatalogTableViewCell"
     
     lazy var tableView: UITableView = {
         let tableView = UITableView.init(frame: .zero, style: UITableView.Style.plain)
@@ -24,7 +24,7 @@ class TRHomeInfroTableViewCell: UITableViewCell {
         tableView.delegate = self
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        tableView.register(TRHomeInfroTitleTableViewCell.self, forCellReuseIdentifier: TRHomeInfroTitleTableViewCellID)
+        tableView.register(UINib.init(nibName: "TRCatalogTableViewCell", bundle: nil), forCellReuseIdentifier: TRCatalogTableViewCellID)
         
         return tableView
     }()
@@ -70,15 +70,15 @@ extension TRHomeInfroTableViewCell: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TRHomeInfroTitleTableViewCellID, for: indexPath) as! TRHomeInfroTitleTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TRCatalogTableViewCellID, for: indexPath) as! TRCatalogTableViewCell
         
         let model: TRArticleGettopnewsDataModel = self.dataArray?[indexPath.row] ?? TRArticleGettopnewsDataModel.init()
         
-        cell.textLabel?.textColor = UIColor.init(white: 0.0, alpha: 0.6)
-        cell.textLabel?.font = UIFont.init(name: "ChalkboardSE-Bold", size: 14.0)
-        cell.textLabel?.lineBreakMode = .byCharWrapping
-        cell.textLabel?.text = model.News_Title
-        cell.textLabel?.numberOfLines = 2
+        cell.trTitleLabel?.text = model.News_Title
+        cell.trTitleLabel?.textColor = UIColor.init(white: 0.0, alpha: 0.6)
+        cell.trTitleLabel?.font = UIFont.init(name: "ChalkboardSE-Bold", size: 14.0)
+        cell.trTitleLabel?.lineBreakMode = .byCharWrapping
+        cell.trTitleLabel?.numberOfLines = 2
          
         return cell
     }

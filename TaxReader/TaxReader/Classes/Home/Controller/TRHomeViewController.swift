@@ -16,7 +16,7 @@ let TRHomeSectionRank = 4           // 排行榜
 
 class TRHomeViewController: UIViewController {
     
-    let headerTitleArray = ["", "最新期刊", "推荐资讯", "推荐文章", "期刊推荐"]
+    let headerTitleArray = ["", "最新期刊", "最新资讯", "推荐文章", "期刊推荐"]
     var dataArrayRotchart: [TRProductRotchartDataModel]? = []
     var dataArrayLast: [TRproductLastDataModel]? = []
     var dataArrayRecd: [TRProductRecdDataModel]? = []

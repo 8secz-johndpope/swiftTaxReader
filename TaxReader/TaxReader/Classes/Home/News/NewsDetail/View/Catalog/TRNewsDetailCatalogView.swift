@@ -47,7 +47,7 @@ class TRNewsDetailCatalogView: UIView {
         
         tableView.register(TRCatalogHeaderView.self, forHeaderFooterViewReuseIdentifier: TRCatalogHeaderViewID)
         tableView.register(TRMeFooterView.self, forHeaderFooterViewReuseIdentifier: TRMeFooterViewID)
-        tableView.register(TRCatalogTableViewCell.self, forCellReuseIdentifier: TRCatalogTableViewCellID)
+        tableView.register(UINib.init(nibName: "TRCatalogTableViewCell", bundle: nil), forCellReuseIdentifier: TRCatalogTableViewCellID)
         
         return tableView
     }()
@@ -114,11 +114,11 @@ extension TRNewsDetailCatalogView: UITableViewDataSource, UITableViewDelegate {
         let sectionModel: TRProductDetailDataPubIssueCataModel = self.dataArrayPubIssueCataModel?[indexPath.section] ?? TRProductDetailDataPubIssueCataModel.init()
         let rowModel: TRProductDetailDataPubIssueCataArticleListModel = sectionModel.ArticleList?[indexPath.row] ?? TRProductDetailDataPubIssueCataArticleListModel.init()
         
-        cell.textLabel?.text = rowModel.ArticleTitle
-        cell.textLabel?.textColor = UIColor.init(white: 0.0, alpha: 0.6)
-        cell.textLabel?.font = UIFont.init(name: "ChalkboardSE-Bold", size: 14.0)
-        cell.textLabel?.lineBreakMode = .byCharWrapping
-        cell.textLabel?.numberOfLines = 2
+        cell.trTitleLabel?.text = rowModel.ArticleTitle
+        cell.trTitleLabel?.textColor = UIColor.init(white: 0.0, alpha: 0.6)
+        cell.trTitleLabel?.font = UIFont.init(name: "ChalkboardSE-Bold", size: 14.0)
+        cell.trTitleLabel?.lineBreakMode = .byCharWrapping
+        cell.trTitleLabel?.numberOfLines = 2
         
         return cell
     }

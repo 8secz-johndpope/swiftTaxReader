@@ -24,7 +24,7 @@ class TRNewsPubIssueViewController: TRBaseViewController {
     
     lazy var navView: LXNavigationBarView = {
         let view = LXNavigationBarView.init(frame: .zero)
-        view.titleString = "选择期刊"
+        view.titleString = "往期浏览"
         view.navBackButtonClick = {[weak self]() in
             self?.navigationController?.popViewController(animated: true)
         }

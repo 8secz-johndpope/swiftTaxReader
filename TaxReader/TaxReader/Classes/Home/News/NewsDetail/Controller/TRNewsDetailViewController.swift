@@ -156,7 +156,7 @@ extension TRNewsDetailViewController {
     func NetworkGetIssueNumber(PubIssueID: String?, PubID: String?, Year: String?) {
         networkViewModel.getIssueNumberUpdateBlock = {[unowned self] in
             if self.networkViewModel.productGetIssueNumberModel?.ret == false {
-                MBProgressHUD.showWithText(text: self.networkViewModel.productGetIssueNumberModel?.msg ?? "", view: self.view)
+                //MBProgressHUD.showWithText(text: self.networkViewModel.productGetIssueNumberModel?.msg ?? "", view: self.view)
                 return
             }
             let dataModel: TRProductGetIssueNumberDataModel? = self.networkViewModel.productGetIssueNumberModel?.data
@@ -389,7 +389,7 @@ extension TRNewsDetailViewController: TRNewsDetailFuncViewDelegate {
             hud.label.text = "Loading...";
             hud.label.numberOfLines = 0;
             hud.label.textAlignment = NSTextAlignment.left;
-            hud.bezelView.style = MBProgressHUDBackgroundStyle.solidColor;
+            hud.bezelView.style = MBProgressHUDBackgroundStyle.solidColor
             hud.contentColor = UIColor.white;
             hud.bezelView.backgroundColor = UIColor.black.withAlphaComponent(0.7);
             

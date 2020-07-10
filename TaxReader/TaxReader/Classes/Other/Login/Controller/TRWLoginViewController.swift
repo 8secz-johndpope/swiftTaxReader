@@ -223,7 +223,17 @@ extension TRWLoginViewController {
     func blockLoginButtonClick(button:UIButton) {
         viewModel.updateBlock = {[unowned self] in
             MBProgressHUD.hide(for: self.view, animated: true)
-            print("\(String(describing: self.viewModel.loginServe?.access_token))")
+            if self.viewModel.loginServe?.ret == false {
+                MBProgressHUD.showWithText(text: self.viewModel.loginServe?.msg ?? "", view: self.view)
+                return
+            }
+            
+            //  登录成功后，User调用需要 access_token 添加到 headerfad 中，expire_time 失效时间
+            let loginModel: TRLoginModel? = self.viewModel.loginServe
+            UserDefaults.LoginInfo.set(value: loginModel?.access_token, forKey: .access_token)
+            UserDefaults.LoginInfo.set(value: loginModel?.expire_time, forKey: .expire_time)
+            UserDefaults.AccountInfo.set(value: loginModel?.data?.UserName, forKey: .userName)
+            
             let tabBar = LXTabbarProvider.TRsystemStyle()
             let keyWindow = UIApplication.shared.windows.first
             if let window = keyWindow {

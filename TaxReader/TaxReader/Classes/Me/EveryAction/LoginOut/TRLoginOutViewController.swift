@@ -105,15 +105,18 @@ extension TRLoginOutViewController: UITableViewDataSource, UITableViewDelegate {
 extension TRLoginOutViewController {
     func blockFooterButtonClick(button: UIButton) {
         viewModel.updateBlock = {[unowned self] in
-            MBProgressHUD.showWithText(text: self.viewModel.userLoginOutModel?.msg ?? "", view: self.view)
+            if self.viewModel.userLoginOutModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.viewModel.userLoginOutModel?.msg ?? "", view: self.view)
+                return
+            }
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                if self.viewModel.userLoginOutModel?.msgCode == 200 {
-                    UserDefaults.LoginInfo.set(value: "", forKey: .rem_login)
-                    let nextVc = TRWLoginViewController()
-                    let keyWindow = UIApplication.shared.windows.first
-                    if let window = keyWindow {
-                        window.rootViewController = nextVc
-                    }
+                MBProgressHUD.showWithText(text: "退出成功", view: self.view)
+                UserDefaults.LoginInfo.set(value: "", forKey: .rem_login)
+                let nextVc = TRWLoginViewController()
+                let keyWindow = UIApplication.shared.windows.first
+                if let window = keyWindow {
+                    window.rootViewController = nextVc
                 }
             }
         }

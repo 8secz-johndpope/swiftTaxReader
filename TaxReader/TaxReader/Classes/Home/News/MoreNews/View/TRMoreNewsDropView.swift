@@ -37,6 +37,13 @@ class TRMoreNewsDropView: UIView {
         selectButtonClickBlock(button)
     }
     
+    lazy var trArrowImageView:UIImageView = {
+        let view = UIImageView.init(frame: .zero)
+        view.image = UIImage.init(named: "LX上箭头")
+        
+        return view
+    }()
+    
     func setupLayout() {
         self.addSubview(self.trContentView)
         self.trContentView.snp.makeConstraints { (make) in
@@ -46,6 +53,13 @@ class TRMoreNewsDropView: UIView {
         self.trContentView.addSubview(self.trSelectButton)
         self.trSelectButton.snp.makeConstraints { (make) in
             make.top.left.bottom.right.equalToSuperview()
+        }
+        
+        self.trContentView.addSubview(self.trArrowImageView)
+        self.trArrowImageView.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-12)
+            make.size.equalTo(22)
         }
     }
     

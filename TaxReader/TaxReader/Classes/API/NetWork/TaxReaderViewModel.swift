@@ -126,14 +126,8 @@ extension TaxReaderViewModel {
                 }
                 
                 let json = JSON(returnData)
+                print("login = \(json)")
                 if let mappedObject = JSONDeserializer<TRLoginModel>.deserializeFrom(json: json.description) {
-                    print("login = \(json.description)")
-                    
-                    //  登录成功后，User调用需要 access_token 添加到 header 中，expire_time 失效时间
-                    UserDefaults.LoginInfo.set(value: mappedObject.access_token, forKey: .access_token)
-                    UserDefaults.LoginInfo.set(value: mappedObject.expire_time, forKey: .expire_time)
-                    UserDefaults.AccountInfo.set(value: mappedObject.data?.UserName, forKey: .userName)
-                    
                     self.loginServe = mappedObject
                 }
                 self.updateBlock?()

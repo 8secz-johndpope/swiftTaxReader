@@ -36,6 +36,7 @@ class TRMoreNewsViewController: UIViewController {
             print(button.isSelected)
             button.isSelected = !button.isSelected
             self.dropContentView.isHidden = !button.isSelected
+            self.dropView.trArrowImageView.image = button.isSelected ? UIImage.init(named: "LX下箭头") : UIImage.init(named: "LX上箭头")
         }
         
         return view
@@ -182,12 +183,12 @@ extension TRMoreNewsViewController: TRDropContentViewDelegate {
         self.dropView.trSelectButton.isSelected = false
     }
     
-    func tableViewDidSelectRowAt(_ tableView: UITableView, indexPath: IndexPath, readTypeText: String?) {
+    func tableViewDidSelectRowAt(_ tableView: UITableView, indexPath: IndexPath, readTypeText: String?, readTypeID: String?) {
         self.dropView.trSelectButton.setTitle(readTypeText, for: .normal)
         self.dropContentView.isHidden = true
         self.dropView.trSelectButton.isSelected = false
         
         // 调用接口进行数据搜索
-        NetworkHomePublicationGetPubIssueList(more: false, ReadType: self.dropView.trSelectButton.titleLabel?.text)
+        NetworkHomePublicationGetPubIssueList(more: false, ReadType: readTypeID)
     }
 }

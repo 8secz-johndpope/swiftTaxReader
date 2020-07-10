@@ -30,10 +30,11 @@
     [imageView sd_cancelCurrentImageLoad];
 }
 
-//- (UIImage *)imageFromMemoryForURL:(NSURL *)url {
-//    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-//    NSString *key = [manager cacheKeyForURL:url];
-//    return [manager.imageCache imageFromCacheForKey:key];
-//}
+- (UIImage *)imageFromMemoryForURL:(NSURL *)url {
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    NSString *key = [manager cacheKeyForURL:url];
+    return UIImage.checkmarkImage;
+    //return [manager.imageCache imageFromCacheForKey:key];
+}
 
 @end

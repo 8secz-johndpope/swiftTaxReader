@@ -26,14 +26,14 @@ class TRMoreInfoViewController: TRBaseViewController {
         return view
     }()
     
-    private let identific = "TRHomeInfroTableViewCell"
+    private let TRCatalogTableViewCellID = "TRCatalogTableViewCell"
     lazy var tableView: UITableView = {
         let tableView = UITableView.init(frame: .zero, style: UITableView.Style.plain)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        tableView.register(TRHomeInfroTableViewCell.self, forCellReuseIdentifier: identific)
+        tableView.register(UINib.init(nibName: "TRCatalogTableViewCell", bundle: nil), forCellReuseIdentifier: TRCatalogTableViewCellID)
         
         return tableView
     }()
@@ -106,17 +106,27 @@ extension TRMoreInfoViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView.init()
     }
-    
+        
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: identific, for: indexPath) as! TRHomeInfroTableViewCell
-        cell.tableViewDataArray = self.dataArray
-        cell.cellDidSelectItem = {[unowned self](tableView, indexPath) in
-            let model: TRArticleGettopnewsDataModel = self.dataArray?[indexPath.row] ?? TRArticleGettopnewsDataModel.init()
-            let nextVc = TRArticleReadHTMLViewController(ArticleID: "\(model.News_ID)")
-            self.navigationController?.pushViewController(nextVc, animated: true)
-        }
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: TRCatalogTableViewCellID, for: indexPath) as! TRCatalogTableViewCell
+        
+        let model: TRArticleGettopnewsDataModel = self.dataArray?[indexPath.row] ?? TRArticleGettopnewsDataModel.init()
+        
+        cell.trTitleLabel?.text = model.News_Title
+        cell.trTitleLabel?.textColor = UIColor.init(white: 0.0, alpha: 0.6)
+        cell.trTitleLabel?.font = UIFont.init(name: "ChalkboardSE-Bold", size: 14.0)
+        cell.trTitleLabel?.lineBreakMode = .byCharWrapping
+        cell.trTitleLabel?.numberOfLines = 2
+         
         return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let model: TRArticleGettopnewsDataModel = self.dataArray?[indexPath.row] ?? TRArticleGettopnewsDataModel.init()
+        let nextVc = TRArticleReadHTMLViewController(ArticleID: "\(model.News_ID)")
+        self.navigationController?.pushViewController(nextVc, animated: true)
     }
 }
 

@@ -10,7 +10,7 @@ import UIKit
 
 protocol TRDropContentViewDelegate: NSObjectProtocol {
     func coverViewTapDisMiss()
-    func tableViewDidSelectRowAt(_ tableView: UITableView, indexPath: IndexPath, readTypeText: String?)
+    func tableViewDidSelectRowAt(_ tableView: UITableView, indexPath: IndexPath, readTypeText: String?, readTypeID: String?)
 }
 
 class TRDropContentView: UIView {
@@ -69,7 +69,7 @@ class TRDropContentView: UIView {
         self.trContentView.addSubview(self.tableView)
         self.tableView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
-            make.height.equalTo(LXScreenHeight * 0.46)
+            make.height.equalTo(LXScreenHeight * 0.5)
         }
         
         self.trContentView.addSubview(self.trCoverView)
@@ -96,6 +96,24 @@ class TRDropContentView: UIView {
             }
             
             self.dataArray = dataArrayModel
+            
+            // 动态计算下拉框的高度
+            if self.dataArray?.count ?? 0 > 0 {
+                let sectionHeight = (self.dataArray?.count ?? 0) * 44
+                var rowHeight = 0
+                for lindex in 0..<self.dataArray!.count {
+                   let sectionModel: TRproductReadTypeDataModel = self.dataArray?[lindex] ?? TRproductReadTypeDataModel.init()
+                    rowHeight = rowHeight + ((sectionModel.children?.count ?? 0) * 44)
+                }
+                var computedHeight = CGFloat(sectionHeight + rowHeight)
+                if computedHeight > (LXScreenHeight * 0.5) {
+                    computedHeight = LXScreenHeight * 0.5
+                }
+                self.tableView.snp.updateConstraints { (make) in
+                    make.height.equalTo(computedHeight)
+                }
+            }
+            
             self.tableView.reloadData()
         }
     }
@@ -141,7 +159,7 @@ extension TRDropContentView: UITableViewDataSource, UITableViewDelegate {
         headerView.isHasImageView = false
         headerView.coverTapBloclk = {[unowned self]() in
             if (self.delegate != nil) && ((self.delegate?.responds(to: Selector.init(("didSelectRowAt")))) != nil) {
-                self.delegate?.tableViewDidSelectRowAt(tableView, indexPath: IndexPath.init(), readTypeText: sectionModel.ReadTypeName)
+                self.delegate?.tableViewDidSelectRowAt(tableView, indexPath: IndexPath.init(), readTypeText: sectionModel.ReadTypeName, readTypeID: "\(sectionModel.ReadTypeID)")
             }
         }
         
@@ -173,7 +191,7 @@ extension TRDropContentView: UITableViewDataSource, UITableViewDelegate {
         let sectionModel: TRproductReadTypeDataModel = self.dataArray?[indexPath.section] ?? TRproductReadTypeDataModel.init()
         let rowModel: TRproductReadTypeDataChildrenModel = sectionModel.children?[indexPath.row] ?? TRproductReadTypeDataChildrenModel.init()
         if (self.delegate != nil) && ((self.delegate?.responds(to: Selector.init(("didSelectRowAt")))) != nil) {
-            self.delegate?.tableViewDidSelectRowAt(tableView, indexPath: indexPath, readTypeText: rowModel.ReadTypeName)
+            self.delegate?.tableViewDidSelectRowAt(tableView, indexPath: indexPath, readTypeText: rowModel.ReadTypeName, readTypeID: "\(sectionModel.ReadTypeID)")
         }
     }
 }

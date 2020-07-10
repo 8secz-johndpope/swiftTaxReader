@@ -159,7 +159,7 @@ extension TRMeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let headerView: TRMeHeaderView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TRMeHeaderViewID) as! TRMeHeaderView
-            headerView.phoneLabel.text = UserDefaults.AccountInfo.string(forKey: .userName) ?? "15711112222"
+            headerView.phoneLabel.text = UserDefaults.AccountInfo.string(forKey: .userName) ?? ""
             headerView.headerImageViewTapBlock = {[weak self](view) in
                 self?.bockHeaderViewTap()
             }

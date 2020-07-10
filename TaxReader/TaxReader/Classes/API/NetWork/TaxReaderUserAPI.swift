@@ -324,6 +324,7 @@ extension TaxReaderUserAPI:TargetType {
             case .publicationGetPubIssueList(let ReadType, let PageIndex, let PageSize):
                 parmeters = ["ReadType": ReadType,
                              "PageIndex":PageIndex,
+                             "SearchType":"1",
                              "PageSize":PageSize]as [String : Any]
             case .productGetIssueNumber(let PubIssueID, let PubID, let Year):
                 parmeters = ["PubIssueID": PubIssueID,

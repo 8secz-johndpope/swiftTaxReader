@@ -19,6 +19,7 @@ struct TRproductLastModel: HandyJSON {
 struct TRproductLastDataModel: HandyJSON {
     var ProdID: Int = 0
     var ProdYear: Int = 0
+    var ProdIssue: Int = 0
     var ProdName: String?
     var ProdImg: String?
     var ReadSourceID: String?

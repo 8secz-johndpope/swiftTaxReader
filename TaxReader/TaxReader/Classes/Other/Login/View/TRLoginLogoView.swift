@@ -19,7 +19,7 @@ class TRLoginLogoView: UIView {
     
     lazy var logoLabel: UILabel = {
         let view = UILabel.init()
-        view.text = "税务期刊交流平台"
+        view.text = "税刊阅读"
         view.textColor = UIColor.white
         view.font = UIFont.systemFont(ofSize: 18.0)
         

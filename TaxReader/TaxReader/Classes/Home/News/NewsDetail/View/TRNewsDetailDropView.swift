@@ -12,7 +12,7 @@ class TRNewsDetailDropView: UIView {
     
     lazy var trTitleButton: UIButton = {
         let view = UIButton.init(type: .custom)
-        view.setTitle("搜索期刊", for: .normal)
+        view.setTitle("往期浏览", for: .normal)
         view.setTitleColor(UIColor.black, for: .normal)
         
         return view

@@ -82,5 +82,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>图片</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>图片2</string>
 </dict>
 </plist>

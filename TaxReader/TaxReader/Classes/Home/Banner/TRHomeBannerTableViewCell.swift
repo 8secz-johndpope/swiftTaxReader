@@ -72,7 +72,7 @@ extension TRHomeBannerTableViewCell: FSPagerViewDataSource, FSPagerViewDelegate 
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let model: TRProductRotchartDataModel = self.homeBannerArr?[index] ?? TRProductRotchartDataModel.init()
         let cell = pageView.dequeueReusableCell(withReuseIdentifier: FSPagerViewCellID, at: index)
-        cell.imageView?.sd_setImage(with: URL(string: "\(appIp)\(model.ImgSRC ?? "")"),
+        cell.imageView?.sd_setImage(with: URL(string: "\(model.ImgSRC ?? "")"),
                                     placeholderImage: UIImage.init(named: "DefaultH"),
                                     options: .allowInvalidSSLCertificates,
                                     context: nil)

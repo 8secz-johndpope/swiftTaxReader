@@ -35,6 +35,10 @@ struct TRArticleSearchDataDataModel: HandyJSON {
     var PubIssueCataName: String?
     var ArticleTitle: String?
     var ArticleAuthorName: String?
+    var PubIssueYear: String?
+    var PubIssueNum: String?
+    
+    var ArticleID: Int = 0
 }
 
 

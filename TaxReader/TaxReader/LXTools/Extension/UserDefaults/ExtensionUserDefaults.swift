@@ -15,6 +15,8 @@ extension UserDefaults {
             case access_token
             case expire_time
             case rem_login
+            case accountText
+            case passwordText
         }
     }
     

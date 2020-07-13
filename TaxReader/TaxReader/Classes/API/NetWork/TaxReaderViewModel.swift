@@ -148,9 +148,11 @@ extension TaxReaderViewModel {
                 
                 let json = JSON(returnData)
                 print("register = \(json.description)")
+                if let mappedObject = JSONDeserializer<TRRegisterModel>.deserializeFrom(json: json.description) {
+                    self.registerModel = mappedObject
+                }
                 
                 self.updateBlock?()
-                
             }
         }
     }

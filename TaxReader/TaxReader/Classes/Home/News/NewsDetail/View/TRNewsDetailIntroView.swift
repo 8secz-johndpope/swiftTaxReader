@@ -373,12 +373,12 @@ class TRNewsDetailIntroView: UIView {
             self.PubLocalLabel.text = model.PubPlace?.isBlank ?? true ? "出版地：null" : "出版地：\(model.PubPlace ?? "")"
             
             self.PubYZLabel.text = model.PubLanguage?.isBlank ?? true ? "语种：null" : "语种：\(model.PubLanguage ?? "")"
-            self.PubKBLabel.text = "开本：null"
+            self.PubKBLabel.text = model.PubSize?.isBlank ?? true ? "开本：null" : "开本：\(model.PubSize ?? "")"
             
             self.PubYFDHLabel.text = "邮发代号：null"
             
             let buildYearText = ("\(model.PubStartBuildYear)").isBlank ? "null" : ("\(model.PubStartBuildYear)")
-            self.PubCKSJLabel.text = "创刊时间：\(buildYearText)"
+            self.PubCKSJLabel.text = "创刊时间：\(buildYearText)年"
         }
     }
     

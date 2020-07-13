@@ -187,16 +187,28 @@ class TRWLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.contentServeView.accountTextField.text = "18101211287"
-        self.contentServeView.pwdTextField.text = "As123456"
-        
         setupLayout()
+        setupView()
         autoLogin()
     }
     
     lazy var viewModel: TaxReaderViewModel = {
         return TaxReaderViewModel()
     }()
+}
+
+extension TRWLoginViewController {
+    func setupView() {
+        if !(UserDefaults.LoginInfo.string(forKey: .accountText)?.isBlank ?? false) {
+            self.contentServeView.accountTextField.text = UserDefaults.LoginInfo.string(forKey: .accountText)
+        }
+        if !(UserDefaults.LoginInfo.string(forKey: .passwordText)?.isBlank ?? false) {
+            self.contentServeView.pwdTextField.text = UserDefaults.LoginInfo.string(forKey: .passwordText)
+        }
+        
+        let isRemLogin = (UserDefaults.LoginInfo.string(forKey: .rem_login) == "1")
+        self.contentServeView.remLoginButton.isSelected = isRemLogin ? true : false
+    }
 }
 
 extension TRWLoginViewController {
@@ -221,12 +233,27 @@ extension TRWLoginViewController {
     }
     
     func blockLoginButtonClick(button:UIButton) {
+        // 登录输入校验
+        let accountTFText = self.contentServeView.accountTextField.text ?? ""
+        let pwdTFText = self.contentServeView.pwdTextField.text ?? ""
+        let message = verifyInput(verify1: accountTFText, verify2: pwdTFText)
+        if !(message?.isBlank ?? true) {
+            MBProgressHUD.showWithText(text: message ?? "", view: view)
+            return
+        }
+        
         viewModel.updateBlock = {[unowned self] in
             MBProgressHUD.hide(for: self.view, animated: true)
             if self.viewModel.loginServe?.ret == false {
                 MBProgressHUD.showWithText(text: self.viewModel.loginServe?.msg ?? "", view: self.view)
                 return
             }
+            
+            // 登录账号存储
+            UserDefaults.LoginInfo.set(value: accountTFText, forKey: .accountText)
+            UserDefaults.LoginInfo.set(value: pwdTFText, forKey: .passwordText)
+            let selectText = self.contentServeView.remLoginButton.isSelected ? "1" : "0"
+            UserDefaults.LoginInfo.set(value: selectText, forKey: .rem_login)
             
             //  登录成功后，User调用需要 access_token 添加到 headerfad 中，expire_time 失效时间
             let loginModel: TRLoginModel? = self.viewModel.loginServe
@@ -239,15 +266,6 @@ extension TRWLoginViewController {
             if let window = keyWindow {
                 window.rootViewController = tabBar
             }
-        }
-
-        // 登录输入校验
-        let accountTFText = self.contentServeView.accountTextField.text ?? "111"
-        let pwdTFText = self.contentServeView.pwdTextField.text ?? "111"
-        let message = verifyInput(verify1: accountTFText, verify2: pwdTFText)
-        if !(message?.isBlank ?? true) {
-            MBProgressHUD.showWithText(text: message ?? "", view: view)
-            return
         }
 
         MBProgressHUD.showWithStatus(text: "", view: view)
@@ -266,9 +284,6 @@ extension TRWLoginViewController {
     // 记住登录
     func blockRemLoginButtonClick(button: UIButton) {
         button.isSelected = !button.isSelected
-        
-        let selectText = button.isSelected ? "1" : "0"
-        UserDefaults.LoginInfo.set(value: selectText, forKey: .rem_login)
     }
     
     func autoLogin(){

@@ -89,7 +89,7 @@ class TRReadTypeDetailView: UIView {
                 return
             }
             
-            self.yearLabel.text = model.ArticleCreatTime
+            self.yearLabel.text = "《\(model.PubIssueName ?? "")》 \(model.PubIssueYear)年 第\(model.PubIssueNum)期"
             self.autorLabel.text = "作者：\(model.ArticleAuthorName ?? "")"
             self.companyLabel.text = "作者单位：\(model.ArticleUnitName ?? "null")"
         }

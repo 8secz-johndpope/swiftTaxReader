@@ -124,6 +124,10 @@ extension TRArticleSearchViewController: UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let model: TRArticleSearchDataDataModel = self.dataArr?[indexPath.section] ?? TRArticleSearchDataDataModel.init()
+        let nextVc = TRArticleReadViewController(ArticleID: "\(model.ArticleID)")
+        self.navigationController?.pushViewController(nextVc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

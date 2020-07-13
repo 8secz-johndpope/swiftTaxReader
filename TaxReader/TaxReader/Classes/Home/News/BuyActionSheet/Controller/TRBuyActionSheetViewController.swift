@@ -230,12 +230,19 @@ extension TRBuyActionSheetViewController {
             dataArrayProductCount?.append(ProductCount)
         case 2:
             let dataArrBatchModel: [TRProductGetIssueNumberDataBatchModel]? = self.dataArrayDanValueModel
-            for lindex in 0..<dataArrBatchModel!.count {
-                let model: TRProductGetIssueNumberDataBatchModel? = dataArrBatchModel?[lindex]
-                let ProductID = "\(model?.ProdID ?? 0)"
-                let ProductCount = "1"
-                dataArrayProductID?.append(ProductID)
-                dataArrayProductCount?.append(ProductCount)
+            if dataArrBatchModel?.count ?? 0 == 0 {
+                MBProgressHUD.showWithText(text: "请选择要购买的商品", view: self.view)
+                return
+            }
+            
+            if dataArrBatchModel?.count ?? 0 > 0 {
+                for lindex in 0..<dataArrBatchModel!.count {
+                    let model: TRProductGetIssueNumberDataBatchModel? = dataArrBatchModel?[lindex]
+                    let ProductID = "\(model?.ProdID ?? 0)"
+                    let ProductCount = "1"
+                    dataArrayProductID?.append(ProductID)
+                    dataArrayProductCount?.append(ProductCount)
+                }
             }
         case 3:
             let model: TRProductGetIssueNumberDataYearModel? = dataModel?.YearProduct

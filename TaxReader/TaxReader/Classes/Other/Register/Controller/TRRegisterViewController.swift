@@ -288,11 +288,13 @@ extension TRRegisterViewController: TRPrefixPhoneVCDelegate {
         
         viewModel.updateBlock = {[unowned self] in
             MBProgressHUD.showWithText(text: self.viewModel.getCodeModel?.msg ?? "", view: self.view)
-            if self.viewModel.getCodeModel?.msgCode == 200 {
-                countButton.maxSecond = 60
-                countButton.countdown = true // 停止 false
-                self.numberCodeView.textField.text = self.viewModel.getCodeModel?.data ?? ""
+            if self.viewModel.getCodeModel?.ret == false {
+                return
             }
+            
+            countButton.maxSecond = 60
+            countButton.countdown = true // 停止 false
+            self.numberCodeView.textField.text = self.viewModel.getCodeModel?.data ?? ""
         }
         
         let ipAddress = LXGetIPAddressTool.getIPAddressWiFiAndTraffic(false)
@@ -357,8 +359,12 @@ extension TRRegisterViewController: TRPrefixPhoneVCDelegate {
         print("ipAddress = \(ipAddress)")
 
         registerViewModel.updateBlock = {[unowned self] in
-            MBProgressHUD.showSuccessWithStatus(text: self.registerViewModel.registerModel?.msg ?? "", view: self.view)
-            if self.registerViewModel.registerModel?.msgCode == 200 {
+            MBProgressHUD.showWithText(text: self.registerViewModel.registerModel?.msg ?? "", view: self.view)
+            if self.registerViewModel.registerModel?.ret == false {
+                return
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 let nextVc = TRWLoginViewController()
                 let keyWindow = UIApplication.shared.windows.first
                 if let window = keyWindow {

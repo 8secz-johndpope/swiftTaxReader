@@ -77,8 +77,8 @@ extension TaxReaderAPI:TargetType {
         case .getCode(let NKValidateCodeReceive, let UserMobileAreaCode, let NKValidateCodeType, let UserRegIP):
                 parmeters = [
                     "NKValidateCodeReceive": NKValidateCodeReceive,
-                    "NKValidateCodeType":UserMobileAreaCode,
-                    "UserMobileAreaCode":NKValidateCodeType,
+                    "UserMobileAreaCode":UserMobileAreaCode,
+                    "NKValidateCodeType":NKValidateCodeType,
                     "UserRegIP":UserRegIP,
                 ] as [String : Any]
             

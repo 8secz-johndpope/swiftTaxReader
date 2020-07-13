@@ -32,6 +32,7 @@ struct TRProductDetailDataModel: HandyJSON {
     var PubIssueCN: String?
     var PubLanguage: String?
     var PubPlace: String?
+    var PubSize: String?
     var PubIssueCoverPath: String?
     var IsFavorite: Bool? = false
     var PubIssueCata: [TRProductDetailDataPubIssueCataModel]?

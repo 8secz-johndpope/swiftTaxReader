@@ -32,6 +32,8 @@ struct TRArticleDetailDataModel: HandyJSON {
     var ArticlePrice: Int = 0
     var ArticleIOSPrice: Double = 0.00
     
+    var PubName: String?
+    var PubIssueName: String?
     var PubIssueYear: Int = 0
     var PubIssueNum: Int = 0
     var PubID: Int = 0

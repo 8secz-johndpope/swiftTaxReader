@@ -109,7 +109,7 @@ class TRSearchDetailTableViewCell: UITableViewCell {
             self.trTextLabel.text = "\(model.cellIndexPathSection + 1). \(model.ArticleTitle ?? "")"
             self.trNameTextLabel.text = model.ArticleAuthorName
             self.trTypeTextLabel.text = model.PubIssueName
-            self.trTimeTextLabel.text = model.ArticleCreatTime
+            self.trTimeTextLabel.text = "\(model.PubIssueYear ?? "")年 \(model.PubIssueNum ?? "")期"
         }
     }
     

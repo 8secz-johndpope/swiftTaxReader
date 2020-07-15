@@ -31,8 +31,6 @@ class TRArticleReadViewController: TRBaseViewController {
                 self?.blockFavorButtonAction()
             case .buttonBuy:
                 self?.blockBuyButtonAction()
-                
-            default: break
             }
         }
         
@@ -56,6 +54,7 @@ class TRArticleReadViewController: TRBaseViewController {
         return view
     }()
     
+    // 单行
     lazy var titleLabel: UILabel = {
         let view = UILabel.init(frame: .zero)
         view.backgroundColor = UIColor.white
@@ -71,13 +70,15 @@ class TRArticleReadViewController: TRBaseViewController {
         return view
     }()
     
-    lazy var articleLabel: UILabel = {
-        let view = UILabel(frame: .zero)
+    lazy var articleLabel: LXInsetsLabel = {
+        let view = LXInsetsLabel(frame: .zero)
         view.backgroundColor = LXTableViewBackgroundColor
         view.textColor = UIColor.black
-        view.font = UIFont.systemFont(ofSize: 15.0)
+        view.font = UIFont.systemFont(ofSize: 16.0)
         view.textAlignment = .left
         view.numberOfLines = 0
+        
+        view.textInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         
         return view
     }()
@@ -86,19 +87,19 @@ class TRArticleReadViewController: TRBaseViewController {
         let view = LXFooterButtonCenterView.init(frame: .zero)
         view.footerButton.setTitle("阅读全文", for: .normal)
         view.footerButtonClick = {[weak self](button) in
-            self?.richTextView.isHidden = false
-            self?.NetworkArticleGetHtmlContent(ArticleID: self?.ArticleID) //28628
+            self?.NetworkArticleGetHtmlContent(ArticleID: self?.ArticleID)
+            //self?.richTextView.isHidden = false
         }
         
         return view
     }()
     
-    lazy var richTextView: RichTextView = {
-        let view = RichTextView(frame: .zero, fromVC: self)
-        view.isHidden = true
-        
-        return view
-    }()
+//    lazy var richTextView: RichTextView = {
+//        let view = RichTextView(frame: .zero, fromVC: self)
+//        view.isHidden = true
+//
+//        return view
+//    }()
 
     func setupLayout() {
         self.view.addSubview(self.navView)
@@ -117,7 +118,7 @@ class TRArticleReadViewController: TRBaseViewController {
         self.contentView.snp.makeConstraints { (make) in
             make.top.left.bottom.right.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.height.equalTo(6000)
+            make.height.equalTo(LXScreenHeight)
         }
         
         self.contentView.addSubview(self.titleLabel)
@@ -144,14 +145,14 @@ class TRArticleReadViewController: TRBaseViewController {
         self.footerButtonView.snp.makeConstraints { (make) in
             make.top.equalTo(self.articleLabel.snp.bottom).offset(64)
             make.left.right.equalToSuperview()
-            make.height.equalTo(84)
+            make.height.equalTo(64)
         }
         
-        self.contentView.addSubview(self.richTextView)
-        self.richTextView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.articleLabel.snp.bottom)
-            make.left.bottom.right.equalToSuperview()
-        }
+//        self.contentView.addSubview(self.richTextView)
+//        self.richTextView.snp.makeConstraints { (make) in
+//            make.top.equalTo(self.articleLabel.snp.bottom)
+//            make.left.bottom.right.equalToSuperview()
+//        }
     }
     
     override func viewDidLoad() {
@@ -184,7 +185,13 @@ extension TRArticleReadViewController{
             self.articleLabel.snp.updateConstraints { (make) in
                 make.height.equalTo(textHeight)
             }
-            self.articleLabel.text = contentText
+            
+            //通过富文本来设置行间距
+            let paraph = NSMutableParagraphStyle()
+            paraph.lineSpacing = 5
+            let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16),
+                              NSAttributedString.Key.paragraphStyle: paraph]
+            self.articleLabel.attributedText = NSAttributedString(string: contentText, attributes: attributes)
             
             // 调用订阅下的弹框数据
             let dataModel: TRArticleDetailDataModel? = self.networkViewModel.articleDetailModel?.data
@@ -221,13 +228,16 @@ extension TRArticleReadViewController{
                 return
             }
             
-            self.htmlContent = self.networkViewModel.articleGetHtmlContentModel?.data
-            self.richTextView.richText = self.networkViewModel.articleGetHtmlContentModel?.data
+            let richText = self.networkViewModel.articleGetHtmlContentModel?.data
+            let nextVc = TRArticleReadHTMLViewController(htmlType: .typeArticleDetail, ArticleID: self.ArticleID, articleRichText: richText)
+            self.navigationController?.pushViewController(nextVc, animated: true)
         }
         
         networkViewModel.refreshDataSource_ArticleGetHtmlContent(ArticleID: ArticleID ?? "")
     }
-        
+      
+    
+    /*
     func NetworkArticleNewsDetail(ArticleID: String?) {
         networkViewModel.updateBlock = {[unowned self] in
             if self.networkViewModel.articleNewsDetailModel?.ret == false {
@@ -238,21 +248,9 @@ extension TRArticleReadViewController{
         
         networkViewModel.refreshDataSource_articleNewsDetail(NewsID: ArticleID ?? "", Number: "1")
     }
+     */
 }
 
-extension TRArticleReadViewController{
-    // 计算文本高度
-    func lxheight(for contentText: String?) -> CGFloat {
-        var height: CGFloat = 10
-        guard let text = contentText else { return height }
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.numberOfLines = 0
-        label.text = text
-        height += label.sizeThatFits(CGSize(width: LXScreenWidth, height: CGFloat.infinity)).height
-        return height
-    }
-}
 
 extension TRArticleReadViewController{
     func blockFavorButtonAction() {
@@ -285,39 +283,6 @@ extension TRArticleReadViewController{
     }
     
     func blockBuyButtonAction() {
-//        let detailDataModel: TRArticleDetailDataModel = self.networkViewModel.articleDetailModel?.data ?? TRArticleDetailDataModel.init()
-//
-//        var shopArray: [YCOrderShopModel]? = []
-//
-//        let shopModel = YCOrderShopModel.init()
-//        shopModel.shopName = Date().getCurrentDay()
-//
-//        var goodsArray: [YCOrderGoodsModel]? = []
-//
-//        let goodsModel = YCOrderGoodsModel.init()
-//        goodsModel.CartItemID = 1
-//        goodsModel.ProductCount = 1
-//        goodsModel.shopName = shopModel.shopName
-//
-//        let productModel = TROrderProductModel.init()
-//        productModel.ProdName = detailDataModel.ArticleTitle
-//        productModel.ProdPrice = Double(detailDataModel.ArticlePrice)
-//        productModel.ProdIOSPrice = Double(detailDataModel.ArticleIOSPrice)
-//        productModel.ProdYear = detailDataModel.PubIssueYear
-//
-//        goodsModel.Product = productModel
-//
-//        goodsArray?.append(goodsModel)
-//
-//        shopModel.goodsArr = goodsArray
-//
-//        shopArray?.append(shopModel)
-//
-//        let nextVc = TRCartSureOrderViewController(dataArrayShopModel: shopArray)
-//        self.navigationController?.pushViewController(nextVc, animated: true)
-        
-        
-        // 底部弹框
         guard let nextVc = TRBuyActionSheetViewController(model: self.productIssueNumberDataModel) else { return }
         nextVc.delegate = self
         present(nextVc, animated: false, completion:  nil)
@@ -330,4 +295,31 @@ extension TRArticleReadViewController: TRBuyActionSheetViewControllerDelegate {
         self.navigationController?.pushViewController(nextVc, animated: true)
     }
 }
+
+extension TRArticleReadViewController{
+    // 计算文本高度
+    func lxheight(for contentText: String?) -> CGFloat {
+        var height: CGFloat = 10
+        guard let text = contentText else { return height }
+        let label = UILabel()
+        label.numberOfLines = 0
+        
+        //label.font = UIFont.systemFont(ofSize: 15)
+        //label.text = text
+        
+        //通过富文本来设置行间距
+        let paraph = NSMutableParagraphStyle()
+        //将行间距设置为28
+        paraph.lineSpacing = 5
+        //样式属性集合
+        let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16),
+                          NSAttributedString.Key.paragraphStyle: paraph]
+        label.attributedText = NSAttributedString(string: text, attributes: attributes)
+
+        
+        height += label.sizeThatFits(CGSize(width: LXScreenWidth - 16, height: CGFloat.infinity)).height
+        return height
+    }
+}
+
 

@@ -125,7 +125,7 @@ extension TRMoreInfoViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let model: TRArticleGettopnewsDataModel = self.dataArray?[indexPath.row] ?? TRArticleGettopnewsDataModel.init()
-        let nextVc = TRArticleReadHTMLViewController(ArticleID: "\(model.News_ID)")
+        let nextVc = TRArticleReadHTMLViewController(htmlType: .typeInfos, ArticleID: "\(model.News_ID)", articleRichText: nil)
         self.navigationController?.pushViewController(nextVc, animated: true)
     }
 }

@@ -185,7 +185,7 @@ extension TRHomeViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.cellDidSelectItem = {[weak self](tableView, indexPath) in
                 let model: TRArticleGettopnewsDataModel = self?.dataArrayArticleGetTopNews?[indexPath.row] ?? TRArticleGettopnewsDataModel.init()
-                let nextVc = TRArticleReadHTMLViewController(ArticleID: "\(model.News_ID)")
+                let nextVc = TRArticleReadHTMLViewController(htmlType: .typeInfos, ArticleID: "\(model.News_ID)", articleRichText: nil)
                 self?.navigationController?.pushViewController(nextVc, animated: true)
             }
             

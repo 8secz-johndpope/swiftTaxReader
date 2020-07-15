@@ -1098,17 +1098,32 @@ extension TaxReaderViewModel {
     }
 
     func refreshDataSource_ArticleGetHtmlContent(ArticleID: String) {
-//        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.articleGetHtmlContent(ArticleID: ArticleID)) { (result) in
-//            if case let .success(response) = result {
-//                let data = try? response.mapJSON()
-//
-//                guard let returnData = data else {
-//                    print("returnData nil")
-//                    return
-//                }
-//
-//                let json = JSON(returnData)
-//                print("articleGetHtmlContent = \(json.description)")
+        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.articleGetHtmlContent(ArticleID: ArticleID)) { (result) in
+            if case let .success(response) = result {
+                let data = try? response.mapJSON()
+
+                guard let returnData = data else {
+                    print("returnData nil")
+                    return
+                }
+
+                let json = JSON(returnData)
+                print("articleGetHtmlContent = \(json.description)")
+
+                if let mappedObject = JSONDeserializer<TRArticleGetHtmlContentModel>.deserializeFrom(json: json.description) {
+                    self.articleGetHtmlContentModel = mappedObject
+                }
+
+                self.articleGetHtmlContentUpdateBlock?()
+            }
+        }
+        
+//        let path = Bundle.main.path(forResource: "articleDetail", ofType: "json")
+//        if let jsonPath = path {
+//            let jsonData = NSData(contentsOfFile: jsonPath)
+//            do {
+//                let json = JSON(jsonData!)
+//                print(json.description)
 //
 //                if let mappedObject = JSONDeserializer<TRArticleGetHtmlContentModel>.deserializeFrom(json: json.description) {
 //                    self.articleGetHtmlContentModel = mappedObject
@@ -1117,21 +1132,6 @@ extension TaxReaderViewModel {
 //                self.articleGetHtmlContentUpdateBlock?()
 //            }
 //        }
-        
-        let path = Bundle.main.path(forResource: "articleDetail", ofType: "json")
-        if let jsonPath = path {
-            let jsonData = NSData(contentsOfFile: jsonPath)
-            do {
-                let json = JSON(jsonData!)
-                print(json.description)
-                
-                if let mappedObject = JSONDeserializer<TRArticleGetHtmlContentModel>.deserializeFrom(json: json.description) {
-                    self.articleGetHtmlContentModel = mappedObject
-                }
-
-                self.articleGetHtmlContentUpdateBlock?()
-            }
-        }
     }
     
     func refreshDataSource_articleNewsDetail(NewsID: String, Number: String) {

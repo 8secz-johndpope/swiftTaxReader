@@ -8,17 +8,26 @@
 
 import UIKit
 
+enum HTMLTYPE {
+    case typeArticleDetail
+    case typeInfos
+}
+
 class TRArticleReadHTMLViewController: UIViewController {
     
+    var htmlType: HTMLTYPE?
     var ArticleID: String?
-    convenience init(ArticleID: String?) {
+    var articleRichText: String?
+    convenience init(htmlType: HTMLTYPE?, ArticleID: String?, articleRichText: String?) {
         self.init()
+        self.htmlType = htmlType
         self.ArticleID = ArticleID
+        self.articleRichText = articleRichText
     }
     
     lazy var navView: UIView = {
         let view = LXNavigationBarView.init(frame: .zero)
-        view.titleString = "资讯详情"
+        view.titleString = (self.htmlType == HTMLTYPE.typeInfos) ? "资讯详情" : "阅读全文"
         view.navBackButtonClick = {[weak self]() in
             self?.navigationController?.popViewController(animated: true)
         }
@@ -66,7 +75,12 @@ class TRArticleReadHTMLViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
-        NetworkArticleNewsDetail(ArticleID: self.ArticleID)
+        
+        if self.htmlType == HTMLTYPE.typeInfos{
+            NetworkArticleNewsDetail(ArticleID: self.ArticleID)
+        }else if self.htmlType == HTMLTYPE.typeArticleDetail {
+            self.richTextView.richText = self.articleRichText
+        }
     }
     
     lazy var networkViewModel: TaxReaderViewModel = {

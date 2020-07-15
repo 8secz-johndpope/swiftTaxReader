@@ -10,10 +10,14 @@ import UIKit
 import WebKit
 import MBProgressHUD
 
+let TRPhoneBottomHeight = LXPhoneLHBarHeight + 44
+
 class RichTextView: UIView {
 
     /// 富文本加载完成后返回高度
     var webHeight: ((_ height: CGFloat)->Void)?
+    
+    var webViewHeight: CGFloat = 0.0
     
     /// 是否允许图片点击弹出
     var isShowImage: Bool = true
@@ -40,6 +44,39 @@ class RichTextView: UIView {
     /// 富文本是否加载成功
     private var isSuccess: Bool = false
     
+        private lazy var nextView: UIView = { [unowned self] in
+            let view = UIView(frame: .zero)
+            view.backgroundColor = UIColor.red
+            
+//            view.isUserInteractionEnabled = true
+//            let tap = UITapGestureRecognizer.init(target: self, action: #selector(nextViewTap(sender:)))
+//            tap.delegate = self
+//            view.addGestureRecognizer(tap)
+            
+            return view
+        }()
+    
+    private lazy var lastView: UIView = { [unowned self] in
+        let view = UIView(frame: .zero)
+        view.backgroundColor = UIColor.red
+        
+//        view.isUserInteractionEnabled = true
+//        let tap = UITapGestureRecognizer.init(target: self, action: #selector(lastViewTap(sender:)))
+//        tap.delegate = self
+//        view.addGestureRecognizer(tap)
+        
+        return view
+    }()
+    
+    private lazy var pageContentView: LXPhoneBottomView = { [unowned self] in
+        let view = LXPhoneBottomView(frame: .zero)
+        view.buttomButtonClick = {[unowned self](button) in
+            self.blockBottomButtonClick(button: button)
+        }
+        
+        return view
+    }()
+    
     /// wkwebView 用来加载富文本
     private lazy var webView: WKWebView = { [unowned self] in
         let config = WKWebViewConfiguration()
@@ -47,7 +84,9 @@ class RichTextView: UIView {
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.uiDelegate = self
         webView.navigationDelegate = self
-        webView.scrollView.isScrollEnabled = true
+        
+        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.delegate = self
         
         return webView
         }()
@@ -61,9 +100,10 @@ class RichTextView: UIView {
         return label
     }()
     
+    
+    
     /// 保存按钮
     private lazy var saveBtn: HXQButton = {
-        
         let button = HXQButton(title: "保存", color: UIColor.white, font: UIFont.systemFont(ofSize:16)){ [unowned self] btn in
             //点击保存 将图片保存在相册
             if let image = self.browser?.currentImage{
@@ -103,10 +143,23 @@ class RichTextView: UIView {
     
     private func setupUI(){
         
-        //设置约束
-        addSubview(webView)
+//        //设置约束
+//        self.addSubview(webView)
+//        webView.snp.makeConstraints { (make) in
+//            make.edges.equalToSuperview()
+//            make.height.equalTo(0)
+//        }
+        
+        self.addSubview(pageContentView)
+        pageContentView.snp.makeConstraints { (make) in
+            make.left.bottom.right.equalToSuperview()
+            make.height.equalTo(LXPhoneLHBarHeight + 44)
+        }
+        
+        self.addSubview(webView)
         webView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.left.right.equalToSuperview()
+            make.bottom.equalTo(self.pageContentView.snp.top)
             make.height.equalTo(0)
         }
     }
@@ -150,6 +203,7 @@ extension RichTextView: WKUIDelegate,WKNavigationDelegate{
                     make.height.equalTo(webHeight)
                 })
                 self.webHeight?(webHeight)
+                self.webViewHeight = webHeight
             }else{
                 self.webHeight?(0)
             }
@@ -165,7 +219,7 @@ extension RichTextView: WKUIDelegate,WKNavigationDelegate{
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.webHeight?(0)
     }
-    
+        
     /// 拦截
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
@@ -181,7 +235,11 @@ extension RichTextView: WKUIDelegate,WKNavigationDelegate{
                 //禁止跳转
                 decisionHandler(.cancel)
                 return
+            }else if (str.hasPrefix("http")) || (str.hasPrefix("https")) {
+                let url:URL? = URL.init(string: str)
+                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
             }
+            
         }
         decisionHandler(.allow)
     }
@@ -202,6 +260,7 @@ extension RichTextView: WKUIDelegate,WKNavigationDelegate{
         
         //触发方法 给所有的图片添加onClick方法
         webView.evaluateJavaScript("imageClickAction();", completionHandler: nil)
+
         
         //拿到所有img标签对应的图片
         handleImgLabel()
@@ -241,30 +300,70 @@ extension RichTextView: WKUIDelegate,WKNavigationDelegate{
             photo.url = URL(string: imgUrl)
             photos.append(photo)
         }
-        if !photos.isEmpty {
-            let browser = GKPhotoBrowser(photos: photos, currentIndex: selectIndex)
-            browser.showStyle = .none
-            browser.hideStyle = .zoomScale
-            browser.loadStyle = .indeterminateMask
-            browser.isResumePhotoZoom = true
-            browser.isAdaptiveSaveArea = true
-            //            browser.isStatusBarShow = true
-            browser.delegate = self
-            browser.setupCoverViews([self.indexLabel,self.saveBtn]) { [unowned self](photoBrowser, superFrame) in
-                self.resetCover(frame: superFrame, index: photoBrowser.currentIndex)
+        
+        let url = URL(string: clickImg)
+        do {
+            let data = try Data(contentsOf: url!)
+            guard let image = UIImage(data: data) else { return }
+            let resultArr = recognitionQRCode(qrCodeImage: image)
+            print("resultArr = \(resultArr ?? [])")
+            
+            if resultArr?.count ?? 0 > 0 {
+                let resultUrl: String = resultArr?.first ?? ""
+                let url:URL? = URL.init(string: resultUrl)
+                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+            }else {
+                if !photos.isEmpty {
+                    let browser = GKPhotoBrowser(photos: photos, currentIndex: selectIndex)
+                    browser.showStyle = .none
+                    browser.hideStyle = .zoomScale
+                    browser.loadStyle = .indeterminateMask
+                    browser.isResumePhotoZoom = true
+                    browser.isAdaptiveSaveArea = true
+                    //            browser.isStatusBarShow = true
+                    browser.delegate = self
+                    browser.setupCoverViews([self.indexLabel,self.saveBtn]) { [unowned self](photoBrowser, superFrame) in
+                        self.resetCover(frame: superFrame, index: photoBrowser.currentIndex)
+                    }
+                    indexLabel.text = "\(selectIndex+1)/\(imgesArr.count)"
+                    guard let currentVc = currentVc else{
+                        return
+                    }
+                    browser.show(fromVC: currentVc)
+                    self.browser = browser
+                }
             }
-            indexLabel.text = "\(selectIndex+1)/\(imgesArr.count)"
-            guard let currentVc = currentVc else{
-                return
-            }
-            browser.show(fromVC: currentVc)
-            self.browser = browser
+            
+            
+        }catch let error as NSError {
+            print(error)
         }
+    }
+    
+    /* *  @param qrCodeImage 二维码的图片
+       *  @return 结果的数组 */
+    func recognitionQRCode(qrCodeImage: UIImage) -> [String]? {
+        //1. 创建过滤器
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil)
+        
+        //2. 获取CIImage
+        guard let ciImage = CIImage(image: qrCodeImage) else { return nil }
+        
+        //3. 识别二维码
+        guard let features = detector?.features(in: ciImage) else { return nil }
+        
+        //4. 遍历数组, 获取信息
+        var resultArr = [String]()
+        for feature in features {
+            let featureMessage: CIQRCodeFeature = feature as! CIQRCodeFeature
+            resultArr.append(featureMessage.messageString ?? "")
+        }
+        
+        return resultArr
     }
 }
 
 extension RichTextView: GKPhotoBrowserDelegate{
-    
     func photoBrowser(_ browser: GKPhotoBrowser, scrollEndedIndex index: Int) {
         resetCover(frame: browser.contentView.bounds, index: index)
         indexLabel.text = "\(index+1)/\(imgesArr.count)"
@@ -282,4 +381,177 @@ extension RichTextView: GKPhotoBrowserDelegate{
         }
     }
 }
+
+extension RichTextView {
+    func blockBottomButtonClick(button: UIButton) {
+        print("buttonTag = \(button.tag) buttonTitle = \(button.titleLabel?.text ?? "")")
+        switch button.tag {
+        case 1:
+            self.firstButtonClick(button: button)
+        case 2:
+            self.lastButtonClick(button: button)
+        case 3:
+            self.nextButtonClick(button: button)
+        case 4:
+            self.tailButtonClick(button: button)
+        default:
+            self.firstButtonClick(button: button)
+        }
+    }
+    
+    @objc func firstButtonClick(button: UIButton) {
+        print("first")
+        let scrollViewY = webView.scrollView.contentOffset.y
+        if  (scrollViewY > 0) {
+            transitionWithTypeLast()
+            webView.scrollView.contentOffset.y = 0
+        }else {
+            MBProgressHUD.showWithText(text: "已经是第一页了", view: self)
+        }
+    }
+        
+    @objc func lastButtonClick(button: UIButton) {
+        print("last")
+        let scrollViewY = webView.scrollView.contentOffset.y
+        if  (scrollViewY > 0) {
+            transitionWithTypeLast()
+            webView.scrollView.contentOffset.y -= (LXScreenHeight  - LXNavBarHeight - TRPhoneBottomHeight)
+        }else {
+            MBProgressHUD.showWithText(text: "已经是第一页了", view: self)
+        }
+    }
+    
+    @objc func nextButtonClick(button: UIButton) {
+        print("next")
+        let scrollViewY = webView.scrollView.contentOffset.y
+        let screenWebViewHeight = (LXScreenHeight  - LXNavBarHeight - TRPhoneBottomHeight)
+        if (scrollViewY + screenWebViewHeight) < webViewHeight {
+            transitionWithTypeNext()
+            webView.scrollView.contentOffset.y += (LXScreenHeight  - LXNavBarHeight - TRPhoneBottomHeight)
+        }else {
+            MBProgressHUD.showWithText(text: "已经是最后一页了", view: self)
+        }
+    }
+    
+    @objc func tailButtonClick(button: UIButton) {
+        print("tail")
+        let screenWebViewHeight = (LXScreenHeight  - LXNavBarHeight - TRPhoneBottomHeight)
+        let scrollViewOffsetY = Int(webViewHeight.truncatingRemainder(dividingBy: screenWebViewHeight)  + 0.5)
+        let scrollViewY = webView.scrollView.contentOffset.y
+        if (scrollViewY + screenWebViewHeight) < webViewHeight {
+            transitionWithTypeNext()
+            webView.scrollView.contentOffset.y = CGFloat(webViewHeight - CGFloat(scrollViewOffsetY))
+        }else {
+            MBProgressHUD.showWithText(text: "已经是最后一页了", view: self)
+        }
+    }
+    
+    func transitionWithTypeLast(){
+        let animation = CATransition()
+        animation.duration = 0.7
+        animation.type = CATransitionType(rawValue: "kCATransitionFade")
+        animation.subtype = CATransitionSubtype(rawValue: "kCATransitionFromLeft")
+        animation.timingFunction = CAMediaTimingFunction(name: .easeIn)
+        self.layer.add(animation, forKey: "animation")
+    }
+    
+    func transitionWithTypeNext(){
+        let animation = CATransition()
+        animation.duration = 0.7
+        animation.type = CATransitionType(rawValue: "pageCurl")
+        animation.subtype = CATransitionSubtype(rawValue: "kCATransitionFromRight")
+        animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        self.layer.add(animation, forKey: "animation")
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+extension RichTextView: UIGestureRecognizerDelegate{
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        
+        //        let scrollViewY = webView.scrollView.contentOffset.y
+        //        let screenWebViewHeight = (LXScreenHeight  - LXNavBarHeight)
+        //        if (scrollViewY + screenWebViewHeight) > webViewHeight {
+        //            transitionWithTypeLast()
+        //            webView.scrollView.contentOffset.y -= (LXScreenHeight  - LXNavBarHeight)
+        //        }
+                
+        //
+        //        let hitPoint = sender.location(in: sender.view)
+        //
+        //        if hitPoint.x < sender.view!.frame.size.width/3 {
+        //            let scrollViewY = webView.scrollView.contentOffset.y
+        //            let screenWebViewHeight = (LXScreenHeight  - LXNavBarHeight)
+        //            if (scrollViewY + screenWebViewHeight) > webViewHeight {
+        //                webView.scrollView.contentOffset.y -= (LXScreenHeight  - LXNavBarHeight)
+        //            }
+        //        }
+        //        if hitPoint.x > sender.view!.frame.size.width*2/3 {
+        //            let scrollViewY = webView.scrollView.contentOffset.y
+        //            let screenWebViewHeight = (LXScreenHeight  - LXNavBarHeight)
+        //            if (scrollViewY + screenWebViewHeight) < webViewHeight {
+        //                webView.scrollView.contentOffset.y += (LXScreenHeight  - LXNavBarHeight)
+        //            }
+        //        }
+        
+        return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
+extension RichTextView: UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //print(scrollView.contentOffset.y)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("开始拖动滑动")
+    }
+}
+
 

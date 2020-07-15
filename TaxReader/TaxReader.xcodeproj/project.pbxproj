@@ -144,6 +144,8 @@
 		4F4D4C6A24500DD00004FD13 /* TRCartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6924500DD00004FD13 /* TRCartHeaderView.swift */; };
 		4F4D4C6C24500F700004FD13 /* TRCartFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6B24500F700004FD13 /* TRCartFooterView.swift */; };
 		4F4D4C6E245010AA0004FD13 /* TRCartToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6D245010AA0004FD13 /* TRCartToolView.swift */; };
+		4F5103D724BE9A1D00A16EA7 /* LXPhoneBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5103D624BE9A1D00A16EA7 /* LXPhoneBottomView.swift */; };
+		4F5103DC24BEDC4D00A16EA7 /* LXInsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5103DB24BEDC4D00A16EA7 /* LXInsetsLabel.swift */; };
 		4F5F6654248A194D00443388 /* hqorder.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F6653248A194D00443388 /* hqorder.json */; };
 		4F5F6657248A1DE700443388 /* TROrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F6656248A1DE700443388 /* TROrderTableViewCell.swift */; };
 		4F5F6659248A1E1100443388 /* TROrderHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F6658248A1E1100443388 /* TROrderHeaderView.swift */; };
@@ -597,6 +599,8 @@
 		4F4D4C6924500DD00004FD13 /* TRCartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartHeaderView.swift; sourceTree = "<group>"; };
 		4F4D4C6B24500F700004FD13 /* TRCartFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartFooterView.swift; sourceTree = "<group>"; };
 		4F4D4C6D245010AA0004FD13 /* TRCartToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartToolView.swift; sourceTree = "<group>"; };
+		4F5103D624BE9A1D00A16EA7 /* LXPhoneBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXPhoneBottomView.swift; sourceTree = "<group>"; };
+		4F5103DB24BEDC4D00A16EA7 /* LXInsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXInsetsLabel.swift; sourceTree = "<group>"; };
 		4F5F6653248A194D00443388 /* hqorder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hqorder.json; sourceTree = "<group>"; };
 		4F5F6656248A1DE700443388 /* TROrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TROrderTableViewCell.swift; sourceTree = "<group>"; };
 		4F5F6658248A1E1100443388 /* TROrderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TROrderHeaderView.swift; sourceTree = "<group>"; };
@@ -1135,8 +1139,6 @@
 		4F0E3F33249CB506005FC4B5 /* ArticleRead */ = {
 			isa = PBXGroup;
 			children = (
-				4F05201024A06D3600676780 /* homeDetail.json */,
-				4F051FD5249E6BF200676780 /* articleDetail.json */,
 				4F9CA04B249E0BCD00B55FE1 /* View */,
 				4F0E3F34249CB51B005FC4B5 /* TRArticleReadViewController.swift */,
 				4F051F9B249E178C00676780 /* TRArticleReadHTMLViewController.swift */,
@@ -1157,6 +1159,7 @@
 		4F1912C32484A8F500BA7C3D /* Local */ = {
 			isa = PBXGroup;
 			children = (
+				4F8A66F324BC395A00453955 /* Home */,
 				4F62147C24A345F300020082 /* Order */,
 				4F5F6652248A192C00443388 /* AllOrder */,
 				4F1912C82484C65D00BA7C3D /* PrefixPhone */,
@@ -1461,6 +1464,8 @@
 		4F4D4C61244FE5700004FD13 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4F5103DA24BEDC2800A16EA7 /* UIlabel */,
+				4F5103D524BE99FC00A16EA7 /* BottomView */,
 				4FFC4869247CFFF3005B5D84 /* CellHeader */,
 				4FFC481F247B8562005B5D84 /* CellTextField */,
 				4FFC481E247B8557005B5D84 /* FooterButton */,
@@ -1477,6 +1482,22 @@
 				4F4D4C6724500D9D0004FD13 /* TRCartTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4F5103D524BE99FC00A16EA7 /* BottomView */ = {
+			isa = PBXGroup;
+			children = (
+				4F5103D624BE9A1D00A16EA7 /* LXPhoneBottomView.swift */,
+			);
+			path = BottomView;
+			sourceTree = "<group>";
+		};
+		4F5103DA24BEDC2800A16EA7 /* UIlabel */ = {
+			isa = PBXGroup;
+			children = (
+				4F5103DB24BEDC4D00A16EA7 /* LXInsetsLabel.swift */,
+			);
+			path = UIlabel;
 			sourceTree = "<group>";
 		};
 		4F5F6652248A192C00443388 /* AllOrder */ = {
@@ -1734,6 +1755,15 @@
 				4F3EF5DC243594FB0017C803 /* TRHomeRankCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4F8A66F324BC395A00453955 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4F05201024A06D3600676780 /* homeDetail.json */,
+				4F051FD5249E6BF200676780 /* articleDetail.json */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		4F9CA04B249E0BCD00B55FE1 /* View */ = {
@@ -3382,6 +3412,7 @@
 				4FC0539924752224000D5CD0 /* TRAreaNetModel.swift in Sources */,
 				4F5F665B248A1E2000443388 /* TROrderFooterView.swift in Sources */,
 				4F9CA04D249E0BF200B55FE1 /* TRReadTypeDetailView.swift in Sources */,
+				4F5103DC24BEDC4D00A16EA7 /* LXInsetsLabel.swift in Sources */,
 				4FFC48A7247E3267005B5D84 /* TROrderPaytypeViewController.swift in Sources */,
 				4FE2779724405A6D00E60E09 /* TRMeViewController.swift in Sources */,
 				4FF873F3242DA86A00524AF5 /* WRCycleScrollView.swift in Sources */,
@@ -3417,6 +3448,7 @@
 				4FC78C3F2487434A000DD086 /* TRAddressInfoModel.swift in Sources */,
 				4FFC488C247E10D2005B5D84 /* TRAllOrderViewController.swift in Sources */,
 				4FFC48AF247E3AC0005B5D84 /* TRPayTypeTableViewCell.swift in Sources */,
+				4F5103D724BE9A1D00A16EA7 /* LXPhoneBottomView.swift in Sources */,
 				4FFC48DE247F8F9A005B5D84 /* ZYCCartViewController.swift in Sources */,
 				4F051FC7249E1E2600676780 /* GKWebImageManager.m in Sources */,
 				4FC78C2E24861EE6000DD086 /* TRUserUppassModel.swift in Sources */,

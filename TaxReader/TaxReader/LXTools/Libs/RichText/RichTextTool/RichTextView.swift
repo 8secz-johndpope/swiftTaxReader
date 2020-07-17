@@ -88,8 +88,26 @@ class RichTextView: UIView {
         webView.scrollView.isScrollEnabled = false
         webView.scrollView.delegate = self
         
+//        // 添加的左右翻页手势
+//        webView.isUserInteractionEnabled = true
+//        let lefttap = UISwipeGestureRecognizer.init(target: self, action: #selector(swipe(sender:)))
+//        lefttap.direction = .left
+//        webView.addGestureRecognizer(lefttap)
+//
+//        let righttap = UISwipeGestureRecognizer.init(target: self, action: #selector(swipe(sender:)))
+//        righttap.direction = .right
+//        webView.addGestureRecognizer(righttap)
+        
         return webView
-        }()
+    }()
+    
+    @objc func swipe(sender: UISwipeGestureRecognizer) {
+        if sender.direction == .right {
+            print("pre")
+        }else {
+            print("next")
+        }
+    }
     
     /// 富文本中图片数组
     private var imgesArr = [String]()
@@ -159,6 +177,7 @@ class RichTextView: UIView {
         self.addSubview(webView)
         webView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
+            //make.bottom.equalToSuperview()
             make.bottom.equalTo(self.pageContentView.snp.top)
             make.height.equalTo(0)
         }
@@ -193,6 +212,13 @@ extension RichTextView: WKUIDelegate,WKNavigationDelegate{
     
     /// 加载成功
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        
+        /*
+        // 可修改字体大小颜色及背景
+        webView.evaluateJavaScript("document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#FFF000'", completionHandler: nil)
+        webView.evaluateJavaScript("document.body.style.backgroundColor=\"#1E1E1E\"", completionHandler: nil)
+        webView.evaluateJavaScript("document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '140%'", completionHandler: nil)
+         */
         
         /// 获取网页高度
         webView.evaluateJavaScript("document.body.offsetHeight") {[unowned self] (result, _) in
@@ -229,7 +255,7 @@ extension RichTextView: WKUIDelegate,WKNavigationDelegate{
                 //加载图片
                 if let clickImg = (navigationAction.request.url as NSURL?)?.resourceSpecifier{
                     if isShowImage{
-                        handleImageWithName(clickImg)
+                        handleImageWithName(clickImg) //
                     }
                 }
                 //禁止跳转

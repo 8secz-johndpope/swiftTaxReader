@@ -13,6 +13,9 @@ import HandyJSON
 import SwiftyJSON
 
 class TRForgetPwdViewController: UIViewController {
+    
+    var isCountButtonClick: Bool = false
+    
     lazy var navView: UIView = {
         let view = LXNavigationBarView.init(frame: .zero)
         view.titleString = "忘记密码"
@@ -54,6 +57,7 @@ class TRForgetPwdViewController: UIViewController {
     
     lazy var phoneView: TRRegisterPhoneView = {
         let view = TRRegisterPhoneView.init(frame: .zero)
+        view.textField.text = UserDefaults.LoginInfo.string(forKey: .accountText)
         view.prefixButtonBlock = {[weak self](prefixButton) in
             let buttonLabelText:String = prefixButton.titleLabel?.text ?? ""
             print("buttonLabelText = \(String(describing: buttonLabelText))")
@@ -162,25 +166,39 @@ extension TRForgetPwdViewController: TRPrefixPhoneVCDelegate {
         }
         
         viewModel.updateBlock = {[unowned self] in
-            MBProgressHUD.showWithText(text: self.viewModel.getCodeModel?.msg ?? "", view: self.view)
-            if self.viewModel.getCodeModel?.msgCode == 200 {
-                countButton.maxSecond = 60
-                countButton.countdown = true // 停止 false
-                self.numberCodeView.textField.text = self.viewModel.getCodeModel?.data ?? ""
+            if (self.viewModel.getCodeModel?.ret == false) || ((self.viewModel.getCodeModel?.ret == true)  && ((self.viewModel.getCodeModel?.data?.isBlank) == nil)) {
+                MBProgressHUD.showWithText(text: self.viewModel.getCodeModel?.msg ?? "", view: self.view)
+                return
             }
+            
+            self.isCountButtonClick = true
+            countButton.maxSecond = 60
+            countButton.countdown = true // 停止 false
+            self.numberCodeView.textField.text = self.viewModel.getCodeModel?.data ?? ""
         }
         
         let ipAddress = LXGetIPAddressTool.getIPAddressWiFiAndTraffic(false)
         let prefixPhoneCode:String = self.phoneView.prefixButton.titleLabel?.text ?? ""
         viewModel.refreshDataSource_GetCode(NKValidateCodeReceive: phoneNumber,
                                             UserMobileAreaCode: prefixPhoneCode,
-                                            NKValidateCodeType: "02",
+                                            NKValidateCodeType: "03",
                                             UserRegIP: ipAddress)
     }
     
     
     func blockFooterButtonClick(button: UIButton) {
-        let nextVc = TRForgetNewPwdViewController()
+        // 未获取验证码不可跳转
+        if self.isCountButtonClick == false {
+            MBProgressHUD.showWithText(text: "请先获取验证码", view: (self.view)!)
+            return
+        }
+        
+        let phoneNumber:String = self.phoneView.textField.text ?? ""
+        let VeriCode:String = self.numberCodeView.textField.text ?? ""
+        let prefixPhoneCode:String? = (self.phoneView.prefixButton.titleLabel?.text ?? "")
+        let ipAddress = LXGetIPAddressTool.getIPAddressWiFiAndTraffic(false)
+        
+        let nextVc = TRForgetNewPwdViewController.init(UserName: phoneNumber, VeriCode: VeriCode, UserMobileAreaCode: prefixPhoneCode, UserRegIP: ipAddress)
         let keyWindow = UIApplication.shared.windows.first
         if let window = keyWindow {
             window.rootViewController = nextVc

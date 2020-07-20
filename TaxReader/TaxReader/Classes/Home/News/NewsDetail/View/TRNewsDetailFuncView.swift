@@ -113,7 +113,7 @@ class TRNewsDetailFuncView: UIView {
         self.backgroundView.addSubview(self.button0)
         self.button0.snp.makeConstraints { (make) in
             make.top.left.bottom.equalToSuperview()
-            make.width.equalToSuperview().dividedBy(4)
+            make.width.equalToSuperview().dividedBy(3)
         }
         
         self.backgroundView.addSubview(self.button1)
@@ -130,12 +130,14 @@ class TRNewsDetailFuncView: UIView {
             make.width.equalTo(self.button0.snp.width)
         }
 
+        /*
         self.backgroundView.addSubview(self.button3)
         self.button3.snp.makeConstraints { (make) in
             make.left.equalTo(self.button2.snp.right)
             make.top.bottom.equalToSuperview()
             make.width.equalTo(self.button0.snp.width)
         }
+ */
     }
     
     override init(frame: CGRect) {

@@ -37,7 +37,9 @@ class YCOrderShopModel: NSObject {
                 productModel.ProdName = proDict["ProdName"] as? String
                 productModel.ProdPrice = proDict["ProdPrice"] as? Double 
                 productModel.ProdIOSPrice = proDict["ProdIOSPrice"] as? Double
+                productModel.ProdImg = proDict["ProdImg"] as? String
                 productModel.ProdYear = proDict["ProdYear"] as? Int
+                productModel.ProdIssue = proDict["ProdIssue"] as? Int
                 productModel.ReadSourceID = proDict["ReadSourceID"] as? String
                 productModel.ReadSourceParentID = proDict["ReadSourceParentID"] as? Int
                 

@@ -10,6 +10,19 @@ import UIKit
 import TPKeyboardAvoiding
 
 class TRForgetNewPwdViewController: UIViewController {
+    
+    var UserName: String!
+    var VeriCode: String!
+    var UserMobileAreaCode: String!
+    var UserRegIP: String!
+    convenience init(UserName: String!, VeriCode: String!, UserMobileAreaCode: String!, UserRegIP: String!) {
+        self.init()
+        self.UserName = UserName
+        self.VeriCode = VeriCode
+        self.UserMobileAreaCode = UserMobileAreaCode
+        self.UserRegIP = UserRegIP
+    }
+    
     let placeHolderArray: [String] = ["请输入新密码", "请输入确认密码"]
     
     lazy var navView: UIView = {
@@ -108,6 +121,7 @@ extension TRForgetNewPwdViewController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: identific, for: indexPath) as! LXTextFieldTableViewCell
         cell.isHasWarnLabel = indexPath.row == 0 ? true : false
         cell.trTextField.placeholder = placeHolderArray[indexPath.row]
+        cell.trTextField.isSecureTextEntry = true
         
         return cell
     }
@@ -147,11 +161,21 @@ extension TRForgetNewPwdViewController {
         viewModel.updateBlock = {[unowned self] in
             MBProgressHUD.showWithText(text: self.viewModel.userFindPassModel?.msg ?? "", view: self.view)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                if self.viewModel.userFindPassModel?.msgCode == 200 {
-                    self.navigationController?.popViewController(animated: true)
+                if self.viewModel.userFindPassModel?.ret == false {
+                    return
+                }
+                
+                let nextVc = TRWLoginViewController()
+                let keyWindow = UIApplication.shared.windows.first
+                if let window = keyWindow {
+                    window.rootViewController = nextVc
                 }
             }
         }
-        viewModel.refreshDataSource_FindPass(UserName: "", VeriCode: "", NewPass: "", UserMobileAreaCode: "", UserRegIP: "")
+        viewModel.refreshDataSource_FindPass(UserName: self.UserName,
+                                             VeriCode: self.VeriCode,
+                                             NewPass: verifyPwd,
+                                             UserMobileAreaCode: "86", //self.UserMobileAreaCode,
+                                             UserRegIP: self.UserRegIP)
     }
 }

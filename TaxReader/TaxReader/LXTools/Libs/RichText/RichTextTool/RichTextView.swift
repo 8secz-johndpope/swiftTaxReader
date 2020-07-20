@@ -484,7 +484,8 @@ extension RichTextView {
     func transitionWithTypeNext(){
         let animation = CATransition()
         animation.duration = 0.7
-        animation.type = CATransitionType(rawValue: "pageCurl")
+        //animation.type = CATransitionType(rawValue: "pageCurl")
+        animation.type = CATransitionType(rawValue: "kCATransitionFade")
         animation.subtype = CATransitionSubtype(rawValue: "kCATransitionFromRight")
         animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         self.layer.add(animation, forKey: "animation")

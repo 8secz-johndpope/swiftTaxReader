@@ -208,7 +208,7 @@ class TRNewsDetailIntroView: UIView {
         self.View1.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.right.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(8)
+            make.height.equalToSuperview().dividedBy(7)
         }
         
         self.View1.addSubview(self.nameLabel)
@@ -216,6 +216,7 @@ class TRNewsDetailIntroView: UIView {
             make.top.left.bottom.right.equalToSuperview()
         }
         
+        /*
         self.trDetailBackgroundView.addSubview(self.View2)
         self.View2.snp.makeConstraints { (make) in
             make.top.equalTo(self.View1.snp.bottom)
@@ -227,10 +228,11 @@ class TRNewsDetailIntroView: UIView {
         self.pubEnglishLabel.snp.makeConstraints { (make) in
             make.top.left.bottom.right.equalToSuperview()
         }
+ */
         
         self.trDetailBackgroundView.addSubview(self.View3)
         self.View3.snp.makeConstraints { (make) in
-            make.top.equalTo(self.View2.snp.bottom)
+            make.top.equalTo(self.View1.snp.bottom)
             make.left.right.equalToSuperview()
             make.height.equalTo(self.View1.snp.height)
         }
@@ -319,16 +321,18 @@ class TRNewsDetailIntroView: UIView {
             make.height.equalTo(self.View1.snp.height)
         }
         
+        /*
         self.View8.addSubview(self.PubYFDHLabel)
         self.PubYFDHLabel.snp.makeConstraints { (make) in
             make.top.left.bottom.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
         }
+ */
 
         self.View8.addSubview(self.PubCKSJLabel)
         self.PubCKSJLabel.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
-            make.left.equalTo(self.PubYFDHLabel.snp.right)
+            make.left.equalToSuperview()
             make.width.equalToSuperview().dividedBy(2)
         }
     }

@@ -135,7 +135,10 @@ extension TRNewsDetailViewController {
             self.catalogView.dataArrayPubIssueCata = self.networkViewModel.productDetailModel?.data?.PubIssueCata
             
             // 根据接口数据判断当前期刊是否被收藏
-            self.funcView.button2.isSelected = ((self.networkViewModel.productDetailModel?.data?.IsFavorite) == nil)
+            let IsSubscribe = self.networkViewModel.productDetailModel?.data?.IsSubscribe ?? false
+            let readButtonText = IsSubscribe ? "试读" : "阅读"
+            self.funcView.button0.setTitle(readButtonText, for: .normal)
+            self.funcView.button2.isSelected = ((self.networkViewModel.productDetailModel?.data?.IsFavorite) == true)
             self.documentFilepath = self.getDocumentFilePath(dataModel: self.networkViewModel.productDetailModel?.data)
             self.removeDianpath = self.getRemoveDianPath(dataModel: self.networkViewModel.productDetailModel?.data)
             self.appIpDownloadpath = self.getAppIpDownloadPathPath(dataModel: self.networkViewModel.productDetailModel?.data)
@@ -435,8 +438,8 @@ extension TRNewsDetailViewController: TRNewsDetailFuncViewDelegate {
                 
                 self.funcView.button2.isSelected = false
             }
-            let articleID = self.networkViewModel.productDetailModel?.data?.PubIssueID
-            self.networkViewModel.refreshDataSource_FavorCancel(FavoriteID: "\(articleID ?? 0)", ReadFavoriteType: "20")
+            //let articleID = self.networkViewModel.productDetailModel?.data?.PubIssueID
+            self.networkViewModel.refreshDataSource_FavorCancel(FavoriteID: self.PubIssueID ?? "", ReadFavoriteType: "20")
         }
         else
         {
@@ -449,9 +452,9 @@ extension TRNewsDetailViewController: TRNewsDetailFuncViewDelegate {
                 self.funcView.button2.isSelected = true
             }
             
-            let ReadSourceID = self.networkViewModel.articleDetailModel?.data?.ArticleID ?? 0
-            let ReadParentID = self.networkViewModel.articleDetailModel?.data?.ReadTypeRootID ?? 0
-            self.networkViewModel.refreshDataSource_FavorAdd(ReadSourceID: "\(ReadSourceID)", ReadParentID: "\(ReadParentID)", ReadFavoriteType: "30")
+            //let ReadSourceID = self.networkViewModel.articleDetailModel?.data?.ArticleID ?? 0
+            //let ReadParentID = self.networkViewModel.articleDetailModel?.data?.ReadTypeRootID ?? 0
+            self.networkViewModel.refreshDataSource_FavorAdd(ReadSourceID: self.PubIssueID ?? "", ReadParentID: self.PubIssueID ?? "", ReadFavoriteType: "20")
         }
         
     }

@@ -313,7 +313,7 @@ class ZYCCartTableViewCell: UITableViewCell {
                                         options: .allowInvalidSSLCertificates,
                                         context: nil)
             self.trNameLabel.text = _xgoodModel?.Product?.ProdName
-            self.trTimeLabel.text = "\(_xgoodModel?.Product?.ProdYear ?? 0)"
+            self.trTimeLabel.text = "\(_xgoodModel?.Product?.ProdYear ?? 0)年 \(xgoodModel?.Product?.ProdIssue ?? 0)期"
             self.trOripriceLabel.text = "\(_xgoodModel?.Product?.ProdPrice ?? 0.0)"
             self.trPriceLabel.text = "\(_xgoodModel?.Product?.ProdIOSPrice ?? 0.0)"
             self.trNumberLabel.text = "\(_xgoodModel?.ProductCount ?? 0)"

@@ -20,6 +20,7 @@ class TROrderProductModel: NSObject {
     var ProdIOSPrice:Double?
     
     var ProdYear:Int?
+    var ProdIssue:Int?
     
     var ReadSourceID: String?
     var ReadSourceParentID: Int? = 0

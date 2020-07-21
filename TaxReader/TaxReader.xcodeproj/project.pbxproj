@@ -144,6 +144,8 @@
 		4F4D4C6A24500DD00004FD13 /* TRCartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6924500DD00004FD13 /* TRCartHeaderView.swift */; };
 		4F4D4C6C24500F700004FD13 /* TRCartFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6B24500F700004FD13 /* TRCartFooterView.swift */; };
 		4F4D4C6E245010AA0004FD13 /* TRCartToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6D245010AA0004FD13 /* TRCartToolView.swift */; };
+		4F4D4C7E24C6D97D000B72EB /* TRSeniorSearchInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C7D24C6D97D000B72EB /* TRSeniorSearchInputView.swift */; };
+		4F4D4C8024C6DAD0000B72EB /* TRSeniorSearchYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C7F24C6DAD0000B72EB /* TRSeniorSearchYearView.swift */; };
 		4F5103D724BE9A1D00A16EA7 /* LXPhoneBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5103D624BE9A1D00A16EA7 /* LXPhoneBottomView.swift */; };
 		4F5103DC24BEDC4D00A16EA7 /* LXInsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5103DB24BEDC4D00A16EA7 /* LXInsetsLabel.swift */; };
 		4F5F6654248A194D00443388 /* hqorder.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F6653248A194D00443388 /* hqorder.json */; };
@@ -209,6 +211,8 @@
 		4F81C07924937BA30070727A /* TRMoreRankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81C07824937BA30070727A /* TRMoreRankViewController.swift */; };
 		4F84A7CB2487A37800B34BB9 /* TRProductRecdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F84A7CA2487A37800B34BB9 /* TRProductRecdModel.swift */; };
 		4F88D65624AB18EC00F585D5 /* TRBuyActionContentPianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F88D65524AB18EC00F585D5 /* TRBuyActionContentPianView.swift */; };
+		4F9C0C2C24C6CC97004E68DF /* TRSeniorSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9C0C2B24C6CC97004E68DF /* TRSeniorSearchViewController.swift */; };
+		4F9C0C3024C6D1DE004E68DF /* TRSeniorSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9C0C2F24C6D1DE004E68DF /* TRSeniorSearchView.swift */; };
 		4F9CA04D249E0BF200B55FE1 /* TRReadTypeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9CA04C249E0BF200B55FE1 /* TRReadTypeDetailView.swift */; };
 		4FADEC00246A394100AC76D8 /* FMHomeVipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FADEBFD246A394100AC76D8 /* FMHomeVipViewModel.swift */; };
 		4FADEC01246A394100AC76D8 /* FMHomeVipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FADEBFF246A394100AC76D8 /* FMHomeVipModel.swift */; };
@@ -599,6 +603,8 @@
 		4F4D4C6924500DD00004FD13 /* TRCartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartHeaderView.swift; sourceTree = "<group>"; };
 		4F4D4C6B24500F700004FD13 /* TRCartFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartFooterView.swift; sourceTree = "<group>"; };
 		4F4D4C6D245010AA0004FD13 /* TRCartToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartToolView.swift; sourceTree = "<group>"; };
+		4F4D4C7D24C6D97D000B72EB /* TRSeniorSearchInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSeniorSearchInputView.swift; sourceTree = "<group>"; };
+		4F4D4C7F24C6DAD0000B72EB /* TRSeniorSearchYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSeniorSearchYearView.swift; sourceTree = "<group>"; };
 		4F5103D624BE9A1D00A16EA7 /* LXPhoneBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXPhoneBottomView.swift; sourceTree = "<group>"; };
 		4F5103DB24BEDC4D00A16EA7 /* LXInsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXInsetsLabel.swift; sourceTree = "<group>"; };
 		4F5F6653248A194D00443388 /* hqorder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hqorder.json; sourceTree = "<group>"; };
@@ -664,6 +670,8 @@
 		4F81C07824937BA30070727A /* TRMoreRankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRMoreRankViewController.swift; sourceTree = "<group>"; };
 		4F84A7CA2487A37800B34BB9 /* TRProductRecdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRProductRecdModel.swift; sourceTree = "<group>"; };
 		4F88D65524AB18EC00F585D5 /* TRBuyActionContentPianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRBuyActionContentPianView.swift; sourceTree = "<group>"; };
+		4F9C0C2B24C6CC97004E68DF /* TRSeniorSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSeniorSearchViewController.swift; sourceTree = "<group>"; };
+		4F9C0C2F24C6D1DE004E68DF /* TRSeniorSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSeniorSearchView.swift; sourceTree = "<group>"; };
 		4F9CA04C249E0BF200B55FE1 /* TRReadTypeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRReadTypeDetailView.swift; sourceTree = "<group>"; };
 		4FADEBFD246A394100AC76D8 /* FMHomeVipViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMHomeVipViewModel.swift; sourceTree = "<group>"; };
 		4FADEBFF246A394100AC76D8 /* FMHomeVipModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMHomeVipModel.swift; sourceTree = "<group>"; };
@@ -1302,6 +1310,7 @@
 		4F3EF5CB2434859B0017C803 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				4F9C0C2A24C6CC71004E68DF /* SeniorSearch */,
 				4F3EF5D124358ACF0017C803 /* ViewModel */,
 				4F3EF5D424358E910017C803 /* HeaderAndFooter */,
 				4FC78C4924878AE9000DD086 /* Controller */,
@@ -1764,6 +1773,33 @@
 				4F051FD5249E6BF200676780 /* articleDetail.json */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		4F9C0C2A24C6CC71004E68DF /* SeniorSearch */ = {
+			isa = PBXGroup;
+			children = (
+				4F9C0C2D24C6D1BA004E68DF /* View */,
+				4F9C0C2E24C6D1C0004E68DF /* Controller */,
+			);
+			path = SeniorSearch;
+			sourceTree = "<group>";
+		};
+		4F9C0C2D24C6D1BA004E68DF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4F9C0C2F24C6D1DE004E68DF /* TRSeniorSearchView.swift */,
+				4F4D4C7D24C6D97D000B72EB /* TRSeniorSearchInputView.swift */,
+				4F4D4C7F24C6DAD0000B72EB /* TRSeniorSearchYearView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4F9C0C2E24C6D1C0004E68DF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4F9C0C2B24C6CC97004E68DF /* TRSeniorSearchViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		4F9CA04B249E0BCD00B55FE1 /* View */ = {
@@ -3269,6 +3305,7 @@
 				4FFC4856247CC1B1005B5D84 /* TRAddInvoicePersonView.swift in Sources */,
 				4FF873E8242DA86A00524AF5 /* ExampleBouncesContentView.swift in Sources */,
 				4FF873EB242DA86A00524AF5 /* ExampleHighlightableContentView.swift in Sources */,
+				4F9C0C2C24C6CC97004E68DF /* TRSeniorSearchViewController.swift in Sources */,
 				4F62149F24A554A500020082 /* TRBuyActionContentView.swift in Sources */,
 				4F3EF5D824358EC90017C803 /* TRHomeFooterView.swift in Sources */,
 				4FFC48F0247FAD9C005B5D84 /* YCOrderShopModel.swift in Sources */,
@@ -3473,6 +3510,7 @@
 				4FF873EE242DA86A00524AF5 /* LXNavigationController.swift in Sources */,
 				4F051FC6249E1E2600676780 /* GKPhoto.m in Sources */,
 				4F1912D92485EA9900BA7C3D /* TRUserInfoModel.swift in Sources */,
+				4F9C0C3024C6D1DE004E68DF /* TRSeniorSearchView.swift in Sources */,
 				4FFC4836247B99B4005B5D84 /* TRInfoPhoneView.swift in Sources */,
 				4FDBDFE4246BC3B700864817 /* ExtensionString.swift in Sources */,
 				4F1912C02484A6BF00BA7C3D /* TaxReaderAPI.swift in Sources */,
@@ -3485,6 +3523,7 @@
 				4FE277A02440640500E60E09 /* LXExample.swift in Sources */,
 				4FFC487E247E0584005B5D84 /* TRForgetNewPwdViewController.swift in Sources */,
 				4F62149B24A54D6300020082 /* TRBuyActionToolView.swift in Sources */,
+				4F4D4C8024C6DAD0000B72EB /* TRSeniorSearchYearView.swift in Sources */,
 				4FF873F0242DA86A00524AF5 /* WRNavigationBar.swift in Sources */,
 				4FFC4858247CC1BE005B5D84 /* TRAddVoiceCompanyView.swift in Sources */,
 				4FFC482C247B98DE005B5D84 /* TRInfoAccountView.swift in Sources */,
@@ -3528,6 +3567,7 @@
 				4FADEC00246A394100AC76D8 /* FMHomeVipViewModel.swift in Sources */,
 				4FFC4838247B99C3005B5D84 /* TRInfoAreaView.swift in Sources */,
 				4F6214A124A557C600020082 /* TRProductGetIssueNumberModel.swift in Sources */,
+				4F4D4C7E24C6D97D000B72EB /* TRSeniorSearchInputView.swift in Sources */,
 				4FFCE0FF24A8A06800AC5033 /* TROrderDetailFooterView.swift in Sources */,
 				4F0881032473AAA700A1B119 /* TRAreaForeignViewController.swift in Sources */,
 				4F0E3F14249B5248005FC4B5 /* TRUserBindCodeModel.swift in Sources */,

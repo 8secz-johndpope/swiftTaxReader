@@ -14,6 +14,7 @@ class TRMoreArticleViewController: TRBaseViewController {
     
     lazy var navView: UIView = {
         let view = LXNavigationBarSearchView.init(frame: .zero)
+        view.isHasSeniorButton = false
         view.navBackButtonClickBlock = {[weak self](button) in
             self?.navigationController?.popViewController(animated: true)
         }

@@ -38,9 +38,15 @@ class TRHomeViewController: UIViewController {
     lazy var navView: UIView = {
         let view = LXNavigationBarSearchView.init(frame: .zero)
         view.isFirstView = true
+        view.isHasSeniorButton = true
         view.navTextFieldShouldReturnBlock = {[weak self](textField) in
             let nextVc = TRArticleSearchViewController(searchText: textField.text)
             self?.navigationController?.pushViewController(nextVc, animated: true)
+        }
+        
+        view.navNextButtonClickBlock = {[weak self](button) in
+            guard let nextVc = TRSeniorSearchViewController(dataArray: ["123","234"]) else { return }
+            self?.present(nextVc, animated: false, completion:  nil)
         }
         
         return view

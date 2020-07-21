@@ -32,6 +32,7 @@ let notchValue: Int = Int(LXSize.width / LXSize.height * 100)
 let isIphoneLH = ((notchValue == 216) || (notchValue == 46)) ? true : false
 // LXNavBarHeight
 let LXNavBarHeight : CGFloat = isIphoneLH ? 88 : 64
+let LXNavBarStatusHeight : CGFloat = isIphoneLH ? 55 : 44
 // LXTabBarHeight
 let LXTabBarHeight : CGFloat = isIphoneLH ? 49 + 34 : 49
 

@@ -8,7 +8,12 @@
 
 import UIKit
 
+typealias TRSeniorSearchVCSearchButtonClickBlock = (_ button: UIButton, _ model: TROwnSeniorSearchModel?) ->Void
+
 class TRSeniorSearchViewController: UIViewController {
+    
+    var footerButtonClickBlock: TRSeniorSearchVCSearchButtonClickBlock?
+    var publicationDataModel: TRGetAllPublicationDataModel?
     
     var dataArray = [String]()
     
@@ -60,6 +65,13 @@ class TRSeniorSearchViewController: UIViewController {
     
     lazy var seniorContentView: TRSeniorSearchView = {
         let view = TRSeniorSearchView.init(frame: .zero)
+        view.textFieldKanmingBlock = {[unowned self](textField, view) in
+            self.blockKanmingField()
+        }
+        
+        view.footerButtonBlock = {[unowned self](button) in
+            self.blockSearchFooterButtonClick(button: button)
+        }
         
         return view
     }()
@@ -68,6 +80,56 @@ class TRSeniorSearchViewController: UIViewController {
         self.contentView.addSubview(self.seniorContentView)
         self.seniorContentView.snp.makeConstraints { (make) in
             make.top.left.bottom.right.equalToSuperview()
+        }
+    }
+    
+    lazy var networkViewModel: TaxReaderViewModel = {
+        return TaxReaderViewModel()
+    }()
+}
+
+extension TRSeniorSearchViewController {
+    func blockSearchFooterButtonClick(button: UIButton) {
+        let CataName = self.seniorContentView.trLanmuView.trSearchTextField.text ?? ""
+        let TitleName = self.seniorContentView.trPianmingView.trSearchTextField.text ?? ""
+        let AuthorName = self.seniorContentView.trAuthorView.trSearchTextField.text ?? ""
+        let KeyWord = self.seniorContentView.trkeywordsView.trSearchTextField.text ?? ""
+        let Content = self.seniorContentView.trQuanwenView.trSearchTextField.text ?? ""
+        let MagazineIDs = "\(self.publicationDataModel?.PubID ?? 0)"
+        
+        let BeginYear = self.seniorContentView.trYearView.trStartYearSearchTextField.text ?? ""
+        let EndYear = self.seniorContentView.trYearView.trEndYearSearchTextField.text ?? ""
+        let BeginNo = self.seniorContentView.trYearView.trStartNumberSearchTextField.text ?? ""
+        let EndNo = self.seniorContentView.trYearView.trEndNumberSearchTextField.text ?? ""
+        
+        let model: TROwnSeniorSearchModel = TROwnSeniorSearchModel.init()
+        model.searchType = .seniorSearch
+        
+        model.CataName = CataName
+        model.TitleName = TitleName
+        model.AuthorName = AuthorName
+        model.KeyWord = KeyWord
+        model.Content = Content
+        model.MagazineIDs = MagazineIDs
+        
+        model.BeginYear = BeginYear
+        model.EndYear = EndYear
+        model.BeginNo = BeginNo
+        model.EndNo = EndNo
+        
+        sheetViewDismiss()
+        guard let footerButtonClickBlock = footerButtonClickBlock else { return }
+        footerButtonClickBlock(button, model)
+    }
+}
+
+extension TRSeniorSearchViewController {
+    func blockKanmingField() {
+        guard let nextVc = TRPublicationViewController(dataArray: ["123","234"]) else { return }
+        self.present(nextVc, animated: false, completion:  nil)
+        nextVc.didSelectRowAtBlock = {[unowned self](model) in
+            self.seniorContentView.trKanmingView.trSearchTextField.text = model.PubName
+            self.publicationDataModel = model
         }
     }
 }

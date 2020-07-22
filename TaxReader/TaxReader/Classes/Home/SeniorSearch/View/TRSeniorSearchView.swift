@@ -9,7 +9,14 @@
 import UIKit
 import TPKeyboardAvoiding
 
+typealias TRSeniorSearchViewFooterButtonBlock = (_ button: UIButton) ->Void
+typealias TRSeniorSearchViewTextFieldBlock = (_ textField: UITextField, _ view: TRSeniorSearchView) ->Void
+
 class TRSeniorSearchView: UIView {
+    
+    var footerButtonBlock: TRSeniorSearchViewFooterButtonBlock?
+    var textFieldKanmingBlock: TRSeniorSearchViewTextFieldBlock?
+    
     lazy var trContentView: UIView = {
         let view = UIView.init(frame: .zero)
         view.backgroundColor = UIColor.white
@@ -51,7 +58,8 @@ class TRSeniorSearchView: UIView {
         view.backgroundColor = UIColor.white
         view.footerButton.setTitle("检索", for: UIControl.State.normal)
         view.footerButtonClick = {[weak self](button) in
-            print("\(button.titleLabel?.text ?? "")")
+            guard let footerButtonBlock = self?.footerButtonBlock else { return }
+            footerButtonBlock(button)
         }
         
         return view
@@ -74,6 +82,7 @@ class TRSeniorSearchView: UIView {
     lazy var trLanmuView: TRSeniorSearchInputView = {
         let view = TRSeniorSearchInputView.init(frame: .zero)
         view.titleLabelText = "栏目"
+        view.trSearchTextField.tag = 1
         
         return view
     }()
@@ -81,6 +90,7 @@ class TRSeniorSearchView: UIView {
     lazy var trPianmingView: TRSeniorSearchInputView = {
         let view = TRSeniorSearchInputView.init(frame: .zero)
         view.titleLabelText = "篇名"
+        view.trSearchTextField.tag = 2
         
         return view
     }()
@@ -88,6 +98,7 @@ class TRSeniorSearchView: UIView {
     lazy var trAuthorView: TRSeniorSearchInputView = {
         let view = TRSeniorSearchInputView.init(frame: .zero)
         view.titleLabelText = "作者"
+        view.trSearchTextField.tag = 3
         
         return view
     }()
@@ -95,6 +106,7 @@ class TRSeniorSearchView: UIView {
     lazy var trkeywordsView: TRSeniorSearchInputView = {
         let view = TRSeniorSearchInputView.init(frame: .zero)
         view.titleLabelText = "关键词"
+        view.trSearchTextField.tag = 4
         
         return view
     }()
@@ -102,6 +114,7 @@ class TRSeniorSearchView: UIView {
     lazy var trQuanwenView: TRSeniorSearchInputView = {
         let view = TRSeniorSearchInputView.init(frame: .zero)
         view.titleLabelText = "全文"
+        view.trSearchTextField.tag = 5
         
         return view
     }()
@@ -110,12 +123,19 @@ class TRSeniorSearchView: UIView {
         let view = TRSeniorSearchInputView.init(frame: .zero)
         view.titleLabelText = "刊名"
         view.textFieldPlaceHolder = "全部刊名"
+        view.trSearchTextField.tag = 6
+        view.textFieldShouldBeginEditingBlock = {[unowned self](textField) in
+            guard let textFieldKanmingBlock = self.textFieldKanmingBlock else { return}
+            textFieldKanmingBlock(textField, self)
+        }
         
         return view
     }()
     
     lazy var trYearView: TRSeniorSearchYearView = {
         let view = TRSeniorSearchYearView.init(frame: .zero)
+        view.titleLabelText = "年期"
+        view.dataArrayTextFieldPlaceHolder = ["开始年度", "截止年度", "开始期号", "截止期号"]
         
         return view
     }()

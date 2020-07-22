@@ -30,19 +30,7 @@ class LXPhoneBottomView: UIView {
         
         return view
     }()
-    
-    lazy var buttomButton1:UIButton = {
-        let view = UIButton.init(type: UIButton.ButtonType.custom)
-        view.backgroundColor = TRThemeColor
-        view.setTitle("首页", for: UIControl.State.normal)
-        view.setTitleColor(UIColor.white, for: UIControl.State.normal)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        view.tag = 1
-        view.addTarget(self, action: #selector(bottomButtonClick(button:)), for: .touchUpInside)
         
-        return view
-    }()
-    
     lazy var buttomButton2:UIButton = {
         let view = UIButton.init(type: UIButton.ButtonType.custom)
         view.backgroundColor = TRThemeColor
@@ -50,6 +38,29 @@ class LXPhoneBottomView: UIView {
         view.setTitleColor(UIColor.white, for: UIControl.State.normal)
         view.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.tag = 2
+        view.addTarget(self, action: #selector(bottomButtonClick(button:)), for: .touchUpInside)
+        view.layer.cornerRadius = 16.0
+        
+        return view
+    }()
+    
+    lazy var buttomButton1:UIButton = {
+        let view = UIButton.init(type: UIButton.ButtonType.custom)
+        view.setTitle("首页", for: UIControl.State.normal)
+        view.setTitleColor(TRThemeColor, for: UIControl.State.normal)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        view.tag = 1
+        view.addTarget(self, action: #selector(bottomButtonClick(button:)), for: .touchUpInside)
+        
+        return view
+    }()
+    
+    lazy var buttomButton4:UIButton = {
+        let view = UIButton.init(type: UIButton.ButtonType.custom)
+        view.setTitle("尾页", for: UIControl.State.normal)
+        view.setTitleColor(TRThemeColor, for: UIControl.State.normal)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        view.tag = 4
         view.addTarget(self, action: #selector(bottomButtonClick(button:)), for: .touchUpInside)
         
         return view
@@ -63,18 +74,7 @@ class LXPhoneBottomView: UIView {
         view.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.tag = 3
         view.addTarget(self, action: #selector(bottomButtonClick(button:)), for: .touchUpInside)
-        
-        return view
-    }()
-
-    lazy var buttomButton4:UIButton = {
-        let view = UIButton.init(type: UIButton.ButtonType.custom)
-        view.backgroundColor = TRThemeColor
-        view.setTitle("尾页", for: UIControl.State.normal)
-        view.setTitleColor(UIColor.white, for: UIControl.State.normal)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        view.tag = 4
-        view.addTarget(self, action: #selector(bottomButtonClick(button:)), for: .touchUpInside)
+        view.layer.cornerRadius = 16.0
         
         return view
     }()
@@ -96,36 +96,36 @@ class LXPhoneBottomView: UIView {
             make.bottom.equalToSuperview().offset(-LXPhoneLHBarHeight)
         }
         
-        self.trBackgroundView.addSubview(self.buttomButton1)
-        self.buttomButton1.snp.makeConstraints { (make) in
+        self.trBackgroundView.addSubview(self.buttomButton2)
+        self.buttomButton2.snp.makeConstraints{ (make) in
             make.centerY.equalToSuperview()
             make.height.equalTo(32)
             make.left.equalTo(LXScreenButtonMargin)
             make.width.equalTo(LXScreenWidthDiv4)
         }
         
-        self.trBackgroundView.addSubview(self.buttomButton2)
-        self.buttomButton2.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.buttomButton1.snp.centerY)
-            make.height.equalTo(self.buttomButton1.snp.height)
+        self.trBackgroundView.addSubview(self.buttomButton1)
+        self.buttomButton1.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.buttomButton2.snp.centerY)
+            make.height.equalTo(self.buttomButton2.snp.height)
+            make.left.equalTo(self.buttomButton2.snp.right).offset(LXScreenButtonMargin)
+            make.width.equalTo(self.buttomButton2.snp.width)
+        }
+        
+        self.trBackgroundView.addSubview(self.buttomButton4)
+        self.buttomButton4.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.buttomButton2.snp.centerY)
+            make.height.equalTo(self.buttomButton2.snp.height)
             make.left.equalTo(self.buttomButton1.snp.right).offset(LXScreenButtonMargin)
-            make.width.equalTo(self.buttomButton1.snp.width)
+            make.width.equalTo(self.buttomButton2.snp.width)
         }
         
         self.trBackgroundView.addSubview(self.buttomButton3)
         self.buttomButton3.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.buttomButton1.snp.centerY)
-            make.height.equalTo(self.buttomButton1.snp.height)
-            make.left.equalTo(self.buttomButton2.snp.right).offset(LXScreenButtonMargin)
-            make.width.equalTo(self.buttomButton1.snp.width)
-        }
-
-        self.trBackgroundView.addSubview(self.buttomButton4)
-        self.buttomButton4.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.buttomButton1.snp.centerY)
-            make.height.equalTo(self.buttomButton1.snp.height)
-            make.left.equalTo(self.buttomButton3.snp.right).offset(LXScreenButtonMargin)
-            make.width.equalTo(self.buttomButton1.snp.width)
+            make.centerY.equalTo(self.buttomButton2.snp.centerY)
+            make.height.equalTo(self.buttomButton2.snp.height)
+            make.left.equalTo(self.buttomButton4.snp.right).offset(LXScreenButtonMargin)
+            make.width.equalTo(self.buttomButton2.snp.width)
         }
     }
     

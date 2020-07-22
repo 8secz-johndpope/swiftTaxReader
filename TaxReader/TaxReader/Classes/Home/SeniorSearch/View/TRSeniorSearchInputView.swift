@@ -8,7 +8,12 @@
 
 import UIKit
 
+typealias TRSeniorSearchInputViewTextFieldBlock = (_ textField: UITextField) ->Void
+
 class TRSeniorSearchInputView: UIView {
+    
+    var textFieldShouldBeginEditingBlock: TRSeniorSearchInputViewTextFieldBlock?
+    
     lazy var trContentView: UIView = {
         let view = UIView.init(frame: .zero)
         view.backgroundColor = UIColor.white
@@ -35,10 +40,11 @@ class TRSeniorSearchInputView: UIView {
         return view
     }()
     
-    private lazy var trSearchTextField: UITextField = {
+    lazy var trSearchTextField: UITextField = {
         let view = UITextField.init()
         view.delegate = self
         view.returnKeyType = .done
+        view.font = UIFont.systemFont(ofSize: 14.0)
         
         return view
     }()
@@ -64,9 +70,8 @@ class TRSeniorSearchInputView: UIView {
         
         self.trTFBackgroundView.addSubview(self.trSearchTextField)
         self.trSearchTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(self.trTitleLabel.snp.bottom)
-            make.left.equalToSuperview().offset(4)
-            make.bottom.right.equalToSuperview()
+            make.top.bottom.right.equalToSuperview()
+            make.left.equalToSuperview().offset(8)
         }
     }
     
@@ -105,6 +110,17 @@ extension TRSeniorSearchInputView:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField.tag == 6 {
+            
+            guard let textFieldShouldBeginEditingBlock = textFieldShouldBeginEditingBlock else { return false}
+            textFieldShouldBeginEditingBlock(textField)
+            
+            return false
+        }
         return true
     }
 }

@@ -40,13 +40,18 @@ class TRHomeViewController: UIViewController {
         view.isFirstView = true
         view.isHasSeniorButton = true
         view.navTextFieldShouldReturnBlock = {[weak self](textField) in
-            let nextVc = TRArticleSearchViewController(searchText: textField.text)
+            let nextVc = TRArticleSearchViewController(searchText: textField.text, seniorModel: TROwnSeniorSearchModel.init())
             self?.navigationController?.pushViewController(nextVc, animated: true)
         }
         
         view.navNextButtonClickBlock = {[weak self](button) in
             guard let nextVc = TRSeniorSearchViewController(dataArray: ["123","234"]) else { return }
             self?.present(nextVc, animated: false, completion:  nil)
+            
+            nextVc.footerButtonClickBlock = {[unowned self](button, model) in
+                let nextVc = TRArticleSearchViewController(searchText: nil, seniorModel: model)
+                self?.navigationController?.pushViewController(nextVc, animated: true)
+            }
         }
         
         return view

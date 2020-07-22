@@ -19,7 +19,7 @@ class TRFavorViewController: UIViewController {
             self?.navigationController?.popViewController(animated: true)
         }
         view.navTextFieldShouldReturnBlock = {[weak self](textField) in
-            let nextVc = TRArticleSearchViewController(searchText: textField.text)
+            let nextVc = TRArticleSearchViewController(searchText: textField.text, seniorModel: TROwnSeniorSearchModel.init())
             self?.navigationController?.pushViewController(nextVc, animated: true)
         }
         

@@ -72,6 +72,10 @@ public enum TaxReaderUserAPI {
     case cartUpdateNumber(CartItemID: String, Number: String)
     case cartAdd(ProductID: String, ProductCount: String)
     case cartGetCartByID(CartItemIDS: String)
+    
+    // Publication
+    case GetAllPublication
+    case articleAdvSearch(CataName: String, TitleName: String, AuthorName: String, KeyWord: String, Content: String, MagazineIDs: String, MagazineNames: String, BeginYear: String, BeginNo: String, EndYear: String, EndNo: String, PageIndex: String, PageSize: String)
 }
 
 extension TaxReaderUserAPI:TargetType {
@@ -181,6 +185,11 @@ extension TaxReaderUserAPI:TargetType {
                 return "/v1/Cart/Add"
             case .cartGetCartByID:
                 return "/v1/Cart/GetCartByID"
+            
+            case .GetAllPublication:
+                return "/v1/Publication/GetAllPublication"
+            case .articleAdvSearch:
+                return "/v1/Article/AdvSearch"
         }
     }
     
@@ -385,6 +394,25 @@ extension TaxReaderUserAPI:TargetType {
                              "ProductCount":ProductCount]as [String : Any]
             case .cartGetCartByID(let CartItemIDS):
                 parmeters = ["CartItemIDS":CartItemIDS]as [String : Any]
+                
+            // Publication
+            case .GetAllPublication: break
+            case .articleAdvSearch(let CataName, let TitleName, let AuthorName, let KeyWord, let Content, let MagazineIDs, let MagazineNames, let BeginYear, let BeginNo, let EndYear, let EndNo, let PageIndex, let PageSize):
+                    parmeters = [
+                        "CataName": CataName,
+                        "TitleName":TitleName,
+                        "AuthorName": AuthorName,
+                        "KeyWord": KeyWord,
+                        "Content": Content,
+                        "MagazineIDs": MagazineIDs,
+                        "MagazineNames": MagazineNames,
+                        "BeginYear": BeginYear,
+                        "BeginNo": BeginNo,
+                        "EndYear": EndYear,
+                        "EndNo": EndNo,
+                        "PageIndex": PageIndex,
+                        "PageSize": PageSize,
+                        ] as [String : Any]
         }
         
         print("parmeters = \(parmeters)")

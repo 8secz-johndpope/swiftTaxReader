@@ -53,7 +53,7 @@ class LXNavigationBarSearchView: UIView {
     
     private lazy var seniorSearchButton: UIButton = {
         let view = UIButton.init(type: .custom)
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = UIColor.purple
         view.setTitle("高级搜索", for: .normal)
         view.setTitleColor(UIColor.white, for: .normal)
         view.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)

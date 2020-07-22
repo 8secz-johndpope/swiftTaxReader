@@ -146,6 +146,11 @@
 		4F4D4C6E245010AA0004FD13 /* TRCartToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6D245010AA0004FD13 /* TRCartToolView.swift */; };
 		4F4D4C7E24C6D97D000B72EB /* TRSeniorSearchInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C7D24C6D97D000B72EB /* TRSeniorSearchInputView.swift */; };
 		4F4D4C8024C6DAD0000B72EB /* TRSeniorSearchYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C7F24C6DAD0000B72EB /* TRSeniorSearchYearView.swift */; };
+		4F4D4C8424C81184000B72EB /* TRPublicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C8324C81184000B72EB /* TRPublicationViewController.swift */; };
+		4F4D4C8724C813AF000B72EB /* TRGetAllPublicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C8624C813AF000B72EB /* TRGetAllPublicationModel.swift */; };
+		4F4D4C8924C820C7000B72EB /* TRArticleAdvSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C8824C820C7000B72EB /* TRArticleAdvSearchModel.swift */; };
+		4F4D4C8B24C825CB000B72EB /* TROwnSeniorSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C8A24C825CB000B72EB /* TROwnSeniorSearchModel.swift */; };
+		4F4D4C8D24C82FEC000B72EB /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C8C24C82FEC000B72EB /* ExtensionColor.swift */; };
 		4F5103D724BE9A1D00A16EA7 /* LXPhoneBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5103D624BE9A1D00A16EA7 /* LXPhoneBottomView.swift */; };
 		4F5103DC24BEDC4D00A16EA7 /* LXInsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5103DB24BEDC4D00A16EA7 /* LXInsetsLabel.swift */; };
 		4F5F6654248A194D00443388 /* hqorder.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F6653248A194D00443388 /* hqorder.json */; };
@@ -605,6 +610,11 @@
 		4F4D4C6D245010AA0004FD13 /* TRCartToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartToolView.swift; sourceTree = "<group>"; };
 		4F4D4C7D24C6D97D000B72EB /* TRSeniorSearchInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSeniorSearchInputView.swift; sourceTree = "<group>"; };
 		4F4D4C7F24C6DAD0000B72EB /* TRSeniorSearchYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSeniorSearchYearView.swift; sourceTree = "<group>"; };
+		4F4D4C8324C81184000B72EB /* TRPublicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRPublicationViewController.swift; sourceTree = "<group>"; };
+		4F4D4C8624C813AF000B72EB /* TRGetAllPublicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRGetAllPublicationModel.swift; sourceTree = "<group>"; };
+		4F4D4C8824C820C7000B72EB /* TRArticleAdvSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRArticleAdvSearchModel.swift; sourceTree = "<group>"; };
+		4F4D4C8A24C825CB000B72EB /* TROwnSeniorSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TROwnSeniorSearchModel.swift; sourceTree = "<group>"; };
+		4F4D4C8C24C82FEC000B72EB /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		4F5103D624BE9A1D00A16EA7 /* LXPhoneBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXPhoneBottomView.swift; sourceTree = "<group>"; };
 		4F5103DB24BEDC4D00A16EA7 /* LXInsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXInsetsLabel.swift; sourceTree = "<group>"; };
 		4F5F6653248A194D00443388 /* hqorder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hqorder.json; sourceTree = "<group>"; };
@@ -1192,6 +1202,7 @@
 		4F1912C72484C56500BA7C3D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4F4D4C8524C8139F000B72EB /* Publication */,
 				4F05200B249F070100676780 /* Other */,
 				4F0E3F22249C984F005FC4B5 /* Cart */,
 				4FC78C3324862859000DD086 /* User */,
@@ -1491,6 +1502,15 @@
 				4F4D4C6724500D9D0004FD13 /* TRCartTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4F4D4C8524C8139F000B72EB /* Publication */ = {
+			isa = PBXGroup;
+			children = (
+				4F4D4C8624C813AF000B72EB /* TRGetAllPublicationModel.swift */,
+				4F4D4C8A24C825CB000B72EB /* TROwnSeniorSearchModel.swift */,
+			);
+			path = Publication;
 			sourceTree = "<group>";
 		};
 		4F5103D524BE99FC00A16EA7 /* BottomView */ = {
@@ -1798,6 +1818,7 @@
 			isa = PBXGroup;
 			children = (
 				4F9C0C2B24C6CC97004E68DF /* TRSeniorSearchViewController.swift */,
+				4F4D4C8324C81184000B72EB /* TRPublicationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2017,6 +2038,7 @@
 				4FDBDFE3246BC3B700864817 /* ExtensionString.swift */,
 				4F0881042473AB8200A1B119 /* ExtensionArray.swift */,
 				4FDBDFE9246E975600864817 /* ExtensionDate.swift */,
+				4F4D4C8C24C82FEC000B72EB /* ExtensionColor.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2039,6 +2061,7 @@
 				4F0E3F2F249CB161005FC4B5 /* TRArticleDetailModel.swift */,
 				4F0E3F31249CB16F005FC4B5 /* TRArticleGetHtmlContentModel.swift */,
 				4F0E3F36249CC2C8005FC4B5 /* TRNewsDetailModel.swift */,
+				4F4D4C8824C820C7000B72EB /* TRArticleAdvSearchModel.swift */,
 			);
 			path = Article;
 			sourceTree = "<group>";
@@ -3373,6 +3396,7 @@
 				4F3EF5F0243723F50017C803 /* TRMoreNewsViewController.swift in Sources */,
 				4F0880F7247257B700A1B119 /* TRRegisterAreaViewController.swift in Sources */,
 				4F1912CF2484E0F500BA7C3D /* LXGlobal.swift in Sources */,
+				4F4D4C8924C820C7000B72EB /* TRArticleAdvSearchModel.swift in Sources */,
 				4FC053492474BBC8000D5CD0 /* TRForeignAddressPickerPresentAnimated.swift in Sources */,
 				4FC78C2A2485F962000DD086 /* TRUserUpInfoModel.swift in Sources */,
 				4F62149324A354A900020082 /* TRBuyActionSheetViewController.swift in Sources */,
@@ -3383,7 +3407,9 @@
 				4FFC4895247E11C1005B5D84 /* TRNoPayViewController.swift in Sources */,
 				4F3EF640243F0F5A0017C803 /* TRNewsDetailDropView.swift in Sources */,
 				4FE277BF2445A59800E60E09 /* TRCartViewController.swift in Sources */,
+				4F4D4C8B24C825CB000B72EB /* TROwnSeniorSearchModel.swift in Sources */,
 				4F62146A24A2E25100020082 /* PDFThumbnailCollectionViewController.swift in Sources */,
+				4F4D4C8424C81184000B72EB /* TRPublicationViewController.swift in Sources */,
 				4FFC487C247E01AA005B5D84 /* TRForgetPwdViewController.swift in Sources */,
 				4F81C03A2490AD1E0070727A /* TROrderFindModel.swift in Sources */,
 				4FC0533C2474B91B000D5CD0 /* EWAddressModel.swift in Sources */,
@@ -3480,6 +3506,7 @@
 				4F0E3F2A249C989A005FC4B5 /* TRCartAddModel.swift in Sources */,
 				4F3ACF512468126B00A9FC1D /* TRLoginRegisterView.swift in Sources */,
 				4FDDCCE1248E3E380062A630 /* TRproductReadTypeModel.swift in Sources */,
+				4F4D4C8D24C82FEC000B72EB /* ExtensionColor.swift in Sources */,
 				4FDBDFEA246E975600864817 /* ExtensionDate.swift in Sources */,
 				4FF873F9242DC5D600524AF5 /* ExampleViewController.swift in Sources */,
 				4FC78C3F2487434A000DD086 /* TRAddressInfoModel.swift in Sources */,
@@ -3574,6 +3601,7 @@
 				4FDE6F6D2463ECBD00D8EF9A /* TRRegisterAgreementView.swift in Sources */,
 				4FF873F1242DA86A00524AF5 /* WRCustomNavigationBar.swift in Sources */,
 				4F6214AB24A5649300020082 /* TRBuyActionContentDanView.swift in Sources */,
+				4F4D4C8724C813AF000B72EB /* TRGetAllPublicationModel.swift in Sources */,
 				4FDE6F652463EBF200D8EF9A /* TRRegisterImageCodeView.swift in Sources */,
 				4F81C0452490CE880070727A /* TRTicketTypeHeaderView.swift in Sources */,
 				4F62149D24A5548A00020082 /* TRBuyActionSegmentView.swift in Sources */,

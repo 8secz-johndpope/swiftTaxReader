@@ -11,9 +11,12 @@ import UIKit
 class TRArticleSearchViewController: UIViewController {
     
     var searchText: String?
-    convenience init(searchText: String?) {
+    var seniorModel: TROwnSeniorSearchModel?
+    
+    convenience init(searchText: String?, seniorModel: TROwnSeniorSearchModel?) {
         self.init()
         self.searchText = searchText
+        self.seniorModel = seniorModel
     }
     
     private var page: Int = 1
@@ -38,11 +41,19 @@ class TRArticleSearchViewController: UIViewController {
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         tableView.register(TRSearchDetailTableViewCell.self, forCellReuseIdentifier: TRSearchDetailTableViewCellID)
         tableView.uHead = URefreshHeader{ [weak self] in
-            self?.NetworkArticleSearch(more: false)
+            if self?.seniorModel?.searchType == TypeSearch.seniorSearch {
+                self?.NetworkGetArticleAdvSearch(more: false)
+            }else {
+                self?.NetworkArticleSearch(more: false)
+            }
         }
         
         tableView.uFoot = URefreshFooter{ [weak self] in
-            self?.NetworkArticleSearch(more: true)
+            if self?.seniorModel?.searchType == TypeSearch.seniorSearch {
+                self?.NetworkGetArticleAdvSearch(more: true)
+            }else {
+                self?.NetworkArticleSearch(more: true)
+            }
         }
         
         return tableView
@@ -66,7 +77,11 @@ class TRArticleSearchViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
-        NetworkArticleSearch(more: false)
+        if self.seniorModel?.searchType == TypeSearch.seniorSearch {
+            NetworkGetArticleAdvSearch(more: false)
+        }else {
+            NetworkArticleSearch(more: false)
+        }
     }
     
     lazy var networkViewModel: TaxReaderViewModel = {
@@ -78,7 +93,7 @@ extension TRArticleSearchViewController {
     func NetworkArticleSearch(more: Bool) {
         networkViewModel.updateBlock = {[unowned self] in
             self.tableView.uHead.endRefreshing()
-            if self.dataArr?.count == self.networkViewModel.orderFindModel?.totalCount {
+            if self.dataArr?.count == self.networkViewModel.articleSearchModel?.data?.TotalCount {
                 self.tableView.uFoot.endRefreshingWithNoMoreData()
             }else {
                 self.tableView.uFoot.endRefreshing()
@@ -96,6 +111,57 @@ extension TRArticleSearchViewController {
         
         page = (more ? ( page + 1) : 1)
         networkViewModel.refreshDataSource_ArticleSearch(KeyWord: searchText ?? "税", PageIndex: "\(page)", PageSize: "10")
+    }
+    
+    /*
+        {
+          "CataName": "string",//栏目
+          "TitleName": "string",//篇名
+          "AuthorName": "string",//作者
+          "KeyWord": "string",--关键词
+          "Content": "string",--全文
+          "MagazineIDs": "string",--刊名id 逗号分割“,”
+          "BeginYear": 0,--开始年份
+          "BeginNo": 0,--开始期号
+          "EndYear": 0,--结束年份
+          "EndNo": 0,--结束期号
+          "PageIndex": 0,--页码
+          "PageSize": 0--页面大小
+        }
+     */
+    func NetworkGetArticleAdvSearch(more: Bool) {
+        networkViewModel.articleAdvSearchBlock = {[unowned self] in
+            self.tableView.uHead.endRefreshing()
+            if self.dataArr?.count == self.networkViewModel.articleSearchModel?.data?.TotalCount {
+                self.tableView.uFoot.endRefreshingWithNoMoreData()
+            }else {
+                self.tableView.uFoot.endRefreshing()
+            }
+
+            if self.networkViewModel.articleSearchModel?.ret == false{
+                MBProgressHUD.showWithText(text: self.networkViewModel.articleSearchModel?.msg ?? "", view: self.view)
+                return
+            }
+            
+            if more == false { self.dataArr?.removeAll() }
+            self.dataArr?.append(contentsOf: self.networkViewModel.articleSearchModel?.data?.data ?? [])
+            self.tableView.reloadData()
+        }
+        
+        page = (more ? ( page + 1) : 1)
+        networkViewModel.refreshDataSource_articleAdvSearch(CataName: self.seniorModel?.CataName ?? "",
+                                                            TitleName: self.seniorModel?.CataName ?? "",
+                                                            AuthorName: self.seniorModel?.CataName ?? "",
+                                                            KeyWord: self.seniorModel?.CataName ?? "",
+                                                            Content: self.seniorModel?.CataName ?? "",
+                                                            MagazineIDs: self.seniorModel?.CataName ?? "",
+                                                            MagazineNames: self.seniorModel?.CataName ?? "",
+                                                            BeginYear: self.seniorModel?.CataName ?? "",
+                                                            BeginNo: self.seniorModel?.CataName ?? "",
+                                                            EndYear: self.seniorModel?.CataName ?? "",
+                                                            EndNo: self.seniorModel?.CataName ?? "",
+                                                            PageIndex: "\(page)",
+                                                            PageSize: "10")
     }
 }
 

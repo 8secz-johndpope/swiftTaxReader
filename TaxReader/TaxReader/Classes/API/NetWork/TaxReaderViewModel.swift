@@ -48,6 +48,9 @@ class TaxReaderViewModel: NSObject {
     typealias APIDataBlockCartGetByID = () -> Void
     var getCartByIDUpdateBlock: APIDataBlockCartGetByID?
     
+    typealias APIDataBlockArticleAdvSearch = () -> Void
+    var articleAdvSearchBlock: APIDataBlockArticleAdvSearch?
+    
     // 登录
     var loginServe: TRLoginModel?
     
@@ -112,6 +115,11 @@ class TaxReaderViewModel: NSObject {
     var cartUpdateNumbeModel: TRCartUpdateNumberModel?
     var cartAddModel: TRCartAddModel?
     var cartGetByIDModel: TRCartGetCartByIDModel?
+    
+    // TRGetAllPublicationModel
+    var allPublicationModel: TRGetAllPublicationModel?
+    var articleAdvSearchModel: TRArticleAdvSearchModel?
+    
 }
 
 // User
@@ -1246,6 +1254,61 @@ extension TaxReaderViewModel {
             }
         }
     }
+    
+    // Publication
+    func refreshDataSource_GetAllPublication() {
+        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.GetAllPublication) { (result) in
+            if case let .success(response) = result {
+                let data = try? response.mapJSON()
+                
+                guard let returnData = data else {
+                    print("returnData nil")
+                    return
+                }
+                
+                let json = JSON(returnData)
+                print("GetAllPublication = \(json.description)")
+                
+                if let mappedObject = JSONDeserializer<TRGetAllPublicationModel>.deserializeFrom(json: json.description) {
+                    self.allPublicationModel = mappedObject
+                }
 
+                self.updateBlock?()
+            }
+        }
+    }
+    
+    func refreshDataSource_articleAdvSearch(CataName: String,
+                                       TitleName: String,
+                                       AuthorName: String,
+                                       KeyWord: String,
+                                       Content: String,
+                                       MagazineIDs: String,
+                                       MagazineNames: String,
+                                       BeginYear: String,
+                                       BeginNo: String,
+                                       EndYear: String,
+                                       EndNo: String,
+                                       PageIndex: String,
+                                       PageSize: String) {
+        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.articleAdvSearch(CataName: CataName, TitleName: TitleName, AuthorName: AuthorName, KeyWord: KeyWord, Content: Content, MagazineIDs: MagazineIDs, MagazineNames: MagazineNames, BeginYear: BeginYear, BeginNo: BeginNo, EndYear: EndYear, EndNo: EndNo, PageIndex: PageIndex, PageSize: PageSize)) { (result) in
+            if case let .success(response) = result {
+                let data = try? response.mapJSON()
+                
+                guard let returnData = data else {
+                    print("returnData nil")
+                    return
+                }
+                
+                let json = JSON(returnData)
+                print("articleAdvSearch = \(json.description)")
+                
+                if let mappedObject = JSONDeserializer<TRArticleSearchModel>.deserializeFrom(json: json.description) {
+                    self.articleSearchModel = mappedObject
+                }
 
+                self.articleAdvSearchBlock?()
+            }
+        }
+    }
 }

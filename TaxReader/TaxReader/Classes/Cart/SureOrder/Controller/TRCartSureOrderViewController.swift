@@ -223,6 +223,8 @@ extension TRCartSureOrderViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == ((self.dataArrayShopModel?.count ?? 0) - 1) {
             let footerView: TRCartPayFooterView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TRCartPayFooterViewID) as! TRCartPayFooterView
+            let shopmodel:YCOrderShopModel = self.dataArrayShopModel?[section] ?? YCOrderShopModel.init()
+            footerView.isHasTicketTypeView = !shopmodel.isFromArticleBenPian!
             footerView.itemCoverViewTapBlock = {[weak self](isPayType, isTicketType) in
                 if isPayType {
                     let nextVc = TROrderPaytypeViewController()

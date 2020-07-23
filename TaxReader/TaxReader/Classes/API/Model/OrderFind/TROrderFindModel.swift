@@ -9,6 +9,7 @@
 import UIKit
 import HandyJSON
 
+/*
 struct TROrderFindModel: HandyJSON {
     var ret: Int = 0
     var msgCode: Int = 0
@@ -40,6 +41,104 @@ struct TROrderFindDataDetailModel: HandyJSON {
 struct TROrderFindDataDetailProductModel: HandyJSON {
     var ProdImg: String?
     var ProdName: String?
+}
+ */
+
+
+struct TROrderFindModel: HandyJSON {
+    var data: [TROrderFindDataModel]?
+    var pageIndex: Int = 0
+    var pageSize: Int = 0
+    var msg: String?
+    var totalCount: Int = 0
+    var ret: Bool = false
+    var msgCode: String?
+}
+
+struct TROrderFindDataModel: HandyJSON {
+    var OrderPayDate: String?
+    
+    /// 无需开票=0，申请开票=10，开票中=20，开票完成=30
+    var OrderInvoiceStatus: Int = 0
+    
+    var Order_token: String?
+    var DoMain: String?
+    var Order_tradeNo: String?
+    var UserName: String?
+    var UserID: Int = 0
+    var OrderIOSMoney: Int = 0
+    var Order_fee: Int = 0
+    var OrderSerialCode: String?
+    var OrderIOSFeeMoney: Int = 0
+    var OrderDate: String?
+    var Order_refundOrderId: String?
+    var OrderDetail: [TROrderFindDataDetailModel]?
+    var OrderRemarks: String?
+    var OrderInvoiceDueDate: String?
+    var OrderFeeMoney: Float = 0.0
+    
+    /// 订单状态（0-已取消；1-待支付；2-支付中；3-已支付；4-申请退款；5-退款中；6-已退款）
+    var OrderStatus: Int = 0
+    
+    var Order_requestId: String?
+    var OrderMoney: Float = 0.0
+    var OrderForm: Int = 0
+    var OrderID: Int = 0
+    var OrderConsignee: String?
+    var OrderInvoice: String?
+    var Order_failMsg: String?
+    var PayModel: Int = 0
+}
+
+struct TROrderFindDataDetailModel: HandyJSON {
+    var OrderDetailID: Int = 0
+    var Product: TROrderFindDataDetailProductModel?
+    var OrderDetailSN: String?
+    var PubProductID: Int = 0
+    var PubProductIOSFeePrice: Int = 0
+    var PubProductFeePrice: Float = 0.0
+    var OrderDetailtMoney: Float = 0.0
+    var PubProductMedia: Int = 0
+    var OrderID: Int = 0
+    var DoMain: String?
+    var PubProductPrice: Float = 0.0
+    var PubProductIOSPrice: Int = 0
+    var OrderDetailCount: Int = 0
+    var PubProductName: String?
+}
+
+struct TROrderFindDataDetailProductModel: HandyJSON {
+    var ReadSourceType: Int = 0
+    var ProdIsDiscount: Int = 0
+    var ProdIssue: Int = 0
+    var ProdSumIssue: Int = 0
+    var ProdForm: Int = 0
+    var ProdLevel: Int = 0
+    var ReadSourceParentID: Int = 0
+    var ProdAuthorName: String?
+    var ReadTypeRootCode: String?
+    var ProdIsFree: Bool = false
+    var ProdShowStatus: Int = 0
+    var ReadTypeRootID: Int = 0
+    var ProdUpdateDate: String?
+    var ProdAbstract: String?
+    var ProdID: Int = 0
+    var ReadSourceURL: String?
+    var ReadSourceID: String?
+    var ProdCreator: Int = 0
+    var ProdIOSPrice: Float = 0.0
+    var ProdIsRCMD: Int = 0
+    var ArticleList: String?
+    var ReadingTypeID: Int = 0
+    var DoMain: String?
+    var ProdPrice: Float = 0.0
+    var ProdName: String?
+    var ProdType: Int = 0
+    var ProdUpdateMan: Int = 0
+    var ProdYear: Int = 0
+    var ProdStatus: Int = 0
+    var ProdImg: String?
+    var ProdCreateTime: String?
 }
 
 

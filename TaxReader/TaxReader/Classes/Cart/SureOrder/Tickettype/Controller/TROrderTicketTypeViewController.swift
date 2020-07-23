@@ -15,7 +15,7 @@ class TROrderTicketTypeViewController: UIViewController {
     var presentBackCommitBlock: TROrderTicketTypeViewControllerBlock?
     
     var userInvoiceID: String?
-    var selectedInvoiceType: String? = "不开发票"
+    var selectedInvoiceType: String? = "个人发票"
     
     lazy var titleHeaderView: TRTicketTypeHeaderView = {
         let view = TRTicketTypeHeaderView.init(frame: .zero)
@@ -145,15 +145,14 @@ extension TROrderTicketTypeViewController {
 
 extension TROrderTicketTypeViewController {
     func blockOpenContentButtonClick(button: UIButton) {
-        print("\(String(describing: button.titleLabel?.text))")
-        self.openContentView.isHidden = button.tag == 1 ? false : true
+        if button.tag == 2 {
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
 extension TROrderTicketTypeViewController {
     func blockHeaderTypeButtonClick(button: UIButton) {
-        print("\(String(describing: button.titleLabel?.text))")
-        
         self.backListView.isTypePerson = button.tag == 1 ? true : false
         self.selectedInvoiceType = button.tag == 1 ? "个人发票" : "企业发票"
     }
@@ -162,7 +161,7 @@ extension TROrderTicketTypeViewController {
 extension TROrderTicketTypeViewController {
     func blockBottomButtonClick(button: UIButton) {
         guard let presentBackCommitBlock = presentBackCommitBlock else { return }
-        presentBackCommitBlock(self.userInvoiceID ?? "", self.selectedInvoiceType ?? "不开发票")
+        presentBackCommitBlock(self.userInvoiceID ?? "", self.selectedInvoiceType ?? "个人发票")
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }

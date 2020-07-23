@@ -16,7 +16,7 @@ class TRCartPayFooterView: UITableViewHeaderFooterView {
 
     private lazy var trContentView: UIView = {
         let view = UIView.init()
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = UIColor.white
         
         return view
     }()
@@ -76,5 +76,15 @@ class TRCartPayFooterView: UITableViewHeaderFooterView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    var isHasTicketTypeView: Bool? {
+        didSet {
+            guard let isHasTicketTypeView = isHasTicketTypeView else {
+                return
+            }
+            
+            self.ticketTypeView.isHidden = !isHasTicketTypeView
+        }
     }
 }

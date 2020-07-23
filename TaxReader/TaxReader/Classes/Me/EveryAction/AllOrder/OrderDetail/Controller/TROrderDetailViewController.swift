@@ -149,14 +149,26 @@ extension TROrderDetailViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let model: TROrderFindDetailDataModel = self.orderFindDetailModel?.data ?? TROrderFindDetailDataModel.init()
-        return model.OrderStatus == 1 ? 66 + 134 : 30 + 134
+        // return model.OrderStatus == 1 ? 66 + 134 : 30 + 134
+        
+        var cellHeight = 30 + 150
+        if model.OrderStatus == NetDataOrderStatus {// 立即支付按钮
+            cellHeight += 36
+        }
+        
+        if model.OrderInvoiceStatus == NetDataOrderInvoiceStatus { // 补开发票按钮
+            cellHeight += 36
+        }
+        
+        return CGFloat(cellHeight)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView: TROrderDetailFooterView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TROrderDetailFooterViewID) as! TROrderDetailFooterView
         
        let model: TROrderFindDetailDataModel = self.orderFindDetailModel?.data ?? TROrderFindDetailDataModel.init()
-        footerView.isHasActionPayView = model.OrderStatus == 1 ? true : false
+        footerView.isHasActionPayView = model.OrderStatus == NetDataOrderStatus ? true : false
+        footerView.isHasActionInvoiceView = model.OrderInvoiceStatus == NetDataOrderInvoiceStatus ? true : false
         footerView.delegate = self
         footerView.findDetailDataDetailModelArray = model.OrderDetail
         footerView.findDetailDataModel = model
@@ -184,16 +196,228 @@ extension TROrderDetailViewController: TROrderTableViewCellDelegate{
 }
 
 extension TROrderDetailViewController: TROrderDetailFooterViewDelegate{
+    func cellDidSelectRowAt(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("点击行")
+    }
+    
     func viewCancelOrderButtonDidSelected(button: UIButton, view: TROrderDetailFooterView) {
         print("取消订单")
     }
     
     func viewPayButtonDidSelected(button: UIButton, view: TROrderDetailFooterView) {
-        print("去支付")
+        let model: TROrderFindDetailDataModel = self.orderFindDetailModel?.data ?? TROrderFindDetailDataModel.init()
+        NetworkOrderSecpay(payModel: PayModelWeixin, orderID: "\(model.OrderID)")
     }
     
-    func cellDidSelectRowAt(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVc = TROrderDetailViewController()
+    func viewInvoiceButtonDidSelected(button: UIButton, view: TROrderDetailFooterView) {
+        let nextVc = TROrderTicketTypeViewController()
+        nextVc.presentBackCommitBlock = {[unowned self](userInvoiceID, selectedInvoiceType) in
+            let model: TROrderFindDetailDataModel = self.orderFindDetailModel?.data ?? TROrderFindDetailDataModel.init()
+            self.NetworkOrderRebuildInvoice(OrderID: "\(model.OrderID)", UserInvoiceID: userInvoiceID)
+        }
+        let nextNavc = UINavigationController(rootViewController: nextVc)
+        self.present(nextNavc, animated: true, completion: nil)
+    }
+}
+
+extension TROrderDetailViewController {
+    // 补开发票
+    func NetworkOrderRebuildInvoice(OrderID: String!, UserInvoiceID: String!) {
+        networkViewModel.updateBlock = {[unowned self] in
+            MBProgressHUD.showWithText(text: self.networkViewModel.orderRebuildInvoiceModel?.msg ?? "", view: self.view)
+            if self.networkViewModel.orderRebuildInvoiceModel?.ret == false {
+                return
+            }
+        }
+        
+        networkViewModel.refreshDataSource_OrderRebuildInvoice(OrderID: OrderID,
+                                                               PayModel: "",
+                                                               OrderForm: "",
+                                                               UserAddressID: "",
+                                                               UserInvoiceID: UserInvoiceID)
+    }
+    
+    // 去支付
+    func NetworkOrderSecpay(payModel: String, orderID: String) {
+        networkViewModel.updateBlock = {[unowned self] in
+            if payModel == PayModelAliLKL {
+                self.payAliLKL(orderCreateData: self.networkViewModel.orderCreateModel?.data ?? TROrderCreateDataModel.init())
+            }
+            if payModel == PayModelWeixin {
+                self.payWeixin(orderCreateData: self.networkViewModel.orderCreateModel?.data ?? TROrderCreateDataModel.init())
+            }
+        }
+        
+        networkViewModel.refreshDataSource_OrderSecpay(OrderForm: OrderForm, PayModel: payModel, OrderID: orderID)
+    }
+    
+    func payAliLKL(orderCreateData: TROrderCreateDataModel) {
+        /* demo的值
+        {
+            code = 000000;
+            data =     {
+                h5JumpUrl = "aHR0cHM6Ly9pbnRwYXkubGFrYWxhLmNvbS9sa2wvaHRtbC9zY2FucGF5L2luZGV4Lmh0bWw/a215UGpSSWc0UTBXS2dIbGxSeEp0ckRyQkNYMW5rd01zclFlcjFyNHNtTU93Y3k2VW5qOHY0d2h0eTcwNWwxcQ==";
+                merchantId = 872100010015005;
+                orderId = "d9885d11-310c-407d-8";
+                returnCode = 000000;
+                returnMessage = SUCCESS;
+                secretKey = "<null>";
+                success = 1;
+                token = 20200624RPM0020200624725381024422436864;
+                tradeNo = 20200624725381024422436864;
+                tradeType = ALIPAYAPP;
+                xcxReqpath = "<null>";
+                xcxUsername = "<null>";
+            };
+            message = "\U4ea4\U6613\U6210\U529f";
+        }
+         */
+        
+        /* 后台数据拼接的
+            {
+                code = 000000;
+                data =     {
+                    h5JumpUrl = "aHR0cHM6Ly9pbnRwYXkubGFrYWxhLmNvbS9sa2wvaHRtbC9zY2FucGF5L2luZGV4Lmh0bWw/anB0b1g5Q1UyZ0RBZGk1bXpaclYyWmxpdlZ2RmJxVHBpZ25taytUY2RHR25ieGZJKzY1aHI1RmdReXAyeVFYOQ==";
+                    merchantId = 872100016015000;
+                    orderId = 637292215182073679;
+                    returnCode = 0;
+                    returnMessage = SUCCESS;
+                    success = 1;
+                    token = 20200701RPM0020200701727939483168808960;
+                    tradeNo = 20200701727939483168808960;
+                    tradeType = ALIPAYAPP;
+                    xcxReqpath = "";
+                    xcxUsername = "";
+                };
+                message = "\U4ea4\U6613\U6210\U529f";
+            }
+         */
+        let dataObject:NSMutableDictionary = NSMutableDictionary.init()
+        dataObject.setValue(orderCreateData.h5JumpUrl, forKey: "h5JumpUrl")
+        dataObject.setValue(orderCreateData.merchantId, forKey: "merchantId")
+        dataObject.setValue(orderCreateData.orderId, forKey: "orderId")
+        dataObject.setValue("\(orderCreateData.returnCode)", forKey: "returnCode")
+        dataObject.setValue(orderCreateData.returnMessage, forKey: "returnMessage")
+        dataObject.setValue(orderCreateData.secretKey, forKey: "secretKey")
+        dataObject.setValue("1", forKey: "success")
+        dataObject.setValue(orderCreateData.token, forKey: "token")
+        dataObject.setValue(orderCreateData.tradeNo, forKey: "tradeNo")
+        dataObject.setValue("ALIPAYAPP", forKey: "tradeType")
+        dataObject.setValue("", forKey: "xcxReqpath")
+        dataObject.setValue("", forKey: "xcxUsername")
+        
+        let responseObject:NSMutableDictionary = NSMutableDictionary.init()
+        responseObject.setValue("000000", forKey: "code")
+        responseObject.setValue(dataObject, forKey: "data")
+        responseObject.setValue("交易成功", forKey: "message")
+        
+        print("responseObject = \(responseObject)")
+        PaymaxSDK.pay(withAliToken: responseObject as! [AnyHashable : Any], viewController: self) { (result) in
+            print("resultType = \(Int(result.type.rawValue))")
+            switch result.type {
+            case .PAYMAX_CODE_SUCCESS:
+                break
+            case .PAYMAX_CODE_FAIL_CANCEL:
+                break
+            case .PAYMAX_CODE_ERROR_DEAL:
+                break
+            case .PAYMAX_CODE_FAILURE:
+                break
+            case .PAYMAX_CODE_ERROR_CONNECT:
+                break
+            case .PAYMAX_CODE_CHANNEL_WRONG:
+                break
+            case .PAYMAX_CODE_ERROR_CHARGE_PARAMETER:
+                break
+            case .PAYMAX_CODE_ERROR_WX_NOT_INSTALL:
+                break
+            case .PAYMAX_CODE_ERROR_WX_NOT_SUPPORT_PAY:
+                break
+            case .PAYMAX_CODE_ERROR_WX_UNKNOW:
+                break
+            @unknown default:
+                break
+            }
+        }
+        
+        
+        self.pushToPaySuccessVc()
+    }
+    
+    func payWeixin(orderCreateData: TROrderCreateDataModel) {
+        /*
+            {
+              "msgCode" : "200",
+              "data" : {
+                "sign" : "616CB993AE38C77E006D4A683C58F7E4",
+                "appid" : "wx8592574799e9e9ba",
+                "nonce_str" : "pAjStTPcv2UcgSLF",
+                "timeStamp" : "1593653755",
+                "prepay_id" : "wx020935347180998538f31f461986871100",
+                "result_code" : "SUCCESS",
+                "trade_type" : "APP",
+                "orderPKID" : 341,
+                "mch_id" : "1503726251",
+                "OrderID" : "637292793551217531"
+              },
+              "ret" : true,
+              "msg" : "订单创建成功"
+            }
+         */
+        
+//        let req = WXApiRequestHandler.jumpToBizPay()
+//        print("req = \(req ?? "")")
+        
+//        /** 商家向财付通申请的商家id */
+//        @property (nonatomic, retain) NSString *partnerId;
+//        /** 预支付订单 */
+//        @property (nonatomic, retain) NSString *prepayId;
+//        /** 随机串，防重发 */
+//        @property (nonatomic, retain) NSString *nonceStr;
+//        /** 时间戳，防重发 */
+//        @property (nonatomic, assign) UInt32 timeStamp;
+//        /** 商家根据财付通文档填写的数据和签名 */
+//        @property (nonatomic, retain) NSString *package;
+//        /** 商家根据微信开放平台文档对数据做的签名 */
+//        @property (nonatomic, retain) NSString *sign;
+        
+        if !WXApi.isWXAppInstalled() {
+            MBProgressHUD.showWithText(text: "没有安装微信", view: self.view)
+            return
+        }
+        
+        if !WXApi.isWXAppSupport() {
+            MBProgressHUD.showWithText(text: "不支持微信支付", view: self.view)
+            return
+        }
+        
+        //调起微信支付
+        let req = PayReq.init()
+        req.partnerId = orderCreateData.mch_id
+        req.prepayId = orderCreateData.prepay_id
+        req.nonceStr = orderCreateData.nonce_str
+        req.timeStamp = UInt32(Date().timeStamp) ?? 0
+        req.package = "Sign=WXPay"
+        
+        let appid = orderCreateData.appid ?? ""
+        let noncestr = orderCreateData.nonce_str ?? ""
+        let package = "Sign=WXPay"
+        let partnerid = orderCreateData.mch_id ?? ""
+        let prepayid = orderCreateData.prepay_id ?? ""
+        let timestamp = "\(req.timeStamp)"
+        let keyString = "key=zhongguoshuiwuzazhishe63886786KF"
+        
+        let signString = "appid=\(appid)&noncestr=\(noncestr)&package=\(package)&partnerid=\(partnerid)&prepayid=\(prepayid)&timestamp=\(timestamp)&\(keyString)"
+        let sign = signString.md5Encrypt()
+        req.sign = sign
+        
+        WXApi.send(req)
+    }
+    
+    func pushToPaySuccessVc() {
+        let nextVc = TRPaySuccessViewController(orderID: "")
         self.navigationController?.pushViewController(nextVc, animated: true)
     }
 }
+
+

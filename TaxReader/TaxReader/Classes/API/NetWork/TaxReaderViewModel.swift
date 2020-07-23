@@ -108,6 +108,7 @@ class TaxReaderViewModel: NSObject {
     var orderActivityCodeModel: TROrderActivityCodeModel?
     var orderFindDetailModel: TROrderFindDetailModel?
     var orderCreateModel: TROrderCreateModel?
+    var orderRebuildInvoiceModel: TROrderRebuildInvoiceModel?
     
     // cart
     var cartInfoModel: TRCartInfoModel?
@@ -1017,6 +1018,32 @@ extension TaxReaderViewModel {
                 
                 if let mappedObject = JSONDeserializer<TROrderCreateModel>.deserializeFrom(json: json.description) {
                     self.orderCreateModel = mappedObject
+                }
+
+                self.updateBlock?()
+            }
+        }
+    }
+    
+    func refreshDataSource_OrderRebuildInvoice(OrderID: String,
+                                               PayModel: String,
+                                               OrderForm: String,
+                                               UserAddressID: String,
+                                               UserInvoiceID: String) {
+        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.orderRebuildInvoice(OrderID: OrderID, PayModel: PayModel, OrderForm: OrderForm, UserAddressID: UserAddressID, UserInvoiceID: UserInvoiceID)) { (result) in
+            if case let .success(response) = result {
+                let data = try? response.mapJSON()
+                
+                guard let returnData = data else {
+                    print("returnData nil")
+                    return
+                }
+                
+                let json = JSON(returnData)
+                print("orderRebuildInvoice = \(json.description)")
+                
+                if let mappedObject = JSONDeserializer<TROrderRebuildInvoiceModel>.deserializeFrom(json: json.description) {
+                    self.orderRebuildInvoiceModel = mappedObject
                 }
 
                 self.updateBlock?()

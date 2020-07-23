@@ -63,14 +63,14 @@ class TRBuyActionToolView: UIView {
         self.contentView.addSubview(self.footerButton1)
         self.footerButton1.snp.makeConstraints { (make) in
             make.top.left.bottom.equalToSuperview()
-            make.width.equalTo(LXScreenWidth * 0.5)
+            make.width.equalTo(0)
         }
         
         self.contentView.addSubview(self.footerButton2)
         self.footerButton2.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
             make.left.equalTo(self.footerButton1.snp.right)
-            make.width.equalTo(LXScreenWidth * 0.5)
+            make.width.equalTo(LXScreenWidth)
         }
     }
     
@@ -110,5 +110,32 @@ class TRBuyActionToolView: UIView {
             }
         }
     }
+    
+    var isOnlyBuyButton: Bool? {
+        didSet {
+            guard let isOnlyBuyButton = isOnlyBuyButton else {
+                return
+            }
+            
+            if isOnlyBuyButton {
+                self.footerButton1.snp.updateConstraints { (make) in
+                    make.width.equalTo(0)
+                }
+                
+                self.footerButton2.snp.updateConstraints { (make) in
+                    make.width.equalTo(LXScreenWidth)
+                }
+            }else {
+                self.footerButton1.snp.updateConstraints { (make) in
+                    make.width.equalTo(LXScreenWidth * 0.5)
+                }
+                
+                self.footerButton2.snp.updateConstraints { (make) in
+                    make.width.equalTo(LXScreenWidth * 0.5)
+                }
+            }
+        }
+    }
+
     
 }

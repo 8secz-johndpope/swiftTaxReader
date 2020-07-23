@@ -18,6 +18,7 @@ class TRHadPayViewController: UIViewController {
     // network
     var orderFindModel: TROrderFindModel?
     var dataArr: [TROrderFindDataModel]? = []
+    var payModelSelectedItem: String? = "0"
     
     private var page: Int = 1
     
@@ -139,16 +140,27 @@ extension TRHadPayViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let model: TROrderFindDataModel = self.dataArr?[section] ?? TROrderFindDataModel.init()
-        return model.OrderStatus == 1 ? 66 : 30
+        var cellHeight = 30
+        if model.OrderStatus == NetDataOrderStatus {// 立即支付按钮
+            cellHeight += 36
+        }
+        
+        if model.OrderInvoiceStatus == NetDataOrderInvoiceStatus { // 补开发票按钮
+            cellHeight += 36
+        }
+        
+        return CGFloat(cellHeight)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView: TROrderFooterView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TROrderFooterViewID) as! TROrderFooterView
         
         let model: TROrderFindDataModel = self.dataArr?[section] ?? TROrderFindDataModel.init()
-        footerView.isHasActionPayView = model.OrderStatus == 1 ? true : false
+        footerView.isHasActionPayView = model.OrderStatus == NetDataOrderStatus ? true : false
+        footerView.isHasActionInvoiceView = model.OrderInvoiceStatus == NetDataOrderInvoiceStatus ? true : false
         footerView.delegate = self
         footerView.detailModelArray = model.OrderDetail
+        footerView.orderFindDataModel = model
         
         return footerView
     }
@@ -166,7 +178,6 @@ extension TRHadPayViewController: TROrderTableViewCellDelegate {
     }
     
     func cellCodeButtonDidSelected(button: UIButton, cell: TROrderTableViewCell) {
-        
         let nextVc = TROrderCodeViewController(orderDetailID: "\(cell.detailModel?.OrderDetailID ?? 0)")
         self.navigationController?.pushViewController(nextVc, animated: true)
     }
@@ -176,11 +187,7 @@ extension TRHadPayViewController: TROrderFooterViewDelegate{
     func viewCancelOrderButtonDidSelected(button: UIButton, view: TROrderFooterView) {
         print("取消订单")
     }
-    
-    func viewPayButtonDidSelected(button: UIButton, view: TROrderFooterView) {
-        print("去支付")
-    }
-    
+        
     func cellDidSelectRowAt(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dataModel: TROrderFindDataModel = self.dataArr?[indexPath.section] ?? TROrderFindDataModel.init()
         //let detailModel: TROrderFindDataDetailModel = dataModel.OrderDetail?[indexPath.row] ?? TROrderFindDataDetailModel.init()
@@ -188,4 +195,38 @@ extension TRHadPayViewController: TROrderFooterViewDelegate{
         let nextVc = TROrderDetailViewController(orderID: "\(dataModel.OrderID)")
         self.navigationController?.pushViewController(nextVc, animated: true)
     }
+    
+    func viewPayButtonDidSelected(button: UIButton, view: TROrderFooterView, model: TROrderFindDataModel?) {
+        
+    }
+    
+    func viewInvoiceButtonDidSelected(button: UIButton, view: TROrderFooterView, model: TROrderFindDataModel?) {
+        let nextVc = TROrderTicketTypeViewController()
+        nextVc.presentBackCommitBlock = {[unowned self](userInvoiceID, selectedInvoiceType) in
+            self.NetworkOrderRebuildInvoice(OrderID: "\(model?.OrderID ?? 0)", UserInvoiceID: userInvoiceID)
+        }
+        let nextNavc = UINavigationController(rootViewController: nextVc)
+        self.present(nextNavc, animated: true, completion: nil)
+    }
 }
+
+extension TRHadPayViewController{
+    // 补开发票
+    func NetworkOrderRebuildInvoice(OrderID: String!, UserInvoiceID: String!) {
+        networkViewModel.updateBlock = {[unowned self] in
+            MBProgressHUD.showWithText(text: self.networkViewModel.orderRebuildInvoiceModel?.msg ?? "", view: self.view)
+            if self.networkViewModel.orderRebuildInvoiceModel?.ret == false {
+                return
+            }
+        }
+        
+        networkViewModel.refreshDataSource_OrderRebuildInvoice(OrderID: OrderID,
+                                                               PayModel: "",
+                                                               OrderForm: "",
+                                                               UserAddressID: "",
+                                                               UserInvoiceID: UserInvoiceID)
+    }
+}
+
+
+

@@ -20,6 +20,7 @@ struct TROrderFindDetailModel: HandyJSON {
 struct TROrderFindDetailDataModel: HandyJSON {
     var OrderForm: Int = 0
     var OrderStatus: Int = 0
+    var OrderInvoiceStatus: Int = 0
     var OrderDate: String?
     var OrderID: Int = 0
     var UserName: String?

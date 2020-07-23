@@ -10,15 +10,19 @@ import UIKit
 
 protocol TROrderFooterViewDelegate: NSObjectProtocol {
     func viewCancelOrderButtonDidSelected(button: UIButton, view:TROrderFooterView)
-    func viewPayButtonDidSelected(button: UIButton, view:TROrderFooterView)
+    func viewPayButtonDidSelected(button: UIButton, view:TROrderFooterView, model: TROrderFindDataModel?)
+    func viewInvoiceButtonDidSelected(button: UIButton, view:TROrderFooterView, model: TROrderFindDataModel?)
 }
 
 class TROrderFooterView: UITableViewHeaderFooterView {
     
     weak var delegate: TROrderFooterViewDelegate?
     
+    var orderDataModel: TROrderFindDataModel?
+    
     private lazy var trContentView: UIView = {
         let view = UIView.init()
+        view.backgroundColor = UIColor.white
         
         return view
     }()
@@ -33,31 +37,64 @@ class TROrderFooterView: UITableViewHeaderFooterView {
         return view
     }()
     
-    lazy var trActionView: UIView = {
+    lazy var trActionPayView: UIView = {
         let view = UIView.init()
         view.backgroundColor = UIColor.white
         
         return view
     }()
         
-    var trPayButton:UIButton = {
-        let button = UIButton.init(type: UIButton.ButtonType.custom)
-        button.backgroundColor = UIColor.red
-        button.setTitle("立即支付", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.layer.cornerRadius = 14.0
-        button.layer.borderColor = UIColor.red.cgColor
-        button.addTarget(self, action: #selector(payButtonClick(button:)), for: .touchUpInside)
+    lazy var trPayButton:UIButton = {
+        let view = UIButton.init(type: UIButton.ButtonType.custom)
+        view.backgroundColor = UIColor.red
+        view.setTitle("立即支付", for: .normal)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
+        view.setTitleColor(UIColor.white, for: .normal)
+        view.layer.cornerRadius = 14.0
+        view.layer.borderColor = UIColor.red.cgColor
+        view.addTarget(self, action: #selector(payButtonClick(button:)), for: .touchUpInside)
         
-        return button
+        return view
     }()
     
     @objc func payButtonClick(button:UIButton) {
         if delegate != nil && ((self.delegate?.responds(to: Selector.init(("payButtonClick")))) != nil) {
-            self.delegate?.viewPayButtonDidSelected(button: button, view: self)
+            self.delegate?.viewPayButtonDidSelected(button: button, view: self, model: self.orderDataModel)
         }
     }
+    
+    lazy var trActionInvoiceView: UIView = {
+        let view = UIView.init()
+        view.backgroundColor = UIColor.white
+        
+        return view
+    }()
+        
+    lazy var trInvoiceButton:UIButton = {
+        let view = UIButton.init(type: UIButton.ButtonType.custom)
+        view.backgroundColor = UIColor.red
+        view.setTitle("补开发票", for: .normal)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
+        view.setTitleColor(UIColor.white, for: .normal)
+        view.layer.cornerRadius = 14.0
+        view.layer.borderColor = UIColor.red.cgColor
+        view.addTarget(self, action: #selector(invoiceButtonClick(button:)), for: .touchUpInside)
+        
+        return view
+    }()
+    
+    @objc func invoiceButtonClick(button:UIButton) {
+        if delegate != nil && ((self.delegate?.responds(to: Selector.init(("invoiceButtonClick")))) != nil) {
+            self.delegate?.viewInvoiceButtonDidSelected(button: button, view: self, model: self.orderDataModel)
+        }
+    }
+    
+    private lazy var trBottomLineView: UIView = {
+        let view = UIView.init()
+        view.backgroundColor = UIColor.lightGray
+        
+        return view
+    }()
     
     func setupLayout() {
         self.addSubview(self.trContentView)
@@ -72,20 +109,43 @@ class TROrderFooterView: UITableViewHeaderFooterView {
             make.height.equalTo(30)
         }
         
-        // 未支付 取消订单 立即支付
-        self.trContentView.addSubview(self.trActionView)
-        self.trActionView.snp.makeConstraints { (make) in
+        // 未支付状态下显示立即支付按钮 状态 == 1 其他不显示
+        self.trContentView.addSubview(self.trActionPayView)
+        self.trActionPayView.snp.makeConstraints { (make) in
             make.top.equalTo(self.trTotalPriceLabel.snp.bottom)
             make.left.right.equalToSuperview()
-            make.height.equalTo(36)
+            make.height.equalTo(35.5)
         }
         
-        self.trActionView.addSubview(self.trPayButton)
+        self.trActionPayView.addSubview(self.trPayButton)
         self.trPayButton.snp.makeConstraints { (make) in
             make.right.equalToSuperview().offset(-4)
             make.centerY.equalToSuperview()
             make.width.equalTo(100)
             make.height.equalTo(28)
+        }
+        
+        // 补开发票状态下显示立即补开发票按钮 状态 == 10 其他不显示
+        self.trContentView.addSubview(self.trActionInvoiceView)
+        self.trActionInvoiceView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.trActionPayView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(35.5)
+        }
+        
+        self.trActionInvoiceView.addSubview(self.trInvoiceButton)
+        self.trInvoiceButton.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-4)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(100)
+            make.height.equalTo(28)
+        }
+        
+        
+        self.trContentView.addSubview(self.trBottomLineView)
+        self.trBottomLineView.snp.makeConstraints { (make) in
+            make.left.bottom.right.equalToSuperview()
+            make.height.equalTo(0.5)
         }
     }
 
@@ -106,20 +166,39 @@ class TROrderFooterView: UITableViewHeaderFooterView {
             }
             
             if !isHasActionPayView {
-                self.trActionView.isHidden = true
-                self.trActionView.snp.updateConstraints { (make) in
+                self.trActionPayView.isHidden = true
+                self.trActionPayView.snp.updateConstraints { (make) in
                     make.height.equalTo(0)
                 }
             }else {
-                self.trActionView.isHidden = false
-                self.trActionView.snp.updateConstraints { (make) in
-                    make.height.equalTo(36)
+                self.trActionPayView.isHidden = false
+                self.trActionPayView.snp.updateConstraints { (make) in
+                    make.height.equalTo(35.5)
                 }
             }
         }
     }
     
-    
+    var isHasActionInvoiceView: Bool? {
+        didSet {
+            guard let isHasActionInvoiceView = isHasActionInvoiceView else {
+                return
+            }
+            
+            if !isHasActionInvoiceView {
+                self.trActionInvoiceView.isHidden = true
+                self.trActionInvoiceView.snp.updateConstraints { (make) in
+                    make.height.equalTo(0)
+                }
+            }else {
+                self.trActionInvoiceView.isHidden = false
+                self.trActionInvoiceView.snp.updateConstraints { (make) in
+                    make.height.equalTo(35.5)
+                }
+            }
+        }
+    }
+
     var detailModelArray: [TROrderFindDataDetailModel]? {
          didSet {
              guard let modelArray = detailModelArray else {
@@ -128,7 +207,7 @@ class TROrderFooterView: UITableViewHeaderFooterView {
              
             var priceTotal: Double = 0.00
             for model: TROrderFindDataDetailModel in modelArray {
-                priceTotal = priceTotal + (model.PubProductPrice * Double(model.OrderDetailCount))
+                priceTotal = priceTotal + (Double(model.PubProductPrice) * Double(model.OrderDetailCount))
             }
             
             
@@ -143,6 +222,15 @@ class TROrderFooterView: UITableViewHeaderFooterView {
             attributedStrM.append(att1)
             self.trTotalPriceLabel.attributedText = attributedStrM
 
+         }
+     }
+    
+    var orderFindDataModel: TROrderFindDataModel? {
+         didSet {
+             guard let orderFindDataModel = orderFindDataModel else {
+                 return
+             }
+            self.orderDataModel = orderFindDataModel
          }
      }
 }

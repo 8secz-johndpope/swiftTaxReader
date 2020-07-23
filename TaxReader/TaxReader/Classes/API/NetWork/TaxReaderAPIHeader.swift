@@ -33,6 +33,11 @@ let PayModelWeixin: String = "22"
 // 微信支付
 let wxPayAppId: String = "wx8592574799e9e9ba" //wxb4ba3c02aa476ea1  wx8592574799e9e9ba
 
+/// 订单状态（0-已取消；1-待支付；2-支付中；3-已支付；4-申请退款；5-退款中；6-已退款）
+let NetDataOrderStatus: Int = 1
+/// 无需开票=0，申请开票=10，开票中=20，开票完成=30
+let NetDataOrderInvoiceStatus: Int = 10
+
 
 //MARK: -时间转时间戳函数
 func TRAPIHeader(isHasToken: Bool) -> Dictionary<String, Any> {

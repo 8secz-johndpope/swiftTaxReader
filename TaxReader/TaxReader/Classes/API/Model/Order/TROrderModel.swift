@@ -42,6 +42,39 @@ struct TROrderDataDetailProductModel: HandyJSON {
     var ProdImg: String?
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
     {
       "ret" : true,

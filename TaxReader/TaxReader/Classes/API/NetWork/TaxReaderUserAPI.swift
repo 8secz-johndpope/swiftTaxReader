@@ -66,6 +66,7 @@ public enum TaxReaderUserAPI {
     case orderGetActivityCode(OrderID: String, OrderDetailID: String, PageIndex: String, PageSize: String)
     case orderFindDetail(OrderID: String, PageIndex: String, PageSize: String)
     case orderSecpay(OrderForm: String, PayModel: String, OrderID: String)
+    case orderRebuildInvoice(OrderID: String, PayModel: String, OrderForm: String, UserAddressID: String, UserInvoiceID: String)
     
     // Cart
     case cartInfo(PageIndex: String, PageSize: String)
@@ -175,6 +176,8 @@ extension TaxReaderUserAPI:TargetType {
                 return "/v1/Order/FindDetail"
             case .orderSecpay:
                 return "/v1/Order/Secpay"
+            case .orderRebuildInvoice:
+                return "/v1/Order/RebuildInvoice"
             
             // cart
             case .cartInfo:
@@ -381,6 +384,13 @@ extension TaxReaderUserAPI:TargetType {
                 parmeters = ["OrderForm": OrderForm,
                              "PayModel":PayModel,
                              "OrderID":OrderID]as [String : Any]
+            case .orderRebuildInvoice(let OrderID, let PayModel, let OrderForm, let UserAddressID, let UserInvoiceID):
+                parmeters = ["OrderID": OrderID,
+                             "PayModel":PayModel,
+                             "OrderForm":OrderForm,
+                             "UserAddressID":UserAddressID,
+                             "UserInvoiceID":UserInvoiceID,
+                        ]as [String : Any]
             
             // cart
             case .cartInfo(let PageIndex, let PageSize):

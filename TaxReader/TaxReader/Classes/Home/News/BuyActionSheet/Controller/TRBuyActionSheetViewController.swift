@@ -199,7 +199,23 @@ extension TRBuyActionSheetViewController {
         self.buyContentView.segButtonTag = button.tag
         print("button = \(button.tag)")
         
-        self.toolView.isOnlyCartButton = button.tag == 2 ? true : false
+        if button.tag == 0 {
+            self.toolView.isOnlyBuyButton = button.tag == 0 ? true : false
+        }
+        
+        if button.tag == 2 {
+            self.toolView.isOnlyCartButton = button.tag == 2 ? true : false
+        }
+        
+        if button.tag == 1 {
+            self.toolView.isOnlyBuyButton = false
+            self.toolView.isOnlyCartButton = false
+        }
+        
+        if button.tag == 3 {
+            self.toolView.isOnlyBuyButton = false
+            self.toolView.isOnlyCartButton = false
+        }
     }
     
     func blockButtonActionToCart(button: UIButton) {
@@ -309,6 +325,8 @@ extension TRBuyActionSheetViewController {
         
         let shopModel = YCOrderShopModel.init()
         shopModel.shopName = Date().getCurrentDay()
+        
+        shopModel.isFromArticleBenPian = self.buyContentView.segButtonTag == 0  ? true : false
         
         var goodsArray: [YCOrderGoodsModel]? = []
         

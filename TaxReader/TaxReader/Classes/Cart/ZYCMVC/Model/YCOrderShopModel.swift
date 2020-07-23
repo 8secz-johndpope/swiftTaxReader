@@ -13,6 +13,8 @@ class YCOrderShopModel: NSObject {
 
     /** 店铺名字 */
     var shopName:String?
+    var isFromArticleBenPian: Bool? = false
+    
     /** 店铺商品 */
     var goodsArr:[YCOrderGoodsModel]?
     /** 是否是全部选中状态 */

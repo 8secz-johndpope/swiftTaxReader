@@ -161,16 +161,27 @@ extension TRAllPayViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let model: TROrderFindDataModel = self.dataArr?[section] ?? TROrderFindDataModel.init()
-        return model.OrderStatus == 1 ? 66 : 30
+        var cellHeight = 30
+        if model.OrderStatus == NetDataOrderStatus {// 立即支付按钮
+            cellHeight += 36
+        }
+        
+        if model.OrderInvoiceStatus == NetDataOrderInvoiceStatus { // 补开发票按钮
+            cellHeight += 36
+        }
+        
+        return CGFloat(cellHeight)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView: TROrderFooterView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TROrderFooterViewID) as! TROrderFooterView
         
         let model: TROrderFindDataModel = self.dataArr?[section] ?? TROrderFindDataModel.init()
-        footerView.isHasActionPayView = model.OrderStatus == 1 ? true : false
+        footerView.isHasActionPayView = model.OrderStatus == NetDataOrderStatus ? true : false
+        footerView.isHasActionInvoiceView = model.OrderInvoiceStatus == NetDataOrderInvoiceStatus ? true : false
         footerView.delegate = self
         footerView.detailModelArray = model.OrderDetail
+        footerView.orderFindDataModel = model
         footerView.trPayButton.tag = section
         
         return footerView
@@ -189,32 +200,12 @@ extension TRAllPayViewController: TROrderTableViewCellDelegate{
     }
     
     func cellCodeButtonDidSelected(button: UIButton, cell: TROrderTableViewCell) {
-        
         let nextVc = TROrderCodeViewController(orderDetailID: "\(cell.detailModel?.OrderDetailID ?? 0)")
         self.navigationController?.pushViewController(nextVc, animated: true)
     }
 }
 
 extension TRAllPayViewController: TROrderFooterViewDelegate{
-    func viewCancelOrderButtonDidSelected(button: UIButton, view: TROrderFooterView) {
-        print("取消订单")
-    }
-    
-    func viewPayButtonDidSelected(button: UIButton, view: TROrderFooterView) {
-        let nextVc = TROrderPaytypeViewController()
-        nextVc.presentBackCommitBlock = {[unowned self](payModelSelectedItem) in
-            self.payModelSelectedItem = payModelSelectedItem
-            
-            // 调用二次创建订单接口，开始支付
-            let model: TROrderFindDataModel = self.dataArr?[button.tag] ?? TROrderFindDataModel.init()
-            let patModel = self.payModelSelectedItem == "0" ? "5" : "22"
-            self.NetworkOrderSecpay(payModel: patModel, orderID: "\(model.OrderID)")
-        }
-        
-        self.present(nextVc, animated: true, completion: nil)
-    }
-    
-    
     func cellDidSelectRowAt(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dataModel: TROrderFindDataModel = self.dataArr?[indexPath.section] ?? TROrderFindDataModel.init()
         //let detailModel: TROrderFindDataDetailModel = dataModel.OrderDetail?[indexPath.row] ?? TROrderFindDataDetailModel.init()
@@ -222,10 +213,54 @@ extension TRAllPayViewController: TROrderFooterViewDelegate{
         let nextVc = TROrderDetailViewController(orderID: "\(dataModel.OrderID)")
         self.navigationController?.pushViewController(nextVc, animated: true)
     }
+    
+    func viewCancelOrderButtonDidSelected(button: UIButton, view: TROrderFooterView) {
+        print("取消订单")
+    }
+    
+    func viewPayButtonDidSelected(button: UIButton, view: TROrderFooterView, model: TROrderFindDataModel?) {
+        let nextVc = TROrderPaytypeViewController()
+        nextVc.presentBackCommitBlock = {[unowned self](payModelSelectedItem) in
+            self.payModelSelectedItem = payModelSelectedItem
+            
+            // 调用二次创建订单接口，开始支付
+            let model: TROrderFindDataModel = self.dataArr?[button.tag] ?? TROrderFindDataModel.init()
+            let patModel = self.payModelSelectedItem == "0" ? PayModelAliLKL : PayModelWeixin
+            self.NetworkOrderSecpay(payModel: patModel, orderID: "\(model.OrderID)")
+        }
+        
+        self.present(nextVc, animated: true, completion: nil)
+    }
+    
+    func viewInvoiceButtonDidSelected(button: UIButton, view: TROrderFooterView, model: TROrderFindDataModel?) {
+        let nextVc = TROrderTicketTypeViewController()
+        nextVc.presentBackCommitBlock = {[unowned self](userInvoiceID, selectedInvoiceType) in
+            print("userInvoiceID = \(userInvoiceID) selectedInvoiceType = \(selectedInvoiceType)")
+            self.NetworkOrderRebuildInvoice(OrderID: "\(model?.OrderID ?? 0)", UserInvoiceID: userInvoiceID)
+        }
+        let nextNavc = UINavigationController(rootViewController: nextVc)
+        self.present(nextNavc, animated: true, completion: nil)
+    }
 }
 
 
 extension TRAllPayViewController{
+    // 补开发票
+    func NetworkOrderRebuildInvoice(OrderID: String!, UserInvoiceID: String!) {
+        networkViewModel.updateBlock = {[unowned self] in
+            MBProgressHUD.showWithText(text: self.networkViewModel.orderRebuildInvoiceModel?.msg ?? "", view: self.view)
+            if self.networkViewModel.orderRebuildInvoiceModel?.ret == false {
+                return
+            }
+        }
+        
+        networkViewModel.refreshDataSource_OrderRebuildInvoice(OrderID: OrderID,
+                                                               PayModel: "",
+                                                               OrderForm: "",
+                                                               UserAddressID: "",
+                                                               UserInvoiceID: UserInvoiceID)
+    }
+    
     func NetworkOrderSecpay(payModel: String, orderID: String) {
         networkViewModel.updateBlock = {[unowned self] in
             if payModel == PayModelAliLKL {

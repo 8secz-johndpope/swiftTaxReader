@@ -12,6 +12,7 @@ import UIKit
 protocol TROrderDetailFooterViewDelegate: NSObjectProtocol {
     func viewCancelOrderButtonDidSelected(button: UIButton, view:TROrderDetailFooterView)
     func viewPayButtonDidSelected(button: UIButton, view:TROrderDetailFooterView)
+    func viewInvoiceButtonDidSelected(button: UIButton, view:TROrderDetailFooterView)
 }
 
 class TROrderDetailFooterView: UITableViewHeaderFooterView {
@@ -20,7 +21,7 @@ class TROrderDetailFooterView: UITableViewHeaderFooterView {
     
     private lazy var trContentView: UIView = {
         let view = UIView.init()
-        view.backgroundColor = LXTableViewBackgroundColor
+        view.backgroundColor = UIColor.white
         
         return view
     }()
@@ -35,41 +36,24 @@ class TROrderDetailFooterView: UITableViewHeaderFooterView {
         return view
     }()
     
-    lazy var trActionView: UIView = {
+    lazy var trActionPayView: UIView = {
         let view = UIView.init()
         view.backgroundColor = UIColor.white
         
         return view
     }()
-    
-    // 未支付 取消订单 立即支付
-    var trCancelButton:UIButton = {
-        let button = UIButton.init(type: UIButton.ButtonType.custom)
-        button.setTitle("取消订单", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.addTarget(self, action: #selector(cancelButtonClick(button:)), for: .touchUpInside)
         
-        return button
-    }()
-    
-    @objc func cancelButtonClick(button:UIButton) {
-        if delegate != nil && ((self.delegate?.responds(to: Selector.init(("cancelButtonClick")))) != nil) {
-            self.delegate?.viewCancelOrderButtonDidSelected(button: button, view: self)
-        }
-    }
-    
-    var trPayButton:UIButton = {
-        let button = UIButton.init(type: UIButton.ButtonType.custom)
-        button.backgroundColor = UIColor.red
-        button.setTitle("立即支付", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.layer.cornerRadius = 14.0
-        button.layer.borderColor = UIColor.red.cgColor
-        button.addTarget(self, action: #selector(payButtonClick(button:)), for: .touchUpInside)
+    lazy var trPayButton:UIButton = {
+        let view = UIButton.init(type: UIButton.ButtonType.custom)
+        view.backgroundColor = UIColor.red
+        view.setTitle("立即支付", for: .normal)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
+        view.setTitleColor(UIColor.white, for: .normal)
+        view.layer.cornerRadius = 14.0
+        view.layer.borderColor = UIColor.red.cgColor
+        view.addTarget(self, action: #selector(payButtonClick(button:)), for: .touchUpInside)
         
-        return button
+        return view
     }()
     
     @objc func payButtonClick(button:UIButton) {
@@ -77,6 +61,39 @@ class TROrderDetailFooterView: UITableViewHeaderFooterView {
             self.delegate?.viewPayButtonDidSelected(button: button, view: self)
         }
     }
+    
+    lazy var trActionInvoiceView: UIView = {
+        let view = UIView.init()
+        view.backgroundColor = UIColor.white
+        
+        return view
+    }()
+        
+    lazy var trInvoiceButton:UIButton = {
+        let view = UIButton.init(type: UIButton.ButtonType.custom)
+        view.backgroundColor = UIColor.red
+        view.setTitle("补开发票", for: .normal)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
+        view.setTitleColor(UIColor.white, for: .normal)
+        view.layer.cornerRadius = 14.0
+        view.layer.borderColor = UIColor.red.cgColor
+        view.addTarget(self, action: #selector(invoiceButtonClick(button:)), for: .touchUpInside)
+        
+        return view
+    }()
+    
+    @objc func invoiceButtonClick(button:UIButton) {
+        if delegate != nil && ((self.delegate?.responds(to: Selector.init(("invoiceButtonClick")))) != nil) {
+            self.delegate?.viewInvoiceButtonDidSelected(button: button, view: self)
+        }
+    }
+    
+    private lazy var trBottomLineView: UIView = {
+        let view = UIView.init()
+        view.backgroundColor = UIColor.lightGray
+        
+        return view
+    }()
     
     // 订单信息
     private lazy var trOrderMsgContentView: UIView = {
@@ -138,19 +155,19 @@ class TROrderDetailFooterView: UITableViewHeaderFooterView {
         self.trContentView.addSubview(self.trTotalPriceLabel)
         self.trTotalPriceLabel.snp.makeConstraints { (make) in
             make.top.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.right.equalToSuperview().offset(-12)
             make.height.equalTo(30)
         }
         
-        // 未支付 取消订单 立即支付
-        self.trContentView.addSubview(self.trActionView)
-        self.trActionView.snp.makeConstraints { (make) in
+        // 未支付状态下显示立即支付按钮 状态 == 1 其他不显示
+        self.trContentView.addSubview(self.trActionPayView)
+        self.trActionPayView.snp.makeConstraints { (make) in
             make.top.equalTo(self.trTotalPriceLabel.snp.bottom)
             make.left.right.equalToSuperview()
-            make.height.equalTo(36)
+            make.height.equalTo(35.5)
         }
         
-        self.trActionView.addSubview(self.trPayButton)
+        self.trActionPayView.addSubview(self.trPayButton)
         self.trPayButton.snp.makeConstraints { (make) in
             make.right.equalToSuperview().offset(-4)
             make.centerY.equalToSuperview()
@@ -158,10 +175,33 @@ class TROrderDetailFooterView: UITableViewHeaderFooterView {
             make.height.equalTo(28)
         }
         
+        // 补开发票状态下显示立即补开发票按钮 状态 == 10 其他不显示
+        self.trContentView.addSubview(self.trActionInvoiceView)
+        self.trActionInvoiceView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.trActionPayView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(35.5)
+        }
+        
+        self.trActionInvoiceView.addSubview(self.trInvoiceButton)
+        self.trInvoiceButton.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-4)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(100)
+            make.height.equalTo(28)
+        }
+        
+        self.trContentView.addSubview(self.trBottomLineView)
+        self.trBottomLineView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.trActionInvoiceView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(0.5)
+        }
+        
         // 订单信息
         self.trContentView.addSubview(self.trOrderMsgContentView)
         self.trOrderMsgContentView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.trActionView.snp.bottom).offset(10)
+            make.top.equalTo(self.trBottomLineView.snp.bottom).offset(10)
             make.left.right.bottom.equalToSuperview()
         }
         
@@ -217,14 +257,34 @@ class TROrderDetailFooterView: UITableViewHeaderFooterView {
             }
             
             if !isHasActionPayView {
-                self.trActionView.isHidden = true
-                self.trActionView.snp.updateConstraints { (make) in
+                self.trActionPayView.isHidden = true
+                self.trActionPayView.snp.updateConstraints { (make) in
                     make.height.equalTo(0)
                 }
             }else {
-                self.trActionView.isHidden = false
-                self.trActionView.snp.updateConstraints { (make) in
-                    make.height.equalTo(36)
+                self.trActionPayView.isHidden = false
+                self.trActionPayView.snp.updateConstraints { (make) in
+                    make.height.equalTo(35.5)
+                }
+            }
+        }
+    }
+    
+    var isHasActionInvoiceView: Bool? {
+        didSet {
+            guard let isHasActionInvoiceView = isHasActionInvoiceView else {
+                return
+            }
+            
+            if !isHasActionInvoiceView {
+                self.trActionInvoiceView.isHidden = true
+                self.trActionInvoiceView.snp.updateConstraints { (make) in
+                    make.height.equalTo(0)
+                }
+            }else {
+                self.trActionInvoiceView.isHidden = false
+                self.trActionInvoiceView.snp.updateConstraints { (make) in
+                    make.height.equalTo(35.5)
                 }
             }
         }

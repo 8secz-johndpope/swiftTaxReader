@@ -151,6 +151,7 @@
 		4F4D4C8924C820C7000B72EB /* TRArticleAdvSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C8824C820C7000B72EB /* TRArticleAdvSearchModel.swift */; };
 		4F4D4C8B24C825CB000B72EB /* TROwnSeniorSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C8A24C825CB000B72EB /* TROwnSeniorSearchModel.swift */; };
 		4F4D4C8D24C82FEC000B72EB /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C8C24C82FEC000B72EB /* ExtensionColor.swift */; };
+		4F4D4C8F24C973B9000B72EB /* TROrderRebuildInvoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C8E24C973B9000B72EB /* TROrderRebuildInvoiceModel.swift */; };
 		4F5103D724BE9A1D00A16EA7 /* LXPhoneBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5103D624BE9A1D00A16EA7 /* LXPhoneBottomView.swift */; };
 		4F5103DC24BEDC4D00A16EA7 /* LXInsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5103DB24BEDC4D00A16EA7 /* LXInsetsLabel.swift */; };
 		4F5F6654248A194D00443388 /* hqorder.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F5F6653248A194D00443388 /* hqorder.json */; };
@@ -615,6 +616,7 @@
 		4F4D4C8824C820C7000B72EB /* TRArticleAdvSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRArticleAdvSearchModel.swift; sourceTree = "<group>"; };
 		4F4D4C8A24C825CB000B72EB /* TROwnSeniorSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TROwnSeniorSearchModel.swift; sourceTree = "<group>"; };
 		4F4D4C8C24C82FEC000B72EB /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
+		4F4D4C8E24C973B9000B72EB /* TROrderRebuildInvoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TROrderRebuildInvoiceModel.swift; sourceTree = "<group>"; };
 		4F5103D624BE9A1D00A16EA7 /* LXPhoneBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXPhoneBottomView.swift; sourceTree = "<group>"; };
 		4F5103DB24BEDC4D00A16EA7 /* LXInsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXInsetsLabel.swift; sourceTree = "<group>"; };
 		4F5F6653248A194D00443388 /* hqorder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hqorder.json; sourceTree = "<group>"; };
@@ -1555,6 +1557,7 @@
 				4F62147524A3145F00020082 /* TROrderCreateModel.swift */,
 				4FFCE10024A977BE00AC5033 /* TROrderFindDetailModel.swift */,
 				4F2907F124AECE7300AC08DA /* TROrderSecpayModel.swift */,
+				4F4D4C8E24C973B9000B72EB /* TROrderRebuildInvoiceModel.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -3559,6 +3562,7 @@
 				4F88D65624AB18EC00F585D5 /* TRBuyActionContentPianView.swift in Sources */,
 				4FFC48A3247E2959005B5D84 /* TRCartPayFooterView.swift in Sources */,
 				4F02063D247768390082773E /* TRPrefixPhoneModel.swift in Sources */,
+				4F4D4C8F24C973B9000B72EB /* TROrderRebuildInvoiceModel.swift in Sources */,
 				4F81C07624937B760070727A /* TRMoreArticleViewController.swift in Sources */,
 				4F0E3F35249CB51B005FC4B5 /* TRArticleReadViewController.swift in Sources */,
 				4FC78C3824862A41000DD086 /* TRInvoiceDeleteModel.swift in Sources */,

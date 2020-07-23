@@ -123,9 +123,9 @@ extension TRTicketTypeListPersonView: UITableViewDataSource, UITableViewDelegate
         } else {
             cell.trSelectedButton.isSelected = false
             
-            if selectIndex == nil  && indexPath.row == 0{
-                cell.trSelectedButton.isSelected = true
-            }
+//            if selectIndex == nil  && indexPath.row == 0{
+//                cell.trSelectedButton.isSelected = true
+//            }
         }
         
         return cell

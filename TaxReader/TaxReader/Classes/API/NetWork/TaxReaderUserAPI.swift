@@ -15,6 +15,7 @@ import SwiftyJSON
 let TaxReaderUserAPIProvider = MoyaProvider<TaxReaderUserAPI>()
 
 public enum TaxReaderUserAPI {
+    // User
     case userLoginOut
     case userInfo
     case userUpInfo(UserNickName: String, UserRealName: String, UserGender: String, UserBirthDate: String,AreaTreePath: String)
@@ -22,14 +23,14 @@ public enum TaxReaderUserAPI {
     case userFindPass(UserName: String, VeriCode: String, NewPass: String, UserMobileAreaCode: String,UserRegIP: String)
     case userBindCode(ActivationCodeSN: String, ActivationCodePWD: String)
     
-    // 开票信息
+    // Invoice
     case invoiceInfo
     case invoiceDelete(UserInvoiceID: String)
     case invoiceSetDefault(UserInvoiceID: String)
     case invoiceAdd(UserInvoiceID: String, UserID: String, UserInvoiceReceiveType: String, UserInvoiceTitle: String,UserInvoiceContent: String, UserInvoicePhone: String, UserInvoiceEmail: String, UserInvoiceTaxpayerNo: String, UserInvoiceorAddress: String, UserInvoiceBuyerTel: String, UserInvoiceBuyerBankName: String, UserInvoiceBankAcount: String, UserInvoiceDefault: String)
     case invoiceEdit(UserInvoiceID: String, UserID: String, UserInvoiceReceiveType: String, UserInvoiceTitle: String,UserInvoiceContent: String, UserInvoicePhone: String, UserInvoiceEmail: String, UserInvoiceTaxpayerNo: String, UserInvoiceorAddress: String, UserInvoiceBuyerTel: String, UserInvoiceBuyerBankName: String, UserInvoiceBankAcount: String, UserInvoiceDefault: String)
     
-    // 收货地址
+    // Address
     case addressInfo
     case addressAdd(UserAddrID: String, UserID: String, UserAddressMan: String, UserAddressCountry: String,UserAddressProv: String, UserAddressCity: String, UserAddressDistrict: String, UserAddressStreet: String, UserAddressDetail: String, UserAddressMobile: String, UserAddressPhone: String, UserAddressZIPCode: String, UserAddressIsDefault: String, UserAddressManGender: String)
     case addressEdit(UserAddrID: String, UserID: String, UserAddressMan: String, UserAddressCountry: String,UserAddressProv: String, UserAddressCity: String, UserAddressDistrict: String, UserAddressStreet: String, UserAddressDetail: String, UserAddressMobile: String, UserAddressPhone: String, UserAddressZIPCode: String, UserAddressIsDefault: String, UserAddressManGender: String)

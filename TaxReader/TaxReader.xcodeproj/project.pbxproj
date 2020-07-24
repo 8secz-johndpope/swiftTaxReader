@@ -97,6 +97,8 @@
 		4F1912D52484EBDA00BA7C3D /* TaxReaderUserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1912D42484EBDA00BA7C3D /* TaxReaderUserAPI.swift */; };
 		4F1912D72485E7AC00BA7C3D /* TRMeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1912D62485E7AC00BA7C3D /* TRMeFooterView.swift */; };
 		4F1912D92485EA9900BA7C3D /* TRUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1912D82485EA9900BA7C3D /* TRUserInfoModel.swift */; };
+		4F267D0E24CAD26900F5569A /* TRCartFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F267D0D24CAD26900F5569A /* TRCartFooterView.swift */; };
+		4F267D1024CAD29E00F5569A /* TRCartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F267D0F24CAD29E00F5569A /* TRCartHeaderView.swift */; };
 		4F2907F224AECE7300AC08DA /* TROrderSecpayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2907F124AECE7300AC08DA /* TROrderSecpayModel.swift */; };
 		4F39756A24763ED500F67AEA /* TRLAreaInlandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39756924763ED500F67AEA /* TRLAreaInlandViewController.swift */; };
 		4F3975722476402B00F67AEA /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39756C2476402A00F67AEA /* NetworkTools.swift */; };
@@ -140,10 +142,6 @@
 		4F4D4C5D244ED25A0004FD13 /* TRAddressNameSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C5C244ED25A0004FD13 /* TRAddressNameSwitchTableViewCell.swift */; };
 		4F4D4C60244ED7D20004FD13 /* TRAreaPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C5F244ED7D20004FD13 /* TRAreaPickerViewController.swift */; };
 		4F4D4C63244FE5AE0004FD13 /* LXFooterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C62244FE5AE0004FD13 /* LXFooterButtonView.swift */; };
-		4F4D4C6824500D9D0004FD13 /* TRCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6724500D9D0004FD13 /* TRCartTableViewCell.swift */; };
-		4F4D4C6A24500DD00004FD13 /* TRCartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6924500DD00004FD13 /* TRCartHeaderView.swift */; };
-		4F4D4C6C24500F700004FD13 /* TRCartFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6B24500F700004FD13 /* TRCartFooterView.swift */; };
-		4F4D4C6E245010AA0004FD13 /* TRCartToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C6D245010AA0004FD13 /* TRCartToolView.swift */; };
 		4F4D4C7E24C6D97D000B72EB /* TRSeniorSearchInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C7D24C6D97D000B72EB /* TRSeniorSearchInputView.swift */; };
 		4F4D4C8024C6DAD0000B72EB /* TRSeniorSearchYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C7F24C6DAD0000B72EB /* TRSeniorSearchYearView.swift */; };
 		4F4D4C8424C81184000B72EB /* TRPublicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D4C8324C81184000B72EB /* TRPublicationViewController.swift */; };
@@ -315,7 +313,6 @@
 		4FE277B824459F5C00E60E09 /* TRFavorArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE277B724459F5C00E60E09 /* TRFavorArticleTableViewCell.swift */; };
 		4FE277BA24459F7A00E60E09 /* TRFavorArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE277B924459F7A00E60E09 /* TRFavorArticleViewController.swift */; };
 		4FE277BC2445A10D00E60E09 /* TRSearchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE277BB2445A10D00E60E09 /* TRSearchDetailTableViewCell.swift */; };
-		4FE277BF2445A59800E60E09 /* TRCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE277BE2445A59800E60E09 /* TRCartViewController.swift */; };
 		4FE277C22445A66300E60E09 /* TRAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE277C12445A66300E60E09 /* TRAddressViewController.swift */; };
 		4FE277C42445A76A00E60E09 /* TRAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE277C32445A76A00E60E09 /* TRAddressTableViewCell.swift */; };
 		4FE277CC244702C000E60E09 /* TRSetAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE277CB244702C000E60E09 /* TRSetAddressViewController.swift */; };
@@ -406,8 +403,6 @@
 		4FFC48AF247E3AC0005B5D84 /* TRPayTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC48AD247E3AC0005B5D84 /* TRPayTypeTableViewCell.swift */; };
 		4FFC48B0247E3AC0005B5D84 /* TRPayTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFC48AE247E3AC0005B5D84 /* TRPayTypeTableViewCell.xib */; };
 		4FFC48B2247E4329005B5D84 /* TRPayTypeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC48B1247E4329005B5D84 /* TRPayTypeHeaderView.swift */; };
-		4FFC48B7247E4E93005B5D84 /* TRCartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC48B6247E4E93005B5D84 /* TRCartModel.swift */; };
-		4FFC48BB247E4EC9005B5D84 /* TRCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC48BA247E4EC9005B5D84 /* TRCartViewModel.swift */; };
 		4FFC48BD247E52C1005B5D84 /* Cart.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FFC48BC247E52C1005B5D84 /* Cart.json */; };
 		4FFC48C0247E5C88005B5D84 /* TRHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC48BF247E5C88005B5D84 /* TRHeader.swift */; };
 		4FFC48D1247F8D6C005B5D84 /* xqq_shop.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FFC48C8247F8D6B005B5D84 /* xqq_shop.plist */; };
@@ -562,6 +557,8 @@
 		4F1912D42484EBDA00BA7C3D /* TaxReaderUserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxReaderUserAPI.swift; sourceTree = "<group>"; };
 		4F1912D62485E7AC00BA7C3D /* TRMeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRMeFooterView.swift; sourceTree = "<group>"; };
 		4F1912D82485EA9900BA7C3D /* TRUserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRUserInfoModel.swift; sourceTree = "<group>"; };
+		4F267D0D24CAD26900F5569A /* TRCartFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRCartFooterView.swift; sourceTree = "<group>"; };
+		4F267D0F24CAD29E00F5569A /* TRCartHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRCartHeaderView.swift; sourceTree = "<group>"; };
 		4F2907F124AECE7300AC08DA /* TROrderSecpayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TROrderSecpayModel.swift; sourceTree = "<group>"; };
 		4F39756924763ED500F67AEA /* TRLAreaInlandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRLAreaInlandViewController.swift; sourceTree = "<group>"; };
 		4F39756C2476402A00F67AEA /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
@@ -605,10 +602,6 @@
 		4F4D4C5C244ED25A0004FD13 /* TRAddressNameSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRAddressNameSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		4F4D4C5F244ED7D20004FD13 /* TRAreaPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRAreaPickerViewController.swift; sourceTree = "<group>"; };
 		4F4D4C62244FE5AE0004FD13 /* LXFooterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXFooterButtonView.swift; sourceTree = "<group>"; };
-		4F4D4C6724500D9D0004FD13 /* TRCartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartTableViewCell.swift; sourceTree = "<group>"; };
-		4F4D4C6924500DD00004FD13 /* TRCartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartHeaderView.swift; sourceTree = "<group>"; };
-		4F4D4C6B24500F700004FD13 /* TRCartFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartFooterView.swift; sourceTree = "<group>"; };
-		4F4D4C6D245010AA0004FD13 /* TRCartToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartToolView.swift; sourceTree = "<group>"; };
 		4F4D4C7D24C6D97D000B72EB /* TRSeniorSearchInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSeniorSearchInputView.swift; sourceTree = "<group>"; };
 		4F4D4C7F24C6DAD0000B72EB /* TRSeniorSearchYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSeniorSearchYearView.swift; sourceTree = "<group>"; };
 		4F4D4C8324C81184000B72EB /* TRPublicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRPublicationViewController.swift; sourceTree = "<group>"; };
@@ -787,7 +780,6 @@
 		4FE277B724459F5C00E60E09 /* TRFavorArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRFavorArticleTableViewCell.swift; sourceTree = "<group>"; };
 		4FE277B924459F7A00E60E09 /* TRFavorArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRFavorArticleViewController.swift; sourceTree = "<group>"; };
 		4FE277BB2445A10D00E60E09 /* TRSearchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSearchDetailTableViewCell.swift; sourceTree = "<group>"; };
-		4FE277BE2445A59800E60E09 /* TRCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartViewController.swift; sourceTree = "<group>"; };
 		4FE277C12445A66300E60E09 /* TRAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRAddressViewController.swift; sourceTree = "<group>"; };
 		4FE277C32445A76A00E60E09 /* TRAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRAddressTableViewCell.swift; sourceTree = "<group>"; };
 		4FE277CB244702C000E60E09 /* TRSetAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSetAddressViewController.swift; sourceTree = "<group>"; };
@@ -884,8 +876,6 @@
 		4FFC48AD247E3AC0005B5D84 /* TRPayTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRPayTypeTableViewCell.swift; sourceTree = "<group>"; };
 		4FFC48AE247E3AC0005B5D84 /* TRPayTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TRPayTypeTableViewCell.xib; sourceTree = "<group>"; };
 		4FFC48B1247E4329005B5D84 /* TRPayTypeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRPayTypeHeaderView.swift; sourceTree = "<group>"; };
-		4FFC48B6247E4E93005B5D84 /* TRCartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartModel.swift; sourceTree = "<group>"; };
-		4FFC48BA247E4EC9005B5D84 /* TRCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRCartViewModel.swift; sourceTree = "<group>"; };
 		4FFC48BC247E52C1005B5D84 /* Cart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Cart.json; sourceTree = "<group>"; };
 		4FFC48BF247E5C88005B5D84 /* TRHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRHeader.swift; sourceTree = "<group>"; };
 		4FFC48C8247F8D6B005B5D84 /* xqq_shop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = xqq_shop.plist; sourceTree = "<group>"; };
@@ -1304,7 +1294,6 @@
 		4F3ACF60246937BB00A9FC1D /* Backups */ = {
 			isa = PBXGroup;
 			children = (
-				4FFC48C3247F8D29005B5D84 /* CustomCart */,
 				4FDDCCDF248E19C70062A630 /* InvoiceDetail */,
 				4FADEC05246A406700AC76D8 /* FMNetRequest */,
 				4F3ACF4D2468120E00A9FC1D /* LoginXib */,
@@ -1491,17 +1480,6 @@
 				4FFC4869247CFFF3005B5D84 /* CellHeader */,
 				4FFC481F247B8562005B5D84 /* CellTextField */,
 				4FFC481E247B8557005B5D84 /* FooterButton */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		4F4D4C64244FF2AF0004FD13 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				4F4D4C6924500DD00004FD13 /* TRCartHeaderView.swift */,
-				4F4D4C6B24500F700004FD13 /* TRCartFooterView.swift */,
-				4F4D4C6D245010AA0004FD13 /* TRCartToolView.swift */,
-				4F4D4C6724500D9D0004FD13 /* TRCartTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2850,14 +2828,6 @@
 			path = HadPay;
 			sourceTree = "<group>";
 		};
-		4FFC4898247E12DD005B5D84 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				4FE277BE2445A59800E60E09 /* TRCartViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		4FFC4899247E12F3005B5D84 /* SureOrder */ = {
 			isa = PBXGroup;
 			children = (
@@ -2925,39 +2895,12 @@
 			path = Cart;
 			sourceTree = "<group>";
 		};
-		4FFC48B4247E4E52005B5D84 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4FFC48B6247E4E93005B5D84 /* TRCartModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4FFC48B5247E4E58005B5D84 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				4FFC48BA247E4EC9005B5D84 /* TRCartViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		4FFC48BE247E5C75005B5D84 /* Header */ = {
 			isa = PBXGroup;
 			children = (
 				4FFC48BF247E5C88005B5D84 /* TRHeader.swift */,
 			);
 			path = Header;
-			sourceTree = "<group>";
-		};
-		4FFC48C3247F8D29005B5D84 /* CustomCart */ = {
-			isa = PBXGroup;
-			children = (
-				4FFC48B5247E4E58005B5D84 /* ViewModel */,
-				4FFC48B4247E4E52005B5D84 /* Model */,
-				4F4D4C64244FF2AF0004FD13 /* View */,
-				4FFC4898247E12DD005B5D84 /* Controller */,
-			);
-			path = CustomCart;
 			sourceTree = "<group>";
 		};
 		4FFC48C4247F8D3E005B5D84 /* ZYCMVC */ = {
@@ -2987,6 +2930,8 @@
 		4FFC48C9247F8D6B005B5D84 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4F267D0F24CAD29E00F5569A /* TRCartHeaderView.swift */,
+				4F267D0D24CAD26900F5569A /* TRCartFooterView.swift */,
 				4FFC48E3247FA245005B5D84 /* ZYCCartHeaderView.swift */,
 				4FFC48E1247F94D4005B5D84 /* ZYCCartToolView.swift */,
 				4FFC48DF247F9227005B5D84 /* ZYCCartTableViewCell.swift */,
@@ -3409,7 +3354,6 @@
 				4FFC4879247DFD41005B5D84 /* TRConnectUSViewController.swift in Sources */,
 				4FFC4895247E11C1005B5D84 /* TRNoPayViewController.swift in Sources */,
 				4F3EF640243F0F5A0017C803 /* TRNewsDetailDropView.swift in Sources */,
-				4FE277BF2445A59800E60E09 /* TRCartViewController.swift in Sources */,
 				4F4D4C8B24C825CB000B72EB /* TROwnSeniorSearchModel.swift in Sources */,
 				4F62146A24A2E25100020082 /* PDFThumbnailCollectionViewController.swift in Sources */,
 				4F4D4C8424C81184000B72EB /* TRPublicationViewController.swift in Sources */,
@@ -3440,9 +3384,7 @@
 				4F051FCC249E1E2600676780 /* MBProgressHUD+FastKit.swift in Sources */,
 				4F051FF7249E757800676780 /* AFNetworkReachabilityManager.m in Sources */,
 				4FFCE0F924A897BA00AC5033 /* TROrderDetailViewController.swift in Sources */,
-				4F4D4C6C24500F700004FD13 /* TRCartFooterView.swift in Sources */,
 				4FB5F2E224B85A60008C2C8A /* TRCatalogTableViewCell.swift in Sources */,
-				4F4D4C6E245010AA0004FD13 /* TRCartToolView.swift in Sources */,
 				4F81C05E2491CAC30070727A /* TRTicketTypeListPersonView.swift in Sources */,
 				4F051FC9249E1E2600676780 /* UIImage+GKDecoder.m in Sources */,
 				4FE277CC244702C000E60E09 /* TRSetAddressViewController.swift in Sources */,
@@ -3492,6 +3434,7 @@
 				4FE2779C24405C1F00E60E09 /* TRMeHeaderView.swift in Sources */,
 				4FDE6F672463EC6700D8EF9A /* TRRegisterNumberCodeView.swift in Sources */,
 				4F5F6657248A1DE700443388 /* TROrderTableViewCell.swift in Sources */,
+				4F267D0E24CAD26900F5569A /* TRCartFooterView.swift in Sources */,
 				4FF8739E242D97C200524AF5 /* ViewController.swift in Sources */,
 				4F81C066249368080070727A /* TRArticleSearchModel.swift in Sources */,
 				4FC78C43248778BC000DD086 /* TRAddressEditModel.swift in Sources */,
@@ -3513,13 +3456,13 @@
 				4FDBDFEA246E975600864817 /* ExtensionDate.swift in Sources */,
 				4FF873F9242DC5D600524AF5 /* ExampleViewController.swift in Sources */,
 				4FC78C3F2487434A000DD086 /* TRAddressInfoModel.swift in Sources */,
+				4F267D1024CAD29E00F5569A /* TRCartHeaderView.swift in Sources */,
 				4FFC488C247E10D2005B5D84 /* TRAllOrderViewController.swift in Sources */,
 				4FFC48AF247E3AC0005B5D84 /* TRPayTypeTableViewCell.swift in Sources */,
 				4F5103D724BE9A1D00A16EA7 /* LXPhoneBottomView.swift in Sources */,
 				4FFC48DE247F8F9A005B5D84 /* ZYCCartViewController.swift in Sources */,
 				4F051FC7249E1E2600676780 /* GKWebImageManager.m in Sources */,
 				4FC78C2E24861EE6000DD086 /* TRUserUppassModel.swift in Sources */,
-				4FFC48BB247E4EC9005B5D84 /* TRCartViewModel.swift in Sources */,
 				4FE277B824459F5C00E60E09 /* TRFavorArticleTableViewCell.swift in Sources */,
 				4FE27794243F172500E60E09 /* TRCatalogHeaderView.swift in Sources */,
 				4F3EF642243F10430017C803 /* TRNewsDetailIntroView.swift in Sources */,
@@ -3582,7 +3525,6 @@
 				4FFC4866247CFDA5005B5D84 /* TRInvoiceCompanyTableViewCell.swift in Sources */,
 				4FFCE0F424A8812400AC5033 /* TRCartBatchAddModel.swift in Sources */,
 				4F3EF638243D80990017C803 /* TRMoreNewsDropView.swift in Sources */,
-				4F4D4C6A24500DD00004FD13 /* TRCartHeaderView.swift in Sources */,
 				4F05200E249F2B4800676780 /* TRLAreaForeignViewController.swift in Sources */,
 				4FC78C4524877E26000DD086 /* TRAddressDeleteModel.swift in Sources */,
 				4FFC489F247E13E0005B5D84 /* TRCartDingFooterView.swift in Sources */,
@@ -3631,14 +3573,12 @@
 				4F0206492477A2220082773E /* LXGetIPAddressTool.m in Sources */,
 				4F43BC052466A2520010E746 /* TRRegisterAgreeViewController.swift in Sources */,
 				4FFC484E247BC110005B5D84 /* TRAddInvoiceViewController.swift in Sources */,
-				4F4D4C6824500D9D0004FD13 /* TRCartTableViewCell.swift in Sources */,
 				4FFC4830247B996A005B5D84 /* TRInfoNameView.swift in Sources */,
 				4F6214A924A5648700020082 /* TRBuyActionContentBenView.swift in Sources */,
 				4F3EF5E724359EAE0017C803 /* TRHomeNewsCollectionViewCell.swift in Sources */,
 				4FC78C32248625AE000DD086 /* TRUserFindPassModel.swift in Sources */,
 				4FDDCCE4248E41360062A630 /* TRArticleRecdModel.swift in Sources */,
 				4FDE6F5E2462A89200D8EF9A /* TRRegisterViewController.swift in Sources */,
-				4FFC48B7247E4E93005B5D84 /* TRCartModel.swift in Sources */,
 				4F0E3F30249CB161005FC4B5 /* TRArticleDetailModel.swift in Sources */,
 				4FC78C2C24861B3C000DD086 /* TRUserLoginOutModel.swift in Sources */,
 				4F5F6659248A1E1100443388 /* TROrderHeaderView.swift in Sources */,

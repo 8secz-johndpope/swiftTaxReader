@@ -21,9 +21,6 @@ public enum TaxReaderAPI {
     
     // 验证类型（用户注册=1，用户登录=2，忘记密码=3）
     case getCode(NKValidateCodeReceive: String, UserMobileAreaCode: String, NKValidateCodeType: String, UserRegIP: String)
-    
-    // 购物车
-    case cartFind(UserID: String, PageIndex: String, PageSize: String)
 }
 
 extension TaxReaderAPI:TargetType {
@@ -39,8 +36,6 @@ extension TaxReaderAPI:TargetType {
             return "/v1/User/Register"
         case .getCode(_, _, _, _):
             return "/v1/SMS/GetCode"
-        case .cartFind(_,_,_):
-            return "/v1/User/cart/find"        
         }
     }
     
@@ -81,13 +76,6 @@ extension TaxReaderAPI:TargetType {
                     "NKValidateCodeType":NKValidateCodeType,
                     "UserRegIP":UserRegIP,
                 ] as [String : Any]
-            
-        case .cartFind(let UserID, let PageIndex, let PageSize):
-                parmeters = [
-                    "UserID": UserID,
-                    "PageIndex":PageIndex,
-                    "PageSize": PageSize,
-                    ] as [String : Any]            
         }
                 
         print("parmeters = \(parmeters)")
@@ -98,6 +86,18 @@ extension TaxReaderAPI:TargetType {
         TRAPIHeader(isHasToken: false) as? [String : String]
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 再次封装的参考，并未执行
 let LoadingPlugin = NetworkActivityPlugin { (type, target) in

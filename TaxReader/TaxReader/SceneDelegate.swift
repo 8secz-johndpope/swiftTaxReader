@@ -21,25 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate{
         guard let _ = (scene as? UIWindowScene) else { return }
         
         // 转交给 SceneDelegate 的willConnectTo Session:方法进行根控制器设置
-        //self.window?.rootViewController = UINavigationController.init(rootViewController: TRWLoginViewController())
         self.window?.backgroundColor = UIColor.white
-        
-//        // expire_time 在此时间内，则直接进入首页 越过登录页面
-//        let expire_time = UserDefaults.LoginInfo.string(forKey: .expire_time)
-//        let dateExpire = expire_time?.toDate()!.date
-//
-//        if expire_time?.isBlank ?? true {
-//            self.window?.rootViewController = TRWLoginViewController()
-//            self.window?.makeKeyAndVisible()
-//
-//            return
-//        }
-//        let dateNow = Date()
-//        print("\(dateNow) \(String(describing: dateExpire))")
-//        let isAscending = dateNow.compare(dateExpire!) == .orderedAscending // // date1 < date2 升序排列
-//        self.window?.rootViewController = !isAscending ? TRWLoginViewController() : LXTabbarProvider.TRsystemStyle()
-        
-        self.window?.rootViewController = TRWLoginViewController()
+        self.window?.rootViewController = LXTabbarProvider.TRsystemStyle()
         self.window?.makeKeyAndVisible()
     }
 

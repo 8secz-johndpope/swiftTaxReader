@@ -235,7 +235,6 @@ extension TaxReaderViewModel {
                 }
 
                 self.updateBlock?()
-                
             }
         }
     }

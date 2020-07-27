@@ -53,6 +53,28 @@ class TRFavorArticleViewController: UIViewController {
 extension TRFavorArticleViewController {
     func NetworkFavorFind() {
         networkViewModel.updateBlock = {[unowned self] in
+            
+            if self.networkViewModel.favorFindModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.networkViewModel.favorFindModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.favorFindModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkFavorFind()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             self.dataArr = self.networkViewModel.favorFindModel?.data
             self.tableView.reloadData()
         }
@@ -140,6 +162,23 @@ extension TRFavorArticleViewController {
         let confirmaction = UIAlertAction.init(title: "确定", style: .default) { (UIAlertAction) in
             self.networkViewModel.updateBlock = {[unowned self] in
                 MBProgressHUD.showWithText(text: self.networkViewModel.favorCancelModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.favorCancelModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.editingStyleDeleteCell(PubIssueID: PubIssueID)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
+                return
+                
                 self.NetworkFavorFind()
             }
             self.networkViewModel.refreshDataSource_FavorCancel(FavoriteID: PubIssueID, ReadFavoriteType: "30")

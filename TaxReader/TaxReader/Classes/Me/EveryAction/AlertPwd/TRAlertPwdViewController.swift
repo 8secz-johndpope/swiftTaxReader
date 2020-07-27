@@ -147,6 +147,28 @@ extension TRAlertPwdViewController {
         // 接口调用
         viewModel.updateBlock = {[unowned self] in
             MBProgressHUD.showWithText(text: self.viewModel.userUppassModel?.msg ?? "", view: self.view)
+            
+            if self.viewModel.userUppassModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.viewModel.userUppassModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.viewModel.userUppassModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.blockFooterButtonClick(button: button)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 if self.viewModel.userUppassModel?.msgCode == 200 {
                     self.navigationController?.popViewController(animated: true)

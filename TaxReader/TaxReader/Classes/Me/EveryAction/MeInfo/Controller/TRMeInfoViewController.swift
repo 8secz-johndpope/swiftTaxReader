@@ -216,6 +216,28 @@ extension TRMeInfoViewController {
 extension TRMeInfoViewController {
     func NetworkDataInfo() {
         viewModel.updateBlock = {[unowned self] in
+            
+            if self.viewModel.userInfoModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.viewModel.userInfoModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.viewModel.userInfoModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkDataInfo()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             self.initViewDataWithModel()
         }
         viewModel.refreshDataSource_Info()
@@ -249,6 +271,28 @@ extension TRMeInfoViewController {
     
     func NetWorkDataUpInfo() {
         viewModel.updateBlock = {[unowned self] in
+            
+            if self.viewModel.userUpInfoModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.viewModel.userUpInfoModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.viewModel.userUpInfoModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetWorkDataUpInfo()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             self.navigationController?.popViewController(animated: true)
         }
         

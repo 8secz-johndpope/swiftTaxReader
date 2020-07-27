@@ -288,8 +288,30 @@ extension TRBuyActionSheetViewController {
             cartArray.add(productParms)
         }
         print("responseObject = \(cartArray)")
+        NetworkCartBatchAdd(isBuy: isBuy, urlstring: urlstring, cartArray: cartArray)
+    }
+    
+    func NetworkCartBatchAdd(isBuy: Bool?, urlstring: String!, cartArray: NSMutableArray) {
         networkBodyViewModel.updateBlock = {[unowned self] in
-            print(self.networkBodyViewModel.cartBatchAddModel?.msg ?? "")
+            if self.networkBodyViewModel.cartBatchAddModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.networkBodyViewModel.cartBatchAddModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.favorFindModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkCartBatchAdd(isBuy: isBuy, urlstring: urlstring, cartArray: cartArray)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
             
             // 购买
             if isBuy ?? false {
@@ -308,6 +330,21 @@ extension TRBuyActionSheetViewController {
         self.networkViewModel.getCartByIDUpdateBlock = {[unowned self] in
             if self.networkViewModel.cartGetByIDModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.cartGetByIDModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.cartGetByIDModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.cartGetByID(CartItemIDS: CartItemIDS ?? "")
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
                 return
             }
             

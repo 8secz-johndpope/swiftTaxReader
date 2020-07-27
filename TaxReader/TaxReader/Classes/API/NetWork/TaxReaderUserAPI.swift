@@ -426,7 +426,7 @@ extension TaxReaderUserAPI:TargetType {
                         ] as [String : Any]
         }
         
-        print("parmeters = \(parmeters)")
+        // print("parmeters = \(parmeters)")
         return .requestParameters(parameters: parmeters, encoding: URLEncoding.default)
     }
 

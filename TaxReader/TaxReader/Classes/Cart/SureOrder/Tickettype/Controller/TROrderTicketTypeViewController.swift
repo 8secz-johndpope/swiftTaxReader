@@ -137,6 +137,27 @@ class TROrderTicketTypeViewController: UIViewController {
 extension TROrderTicketTypeViewController {
     func NetWorkInvoiceInfo() {
         viewModel.updateBlock = {[unowned self] in
+            
+            if self.viewModel.invoiceInfoModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.viewModel.invoiceInfoModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.viewModel.invoiceInfoModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetWorkInvoiceInfo()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+            
             self.backListView.dataArrayInvoiceInfoDataModel = self.viewModel.invoiceInfoModel?.data
         }
         viewModel.refreshDataSource_InvoiceInfo()

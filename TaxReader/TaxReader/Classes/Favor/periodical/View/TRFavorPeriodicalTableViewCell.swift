@@ -54,7 +54,6 @@ class TRFavorPeriodicalTableViewCell: UITableViewCell {
         label.backgroundColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.black
-        label.text = "优化税收营商环境1"
         
         return label
     }()
@@ -65,7 +64,6 @@ class TRFavorPeriodicalTableViewCell: UITableViewCell {
         label.backgroundColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.black
-        label.text = "优化税收营商环境2"
         
         return label
     }()
@@ -76,7 +74,6 @@ class TRFavorPeriodicalTableViewCell: UITableViewCell {
         label.backgroundColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.black
-        label.text = "优化税收营商环境3"
         
         return label
     }()
@@ -87,7 +84,6 @@ class TRFavorPeriodicalTableViewCell: UITableViewCell {
         label.backgroundColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.black
-        label.text = "优化税收营商环境4"
         
         return label
     }()
@@ -177,10 +173,18 @@ class TRFavorPeriodicalTableViewCell: UITableViewCell {
                                         placeholderImage: UIImage.init(named: "DefaultS"),
                                         options: .allowInvalidSSLCertificates,
                                         context: nil)
-            self.exp1Label.text = model.ArticleList?[0].ArticleTitle
-            self.exp2Label.text = model.ArticleList?[1].ArticleTitle
-            self.exp3Label.text = model.ArticleList?[2].ArticleTitle
-            self.exp4Label.text = model.ArticleList?[3].ArticleTitle
+            if model.ArticleList?.count ?? 0 > 0 {
+                self.exp1Label.text = model.ArticleList?[0].ArticleTitle
+            }
+            if model.ArticleList?.count ?? 0 > 1 {
+                self.exp2Label.text = model.ArticleList?[1].ArticleTitle
+            }
+            if model.ArticleList?.count ?? 0 > 2 {
+                self.exp3Label.text = model.ArticleList?[2].ArticleTitle
+            }
+            if model.ArticleList?.count ?? 0 > 3 {
+                self.exp4Label.text = model.ArticleList?[3].ArticleTitle
+            }
         }
     }
 }

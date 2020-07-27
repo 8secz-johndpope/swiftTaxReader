@@ -122,6 +122,21 @@ extension TRMoreNewsViewController {
         networkViewModel.homeReadTypeBlock = {[unowned self] in
             if self.networkViewModel.productReadtypeModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.productReadtypeModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.productReadtypeModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkHomeProductReadType()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
                 return
             }
             
@@ -129,13 +144,29 @@ extension TRMoreNewsViewController {
             self.dropContentView.dataArrayReadType = self.networkViewModel.productReadtypeModel?.data
         }
         
-        networkViewModel.refreshDataSource_productReadType()
+        networkViewModel.refreshDataSource_ProductReadType()
     }
     
     func NetworkHomePublicationGetPubIssueList(more: Bool, ReadType: String?) {
         networkViewModel.updateBlock = {[unowned self] in
             if self.networkViewModel.publicationGetPubIssueListModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.publicationGetPubIssueListModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.publicationGetPubIssueListModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.networkViewModel.refreshDataSource_PublicationGetPubIssueList(ReadType: ReadType ?? "", PageIndex: "\(self.page)", PageSize: "10")
+
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
                 return
             }
             

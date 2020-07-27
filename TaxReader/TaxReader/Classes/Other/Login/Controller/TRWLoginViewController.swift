@@ -12,6 +12,11 @@ import MBProgressHUD
 
 class TRWLoginViewController: UIViewController {
     
+    // 是否是 authorization 参数为空 弹出登录的情况
+    var isTypeShowFromTokenNull: Bool? = false
+    typealias loginReloadDataBlock = () -> Void
+    var loginReloadBlock: loginReloadDataBlock?
+    
     lazy var scrollView: TPKeyboardAvoidingScrollView = {
         let scrollView = TPKeyboardAvoidingScrollView.init(frame: .zero)
         scrollView.backgroundColor = UIColor.white
@@ -254,17 +259,25 @@ extension TRWLoginViewController {
             UserDefaults.LoginInfo.set(value: pwdTFText, forKey: .passwordText)
             let selectText = self.contentServeView.remLoginButton.isSelected ? "1" : "0"
             UserDefaults.LoginInfo.set(value: selectText, forKey: .rem_login)
-            
+
             //  登录成功后，User调用需要 access_token 添加到 headerfad 中，expire_time 失效时间
             let loginModel: TRLoginModel? = self.viewModel.loginServe
             UserDefaults.LoginInfo.set(value: loginModel?.access_token, forKey: .access_token)
             UserDefaults.LoginInfo.set(value: loginModel?.expire_time, forKey: .expire_time)
             UserDefaults.AccountInfo.set(value: loginModel?.data?.UserName, forKey: .userName)
             
-            let tabBar = LXTabbarProvider.TRsystemStyle()
-            let keyWindow = UIApplication.shared.windows.first
-            if let window = keyWindow {
-                window.rootViewController = tabBar
+            if self.isTypeShowFromTokenNull ?? false {
+                self.dismiss(animated: true, completion: {
+                    guard let loginReloadBlock = self.loginReloadBlock else { return }
+                    loginReloadBlock()
+                })
+            }else
+            {// 原有进入首页的登录
+                let tabBar = LXTabbarProvider.TRsystemStyle()
+                let keyWindow = UIApplication.shared.windows.first
+                if let window = keyWindow {
+                    window.rootViewController = tabBar
+                }
             }
         }
 

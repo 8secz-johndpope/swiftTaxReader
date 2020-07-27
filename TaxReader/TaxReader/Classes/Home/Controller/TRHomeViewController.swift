@@ -118,7 +118,7 @@ extension TRHomeViewController {
             self.tableView.reloadSections([0], with: .fade)
         }
         
-        networkViewModel.refreshDataSource_productRotchart()
+        networkViewModel.refreshDataSource_ProductRotchart()
     }
     
     func NetworkHomeProductLast() {
@@ -127,7 +127,7 @@ extension TRHomeViewController {
             self.tableView.reloadSections([1], with: .fade)
         }
         
-        networkViewModel.refreshDataSource_productLast()
+        networkViewModel.refreshDataSource_ProductLast()
     }
     
     func NetworkHomeArticleGetTopNews() {
@@ -136,7 +136,7 @@ extension TRHomeViewController {
             self.tableView.reloadSections([2], with: .fade)
         }
         
-        networkViewModel.refreshDataSource_articleGetTopNews(NewsID: "", Number: "2")
+        networkViewModel.refreshDataSource_ArticleGetTopNews(NewsID: "", Number: "2")
     }
     
     func NetworkHomeArticleRecd() {
@@ -145,7 +145,7 @@ extension TRHomeViewController {
             self.tableView.reloadSections([3], with: .fade)
         }
         
-        networkViewModel.refreshDataSource_articleRecd()
+        networkViewModel.refreshDataSource_ArticleRecd()
     }
     
     func NetworkHomeProductRect() {
@@ -154,7 +154,7 @@ extension TRHomeViewController {
             self.tableView.reloadSections([4], with: .fade)
         }
         
-        networkViewModel.refreshDataSource_productRecd()
+        networkViewModel.refreshDataSource_ProductRecd()
     }
 }
 

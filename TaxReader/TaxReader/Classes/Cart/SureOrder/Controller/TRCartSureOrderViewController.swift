@@ -145,6 +145,22 @@ extension TRCartSureOrderViewController {
         networkViewModel.updateBlock = {[unowned self] in
             if self.networkViewModel.addressGetDefaultModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.addressGetDefaultModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.addressGetDefaultModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkAddressGetDefault()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
+                
                 return
             }
             
@@ -300,7 +316,28 @@ extension TRCartSureOrderViewController {
         parmeters.setValue(cartItemsArray, forKey: "CartItems")
 
         networkBodyViewModel.updateBlock = {[unowned self] in
-            print(self.networkBodyViewModel.orderCreateModel?.msg ?? "")
+            
+            if self.networkBodyViewModel.orderCreateModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.networkBodyViewModel.orderCreateModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.orderCreateModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.blockPay(button: button)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             if payModel == PayModelAliLKL {
                 self.payAliLKL(orderCreateData: self.networkBodyViewModel.orderCreateModel?.data ?? TROrderCreateDataModel.init())
             }

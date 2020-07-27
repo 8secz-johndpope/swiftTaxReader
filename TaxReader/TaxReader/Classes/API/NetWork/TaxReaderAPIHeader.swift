@@ -38,13 +38,19 @@ let NetDataOrderStatus: Int = 1
 /// 无需开票=0，申请开票=10，开票中=20，开票完成=30
 let NetDataOrderInvoiceStatus: Int = 10
 
+// authorization参数不能为空
+let NetDataAuthorizationNull: Int = 3000
+let TokenNullTitle: String = ""
+let TokenNullDetailTitle: String = "需要先登录个人账户才能继续操作"
+let TokenNullActionDefault: String = "去登录"
+let TokenNullActionCancel: String = "取消"
 
 //MARK: -时间转时间戳函数
 func TRAPIHeader(isHasToken: Bool) -> Dictionary<String, Any> {
     let appsecretString = appsecret
     let timestampString = Date().milliStamp // 13位时间戳
     let changeTimestampString = String(describing: (Int(timestampString) ?? 0) - 10000) // 提前5秒合适 - 5000
-    print("时间戳是(目前当前时间减了10秒) = \(changeTimestampString)")
+    //print("时间戳是(目前当前时间减了10秒) = \(changeTimestampString)")
     
     let nonceString = "049e73d6e0744a7491c\(changeTimestampString)" // 一次性随机数 32位
     
@@ -53,21 +59,22 @@ func TRAPIHeader(isHasToken: Bool) -> Dictionary<String, Any> {
     // 签名有效期只有一次,每次调用接口时都需要重新生成签名
     let signatureFormat = "appSecret=\(appsecretString)&nonce=\(nonceString)&timestamp=\(changeTimestampString)"
     let signatureString = signatureFormat.sha1()
-    print("待签名的字符串是 = \(signatureFormat)")
-    print("签名后的字符串是 = \(signatureString)")
+    //print("待签名的字符串是 = \(signatureFormat)")
+    //print("签名后的字符串是 = \(signatureString)")
     
     var dictionary: [String:String] = [:]
     dictionary.updateValue("application/x-www-form-urlencoded", forKey: "Content-Type")
     dictionary.updateValue(nonceString, forKey: "nonce")
     dictionary.updateValue(signatureString, forKey: "signature")
     dictionary.updateValue(changeTimestampString, forKey: "timestamp")
+    dictionary.updateValue("", forKey: "authorization")
     
-    let headerToken: String = UserDefaults.LoginInfo.string(forKey: .access_token) ?? "111"
+    let headerToken: String = UserDefaults.LoginInfo.string(forKey: .access_token) ?? ""
     if isHasToken && !headerToken.isBlank {
         dictionary.updateValue(headerToken, forKey: "authorization")
     }
     
-    print("最后的 header 是 = \(dictionary)")
+    //print("最后的 header 是 = \(dictionary)")
     
     return dictionary
 }

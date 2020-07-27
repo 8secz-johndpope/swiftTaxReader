@@ -218,6 +218,7 @@
 		4F9C0C2C24C6CC97004E68DF /* TRSeniorSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9C0C2B24C6CC97004E68DF /* TRSeniorSearchViewController.swift */; };
 		4F9C0C3024C6D1DE004E68DF /* TRSeniorSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9C0C2F24C6D1DE004E68DF /* TRSeniorSearchView.swift */; };
 		4F9CA04D249E0BF200B55FE1 /* TRReadTypeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9CA04C249E0BF200B55FE1 /* TRReadTypeDetailView.swift */; };
+		4FAB151B24CEB73B00156655 /* LXAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB151A24CEB73B00156655 /* LXAlertController.swift */; };
 		4FADEC00246A394100AC76D8 /* FMHomeVipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FADEBFD246A394100AC76D8 /* FMHomeVipViewModel.swift */; };
 		4FADEC01246A394100AC76D8 /* FMHomeVipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FADEBFF246A394100AC76D8 /* FMHomeVipModel.swift */; };
 		4FADEC04246A399000AC76D8 /* FMHomeVipAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FADEC03246A399000AC76D8 /* FMHomeVipAPI.swift */; };
@@ -678,6 +679,7 @@
 		4F9C0C2B24C6CC97004E68DF /* TRSeniorSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSeniorSearchViewController.swift; sourceTree = "<group>"; };
 		4F9C0C2F24C6D1DE004E68DF /* TRSeniorSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRSeniorSearchView.swift; sourceTree = "<group>"; };
 		4F9CA04C249E0BF200B55FE1 /* TRReadTypeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRReadTypeDetailView.swift; sourceTree = "<group>"; };
+		4FAB151A24CEB73B00156655 /* LXAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXAlertController.swift; sourceTree = "<group>"; };
 		4FADEBFD246A394100AC76D8 /* FMHomeVipViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMHomeVipViewModel.swift; sourceTree = "<group>"; };
 		4FADEBFF246A394100AC76D8 /* FMHomeVipModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMHomeVipModel.swift; sourceTree = "<group>"; };
 		4FADEC03246A399000AC76D8 /* FMHomeVipAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMHomeVipAPI.swift; sourceTree = "<group>"; };
@@ -1813,6 +1815,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4FAB151924CEB72500156655 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				4FAB151A24CEB73B00156655 /* LXAlertController.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		4FADEBFC246A394100AC76D8 /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2332,6 +2342,7 @@
 		4FF873CA242DA86A00524AF5 /* LXTools */ = {
 			isa = PBXGroup;
 			children = (
+				4FAB151924CEB72500156655 /* Tools */,
 				4F05201224A0B81B00676780 /* RequestNetWork */,
 				4F81C07124937B170070727A /* Base */,
 				4FFC4812247B8140005B5D84 /* Example */,
@@ -3319,6 +3330,7 @@
 				4F81C0402490BE9D0070727A /* URefresh.swift in Sources */,
 				4FC0539424751518000D5CD0 /* TRRegisterModel.swift in Sources */,
 				4F81C06B24936AF00070727A /* LXNavigationBarSearchView.swift in Sources */,
+				4FAB151B24CEB73B00156655 /* LXAlertController.swift in Sources */,
 				4F0E3F1A249B59F5005FC4B5 /* TROrderCodeTableViewCell.swift in Sources */,
 				4F3EF5DB2435931C0017C803 /* TRHomeRankTableViewCell.swift in Sources */,
 				4FE277C42445A76A00E60E09 /* TRAddressTableViewCell.swift in Sources */,

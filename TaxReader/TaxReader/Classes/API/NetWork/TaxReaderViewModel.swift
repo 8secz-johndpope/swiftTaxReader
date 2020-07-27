@@ -15,7 +15,6 @@ class TaxReaderViewModel: NSObject {
     typealias APIDataBlock = () -> Void
     var updateBlock: APIDataBlock?
     
-    // Home
     typealias APIDataBlockHomeReadType = () -> Void
     var homeReadTypeBlock: APIDataBlockHomeReadType?
     
@@ -34,13 +33,11 @@ class TaxReaderViewModel: NSObject {
     typealias APIDataBlockHomeProductLast = () -> Void
     var homeproductLastBlock: APIDataBlockHomeProductLast?
     
-    // 数据源更新 readType 富文本
     typealias APIDataBlockArticleDetail = () -> Void
     var articleDetailUpdateBlock: APIDataBlockArticleDetail?
     
     typealias APIDataBlockArticleGetHtmlContent = () -> Void
     var articleGetHtmlContentUpdateBlock: APIDataBlockArticleGetHtmlContent?
-    
     
     typealias APIDataBlockProductGetIssueNumber = () -> Void
     var getIssueNumberUpdateBlock: APIDataBlockProductGetIssueNumber?
@@ -53,8 +50,6 @@ class TaxReaderViewModel: NSObject {
     
     // 登录
     var loginServe: TRLoginModel?
-    
-    // 注册
     var registerModel: TRRegisterModel?
     var getCodeModel: TRGetCodeModel?
     
@@ -66,7 +61,7 @@ class TaxReaderViewModel: NSObject {
     var userFindPassModel: TRUserFindPassModel?
     var userBindCodeModel: TRUserBindCodeModel?
     
-    // Invoice info
+    // Invoice
     var invoiceInfoModel: TRInvoiceInfoModel?
     var invoiceDeleteModel: TRInvoiceDeleteModel?
     var invoiceAddModel: TRInvoiceAddModel?
@@ -85,18 +80,18 @@ class TaxReaderViewModel: NSObject {
     var productLastModel: TRproductLastModel?
     var productRecdModel: TRProductRecdModel?
     var productGetIssueNumberModel: TRProductGetIssueNumberModel?
+    var productDetailModel: TRProductDetailModel?
+    var productGetPubYearIssueModel: TRProductGetPubYearIssueModel?
+    var productGetPubIssueByYearModel: TRProductGetPubIssueByYearModel?
+    var publicationGetPubIssueListModel: TRPublicationGetPubIssueListModel?
     
+    // Article
     var articleGetTopNewsModel: TRArticleGettopnewsModel?
     var articleRecdModel: TRArticleRecdModel?
     var articleSearchModel: TRArticleSearchModel?
     var articleDetailModel: TRArticleDetailModel?
     var articleGetHtmlContentModel: TRArticleGetHtmlContentModel?
     var articleNewsDetailModel: TRNewsDetailModel?
-    
-    var productDetailModel: TRProductDetailModel?
-    var productGetPubYearIssueModel: TRProductGetPubYearIssueModel?
-    var productGetPubIssueByYearModel: TRProductGetPubIssueByYearModel?
-    var publicationGetPubIssueListModel: TRPublicationGetPubIssueListModel?
     
     //Favor
     var favorFindModel: TRFavorFindModel?
@@ -117,13 +112,12 @@ class TaxReaderViewModel: NSObject {
     var cartAddModel: TRCartAddModel?
     var cartGetByIDModel: TRCartGetCartByIDModel?
     
-    // TRGetAllPublicationModel
+    // Publication
     var allPublicationModel: TRGetAllPublicationModel?
     var articleAdvSearchModel: TRArticleAdvSearchModel?
-    
 }
 
-// User
+// 用户 User
 extension TaxReaderViewModel {
     func refreshDataSource_Login(userName: String, UserPWD: String) {
         TaxReaderAPIProvider.request(TaxReaderAPI.login(UserName: userName, UserPWD: UserPWD)) { (result) in
@@ -143,7 +137,6 @@ extension TaxReaderViewModel {
             }
         }
     }
-    
     
     func refreshDataSource_Register(UserName: String, UserMobile: String, UserRegIP: String, AreaTreePath: String,AreaFullName: String,UserPWD: String, UserMobileAreaCode: String, UseFrom: String,SMSCode: String) {
         TaxReaderAPIProvider.request(TaxReaderAPI.register(UserName: UserName, UserMobile: UserMobile, UserRegIP: UserRegIP, AreaTreePath: AreaTreePath, AreaFullName: AreaFullName, UserPWD: UserPWD, UserMobileAreaCode: UserMobileAreaCode, UseFrom: UseFrom, SMSCode: SMSCode)) { (result) in
@@ -193,8 +186,6 @@ extension TaxReaderViewModel {
         }
     }
     
-    
-    // User 中需要 token 作为 header 中的一部分
     func refreshDataSource_LoginOut() {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.userLoginOut) { (result) in
             if case let .success(response) = result {
@@ -337,8 +328,10 @@ extension TaxReaderViewModel {
             }
         }
     }
-    
-    // 开票信息
+}
+
+// 开票信息 Invoice
+extension TaxReaderViewModel {
     func refreshDataSource_InvoiceInfo() {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.invoiceInfo) { (result) in
             if case let .success(response) = result {
@@ -477,10 +470,10 @@ extension TaxReaderViewModel {
             }
         }
     }
+}
 
-    
-    
-    // 收货地址
+// 收货地址 Address
+extension TaxReaderViewModel {
     func refreshDataSource_AddressInfo() {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.addressInfo) { (result) in
             if case let .success(response) = result {
@@ -641,10 +634,12 @@ extension TaxReaderViewModel {
             }
         }
     }
-    
-    
-    // 首页
-    func refreshDataSource_productReadType() {
+
+}
+
+// 首页 product
+extension TaxReaderViewModel {
+    func refreshDataSource_ProductReadType() {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.productReadType) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -666,7 +661,7 @@ extension TaxReaderViewModel {
         }
     }
     
-    func refreshDataSource_productRotchart() {
+    func refreshDataSource_ProductRotchart() {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.productRotchart) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -688,7 +683,7 @@ extension TaxReaderViewModel {
         }
     }
         
-    func refreshDataSource_productRecd() {
+    func refreshDataSource_ProductRecd() {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.productRecd) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -710,31 +705,7 @@ extension TaxReaderViewModel {
         }
     }
     
-    
-    func refreshDataSource_articleRecd() {
-        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.articleRecd) { (result) in
-            if case let .success(response) = result {
-                let data = try? response.mapJSON()
-                
-                guard let returnData = data else {
-                    print("returnData nil")
-                    return
-                }
-                
-                let json = JSON(returnData)
-                print("articleRecd = \(json.description)")
-                
-                if let mappedObject = JSONDeserializer<TRArticleRecdModel>.deserializeFrom(json: json.description) {
-                    self.articleRecdModel = mappedObject
-                }
-
-                self.homeArticleRecdBlock?()
-            }
-        }
-    }
-    
-    
-    func refreshDataSource_productLast() {
+    func refreshDataSource_ProductLast() {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.productLast) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -756,7 +727,7 @@ extension TaxReaderViewModel {
         }
     }
     
-    func refreshDataSource_productDetail(PubIssueID: String, PubID: String, Year: String) {
+    func refreshDataSource_ProductDetail(PubIssueID: String, PubID: String, Year: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.productDetail(PubIssueID: PubIssueID, PubID: PubID, Year: Year)) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -778,7 +749,7 @@ extension TaxReaderViewModel {
         }
     }
     
-    func refreshDataSource_productGetYearPubIssue(PubIssueID: String, PubID: String, Year: String) {
+    func refreshDataSource_ProductGetYearPubIssue(PubIssueID: String, PubID: String, Year: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.productGetYearPubIssue(PubIssueID: PubIssueID, PubID: PubID, Year: Year)) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -800,7 +771,7 @@ extension TaxReaderViewModel {
         }
     }
 
-    func refreshDataSource_productGetPubIssueByYear(PubIssueID: String, PubID: String, Year: String) {
+    func refreshDataSource_ProductGetPubIssueByYear(PubIssueID: String, PubID: String, Year: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.productGetPubIssueByYear(PubIssueID: PubIssueID, PubID: PubID, Year: Year)) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -821,30 +792,8 @@ extension TaxReaderViewModel {
             }
         }
     }
-    
-    func refreshDataSource_PublicationGetPubIssueList(ReadType: String, PageIndex: String, PageSize: String) {
-        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.publicationGetPubIssueList(ReadType: ReadType, PageIndex: PageIndex, PageSize: PageSize)) { (result) in
-            if case let .success(response) = result {
-                let data = try? response.mapJSON()
-                
-                guard let returnData = data else {
-                    print("returnData nil")
-                    return
-                }
-                
-                let json = JSON(returnData)
-                print("publicationGetPubIssueList = \(json.description)")
-                
-                if let mappedObject = JSONDeserializer<TRPublicationGetPubIssueListModel>.deserializeFrom(json: json.description) {
-                    self.publicationGetPubIssueListModel = mappedObject
-                }
-
-                self.updateBlock?()
-            }
-        }
-    }
-    
-    func refreshDataSource_productGetIssueNumber(PubIssueID: String, PubID: String, Year: String) {
+        
+    func refreshDataSource_ProductGetIssueNumber(PubIssueID: String, PubID: String, Year: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.productGetIssueNumber(PubIssueID: PubIssueID, PubID: PubID, Year: Year)) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -865,8 +814,11 @@ extension TaxReaderViewModel {
             }
         }
     }
-    
-    // Favor
+
+}
+
+// 收藏 Favor
+extension TaxReaderViewModel {
     func refreshDataSource_FavorFind(FavoriteID: String, ReadFavoriteType: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.favorFind(FavoriteID: FavoriteID, ReadFavoriteType: ReadFavoriteType)) { (result) in
             if case let .success(response) = result {
@@ -933,8 +885,10 @@ extension TaxReaderViewModel {
         }
     }
 
-    
-    // Order
+}
+
+// 订单 Order
+extension TaxReaderViewModel {
     func refreshDataSource_OrderFind(OrderStatus: String, PageIndex: String, PageSize: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.orderFind(OrderStatus: OrderStatus, PageIndex: PageIndex, PageSize: PageSize)) { (result) in
             if case let .success(response) = result {
@@ -957,7 +911,6 @@ extension TaxReaderViewModel {
         }
     }
     
-    // Order
     func refreshDataSource_OrderFindDetail(OrderID: String, PageIndex: String, PageSize: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.orderFindDetail(OrderID: OrderID, PageIndex: PageIndex, PageSize: PageSize)) { (result) in
             if case let .success(response) = result {
@@ -1049,6 +1002,32 @@ extension TaxReaderViewModel {
             }
         }
     }
+
+}
+
+// 文章 Article
+extension TaxReaderViewModel {
+    func refreshDataSource_ArticleRecd() {
+        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.articleRecd) { (result) in
+            if case let .success(response) = result {
+                let data = try? response.mapJSON()
+                
+                guard let returnData = data else {
+                    print("returnData nil")
+                    return
+                }
+                
+                let json = JSON(returnData)
+                print("articleRecd = \(json.description)")
+                
+                if let mappedObject = JSONDeserializer<TRArticleRecdModel>.deserializeFrom(json: json.description) {
+                    self.articleRecdModel = mappedObject
+                }
+
+                self.homeArticleRecdBlock?()
+            }
+        }
+    }
     
     func refreshDataSource_ArticleSearch(KeyWord: String, PageIndex: String, PageSize: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.articleSearch(KeyWord: KeyWord, PageIndex: PageIndex, PageSize: PageSize)) { (result) in
@@ -1072,7 +1051,7 @@ extension TaxReaderViewModel {
         }
     }
     
-    func refreshDataSource_articleGetTopNews(NewsID: String, Number: String) {
+    func refreshDataSource_ArticleGetTopNews(NewsID: String, Number: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.articleGetTopNews(NewsID: NewsID, Number: Number)) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -1114,21 +1093,6 @@ extension TaxReaderViewModel {
                 self.articleDetailUpdateBlock?()
             }
         }
-        
-//        let path = Bundle.main.path(forResource: "homeDetail", ofType: "json")
-//        if let jsonPath = path {
-//            let jsonData = NSData(contentsOfFile: jsonPath)
-//            do {
-//                let json = JSON(jsonData!)
-//                print(json.description)
-//
-//                if let mappedObject = JSONDeserializer<TRArticleDetailModel>.deserializeFrom(json: json.description) {
-//                    self.articleDetailModel = mappedObject
-//                }
-//
-//                self.articleDetailUpdateBlock?()
-//            }
-//        }
     }
 
     func refreshDataSource_ArticleGetHtmlContent(ArticleID: String) {
@@ -1151,24 +1115,9 @@ extension TaxReaderViewModel {
                 self.articleGetHtmlContentUpdateBlock?()
             }
         }
-        
-//        let path = Bundle.main.path(forResource: "articleDetail", ofType: "json")
-//        if let jsonPath = path {
-//            let jsonData = NSData(contentsOfFile: jsonPath)
-//            do {
-//                let json = JSON(jsonData!)
-//                print(json.description)
-//
-//                if let mappedObject = JSONDeserializer<TRArticleGetHtmlContentModel>.deserializeFrom(json: json.description) {
-//                    self.articleGetHtmlContentModel = mappedObject
-//                }
-//
-//                self.articleGetHtmlContentUpdateBlock?()
-//            }
-//        }
     }
     
-    func refreshDataSource_articleNewsDetail(NewsID: String, Number: String) {
+    func refreshDataSource_ArticleNewsDetail(NewsID: String, Number: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.articleNewDetail(NewsID: NewsID, Number: Number)) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -1190,8 +1139,45 @@ extension TaxReaderViewModel {
         }
     }
     
-    // cart
-    func refreshDataSource_cartInfo(PageIndex: String, PageSize: String) {
+    func refreshDataSource_ArticleAdvSearch(CataName: String,
+                                       TitleName: String,
+                                       AuthorName: String,
+                                       KeyWord: String,
+                                       Content: String,
+                                       MagazineIDs: String,
+                                       MagazineNames: String,
+                                       BeginYear: String,
+                                       BeginNo: String,
+                                       EndYear: String,
+                                       EndNo: String,
+                                       PageIndex: String,
+                                       PageSize: String) {
+        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.articleAdvSearch(CataName: CataName, TitleName: TitleName, AuthorName: AuthorName, KeyWord: KeyWord, Content: Content, MagazineIDs: MagazineIDs, MagazineNames: MagazineNames, BeginYear: BeginYear, BeginNo: BeginNo, EndYear: EndYear, EndNo: EndNo, PageIndex: PageIndex, PageSize: PageSize)) { (result) in
+            if case let .success(response) = result {
+                let data = try? response.mapJSON()
+                
+                guard let returnData = data else {
+                    print("returnData nil")
+                    return
+                }
+                
+                let json = JSON(returnData)
+                print("articleAdvSearch = \(json.description)")
+                
+                if let mappedObject = JSONDeserializer<TRArticleSearchModel>.deserializeFrom(json: json.description) {
+                    self.articleSearchModel = mappedObject
+                }
+
+                self.articleAdvSearchBlock?()
+            }
+        }
+    }
+
+}
+
+// 购物车 Cart
+extension TaxReaderViewModel {
+    func refreshDataSource_CartInfo(PageIndex: String, PageSize: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.cartInfo(PageIndex: PageIndex, PageSize: PageSize)) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -1215,7 +1201,7 @@ extension TaxReaderViewModel {
         }
     }
     
-    func refreshDataSource_cartUpdateNumber(CartItemID: String, Number: String) {
+    func refreshDataSource_CartUpdateNumber(CartItemID: String, Number: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.cartUpdateNumber(CartItemID: CartItemID, Number: Number)) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -1237,7 +1223,7 @@ extension TaxReaderViewModel {
         }
     }
 
-    func refreshDataSource_cartAdd(ProductID: String, ProductCount: String) {
+    func refreshDataSource_CartAdd(ProductID: String, ProductCount: String) {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.cartAdd(ProductID: ProductID, ProductCount: ProductCount)) { (result) in
             if case let .success(response) = result {
                 let data = try? response.mapJSON()
@@ -1280,8 +1266,33 @@ extension TaxReaderViewModel {
             }
         }
     }
+
+}
+
+//  Publication
+extension TaxReaderViewModel {
+    func refreshDataSource_PublicationGetPubIssueList(ReadType: String, PageIndex: String, PageSize: String) {
+        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.publicationGetPubIssueList(ReadType: ReadType, PageIndex: PageIndex, PageSize: PageSize)) { (result) in
+            if case let .success(response) = result {
+                let data = try? response.mapJSON()
+                
+                guard let returnData = data else {
+                    print("returnData nil")
+                    return
+                }
+                
+                let json = JSON(returnData)
+                print("publicationGetPubIssueList = \(json.description)")
+                
+                if let mappedObject = JSONDeserializer<TRPublicationGetPubIssueListModel>.deserializeFrom(json: json.description) {
+                    self.publicationGetPubIssueListModel = mappedObject
+                }
+
+                self.updateBlock?()
+            }
+        }
+    }
     
-    // Publication
     func refreshDataSource_GetAllPublication() {
         TaxReaderUserAPIProvider.request(TaxReaderUserAPI.GetAllPublication) { (result) in
             if case let .success(response) = result {
@@ -1300,40 +1311,6 @@ extension TaxReaderViewModel {
                 }
 
                 self.updateBlock?()
-            }
-        }
-    }
-    
-    func refreshDataSource_articleAdvSearch(CataName: String,
-                                       TitleName: String,
-                                       AuthorName: String,
-                                       KeyWord: String,
-                                       Content: String,
-                                       MagazineIDs: String,
-                                       MagazineNames: String,
-                                       BeginYear: String,
-                                       BeginNo: String,
-                                       EndYear: String,
-                                       EndNo: String,
-                                       PageIndex: String,
-                                       PageSize: String) {
-        TaxReaderUserAPIProvider.request(TaxReaderUserAPI.articleAdvSearch(CataName: CataName, TitleName: TitleName, AuthorName: AuthorName, KeyWord: KeyWord, Content: Content, MagazineIDs: MagazineIDs, MagazineNames: MagazineNames, BeginYear: BeginYear, BeginNo: BeginNo, EndYear: EndYear, EndNo: EndNo, PageIndex: PageIndex, PageSize: PageSize)) { (result) in
-            if case let .success(response) = result {
-                let data = try? response.mapJSON()
-                
-                guard let returnData = data else {
-                    print("returnData nil")
-                    return
-                }
-                
-                let json = JSON(returnData)
-                print("articleAdvSearch = \(json.description)")
-                
-                if let mappedObject = JSONDeserializer<TRArticleSearchModel>.deserializeFrom(json: json.description) {
-                    self.articleSearchModel = mappedObject
-                }
-
-                self.articleAdvSearchBlock?()
             }
         }
     }

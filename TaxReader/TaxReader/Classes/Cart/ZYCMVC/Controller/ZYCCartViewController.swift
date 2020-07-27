@@ -73,6 +73,7 @@ class ZYCCartViewController: UIViewController {
         let view = ZYCCartToolView.init(frame: .zero)
         view.backgroundColor = UIColor.lightGray
         view.footDelegate = self
+        view.isHidden = true
         
         return view
     }()
@@ -146,6 +147,23 @@ extension ZYCCartViewController {
         networkViewModel.updateBlock = {[unowned self] in
             if self.networkViewModel.cartInfoModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.cartInfoModel?.msg ?? "", view: self.view)
+                
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.cartInfoModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkCartInfo(more: more)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
+                
                 return
             }
             
@@ -178,18 +196,34 @@ extension ZYCCartViewController {
             }
         }
         
-        networkViewModel.refreshDataSource_cartInfo(PageIndex: "", PageSize: "")
+        networkViewModel.refreshDataSource_CartInfo(PageIndex: "", PageSize: "")
     }
     
     func NetworkCartUpdateNumber(CartItemID: String?, Number: String?) {
         networkViewModel.updateBlock = {[unowned self] in
             if self.networkViewModel.cartUpdateNumbeModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.cartUpdateNumbeModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.cartUpdateNumbeModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkCartUpdateNumber(CartItemID: CartItemID, Number: Number)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
+                
                 return
             }
         }
         
-        networkViewModel.refreshDataSource_cartUpdateNumber(CartItemID: CartItemID ?? "", Number: Number ?? "")
+        networkViewModel.refreshDataSource_CartUpdateNumber(CartItemID: CartItemID ?? "", Number: Number ?? "")
     }
 }
 
@@ -490,6 +524,21 @@ extension ZYCCartViewController:ZYCCartToolViewDelegate{
     func favorBatchAddWithSourceIdsArray(dataArrayFavorSourceIds: [String]) {
         networkBodyViewModel.updateBlock = {[unowned self] in
             MBProgressHUD.showWithText(text: self.networkBodyViewModel.favorBatchAddModel?.msg ?? "", view: self.view)
+            // 3000 authorization参数不能为空
+            if self.networkBodyViewModel.favorBatchAddModel?.msgCode == NetDataAuthorizationNull {
+                let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                    let popoverView = TRWLoginViewController()
+                    popoverView.modalPresentationStyle = .custom
+                    popoverView.isTypeShowFromTokenNull = true
+                    popoverView.loginReloadBlock = {[unowned self] in
+                        self.favorBatchAddWithSourceIdsArray(dataArrayFavorSourceIds: dataArrayFavorSourceIds)
+                    }
+                    self.present(popoverView, animated: true, completion: nil)
+                }
+                self.present(alertController, animated: true, completion: nil)
+            }
+
+            return
         }
         
         let urlstring = "/v1/Favor/BatchAdd"
@@ -573,7 +622,21 @@ extension ZYCCartViewController:ZYCCartToolViewDelegate{
     func cartDeleteWithCartItemsArray(dataArrayDeleteCartItems: [String]) {
         networkBodyViewModel.updateBlock = {[unowned self] in
             MBProgressHUD.showWithText(text: self.networkBodyViewModel.cartDeleteModel?.msg ?? "", view: self.view)
-            
+            // 3000 authorization参数不能为空
+            if self.networkBodyViewModel.cartDeleteModel?.msgCode == NetDataAuthorizationNull {
+                let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                    let popoverView = TRWLoginViewController()
+                    popoverView.modalPresentationStyle = .custom
+                    popoverView.isTypeShowFromTokenNull = true
+                    popoverView.loginReloadBlock = {[unowned self] in
+                        self.cartDeleteWithCartItemsArray(dataArrayDeleteCartItems: dataArrayDeleteCartItems)
+                    }
+                    self.present(popoverView, animated: true, completion: nil)
+                }
+                self.present(alertController, animated: true, completion: nil)
+            }
+
+            return
         }
         
         let urlstring = "/v1/Cart/Delete"

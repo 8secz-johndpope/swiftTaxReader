@@ -172,6 +172,22 @@ extension TRArticleReadViewController{
         networkViewModel.articleDetailUpdateBlock = {[unowned self] in
             if self.networkViewModel.articleDetailModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.articleDetailModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.articleDetailModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkArticleDetail(ArticleID: ArticleID)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
+                
                 return
             }
             
@@ -205,6 +221,22 @@ extension TRArticleReadViewController{
         networkViewModel.getIssueNumberUpdateBlock = {[unowned self] in
             if self.networkViewModel.productGetIssueNumberModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.productGetIssueNumberModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.productGetIssueNumberModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkGetIssueNumber(model: model)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
+                
                 return
             }
             var dataModel: TRProductGetIssueNumberDataModel? = self.networkViewModel.productGetIssueNumberModel?.data
@@ -216,7 +248,7 @@ extension TRArticleReadViewController{
             self.productIssueNumberDataModel = dataModel
         }
         
-        networkViewModel.refreshDataSource_productGetIssueNumber(PubIssueID: "\(model?.PubIssueID ?? 0)",
+        networkViewModel.refreshDataSource_ProductGetIssueNumber(PubIssueID: "\(model?.PubIssueID ?? 0)",
                                                                  PubID: "\(model?.PubID ?? 0)",
                                                                  Year: "\(model?.PubIssueYear ?? 0)")
     }
@@ -225,6 +257,22 @@ extension TRArticleReadViewController{
         networkViewModel.articleGetHtmlContentUpdateBlock = {[unowned self] in
             if self.networkViewModel.articleGetHtmlContentModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.articleGetHtmlContentModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.articleGetHtmlContentModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkArticleGetHtmlContent(ArticleID: ArticleID)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
+                
                 return
             }
             
@@ -258,6 +306,22 @@ extension TRArticleReadViewController{
             self.networkViewModel.updateBlock = {[unowned self] in
                 if self.networkViewModel.favorCancelModel?.ret == false {
                     MBProgressHUD.showWithText(text: self.networkViewModel.favorCancelModel?.msg ?? "", view: self.view)
+                    
+                    // 3000 authorization参数不能为空
+                    if self.networkViewModel.favorCancelModel?.msgCode == NetDataAuthorizationNull {
+                        let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                            let popoverView = TRWLoginViewController()
+                            popoverView.modalPresentationStyle = .custom
+                            popoverView.isTypeShowFromTokenNull = true
+                            popoverView.loginReloadBlock = {[unowned self] in
+                                self.blockFavorButtonAction()
+                            }
+                            self.present(popoverView, animated: true, completion: nil)
+                        }
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+
+                    
                     return
                 }
                 
@@ -269,6 +333,22 @@ extension TRArticleReadViewController{
             self.networkViewModel.updateBlock = {[unowned self] in
                 if self.networkViewModel.favorAddModel?.ret == false {
                     MBProgressHUD.showWithText(text: self.networkViewModel.favorAddModel?.msg ?? "", view: self.view)
+                    
+                    // 3000 authorization参数不能为空
+                    if self.networkViewModel.favorAddModel?.msgCode == NetDataAuthorizationNull {
+                        let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                            let popoverView = TRWLoginViewController()
+                            popoverView.modalPresentationStyle = .custom
+                            popoverView.isTypeShowFromTokenNull = true
+                            popoverView.loginReloadBlock = {[unowned self] in
+                                self.blockFavorButtonAction()
+                            }
+                            self.present(popoverView, animated: true, completion: nil)
+                        }
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+
+                    
                     return
                 }
                 

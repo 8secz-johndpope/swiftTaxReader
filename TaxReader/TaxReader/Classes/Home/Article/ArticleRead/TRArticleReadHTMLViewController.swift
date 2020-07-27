@@ -93,12 +93,28 @@ extension TRArticleReadHTMLViewController{
         networkViewModel.updateBlock = {[unowned self] in
             if self.networkViewModel.articleNewsDetailModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.articleNewsDetailModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.articleNewsDetailModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkArticleNewsDetail(ArticleID: ArticleID)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
+                
                 return
             }
             
             self.richTextView.richText = self.networkViewModel.articleNewsDetailModel?.data?.News_Content_HTML
         }
         
-        networkViewModel.refreshDataSource_articleNewsDetail(NewsID: ArticleID ?? "", Number: "1")
+        networkViewModel.refreshDataSource_ArticleNewsDetail(NewsID: ArticleID ?? "", Number: "1")
     }
 }

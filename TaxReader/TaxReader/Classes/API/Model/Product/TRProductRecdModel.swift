@@ -10,7 +10,7 @@ import UIKit
 import HandyJSON
 
 struct TRProductRecdModel: HandyJSON {
-    var ret: Int = 0
+    var ret: Bool? = false
     var msgCode: Int = 0
     var msg: String?
     var data: [TRProductRecdDataModel]?

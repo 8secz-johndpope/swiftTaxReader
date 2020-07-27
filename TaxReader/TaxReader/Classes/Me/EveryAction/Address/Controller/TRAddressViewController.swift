@@ -89,6 +89,28 @@ class TRAddressViewController: UIViewController {
 extension TRAddressViewController {
     func NetworkDataInfo() {
         viewModel.updateBlock = {[unowned self] in
+            
+            if self.viewModel.addressInfoModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.viewModel.addressInfoModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.viewModel.addressInfoModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkDataInfo()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             self.dataArray = self.viewModel.addressInfoModel?.data
             self.tableView.reloadData()
         }
@@ -192,6 +214,28 @@ extension TRAddressViewController {
         let confirmaction = UIAlertAction.init(title: "确定", style: .default) { (UIAlertAction) in
             self.viewModel.updateBlock = {[unowned self] in
                 MBProgressHUD.showWithText(text: self.viewModel.addressSetDefaultModel?.msg ?? "", view: self.view)
+                
+                if self.viewModel.addressSetDefaultModel?.ret == false {
+                    MBProgressHUD.showWithText(text: self.viewModel.addressSetDefaultModel?.msg ?? "", view: self.view)
+                    
+                    // 3000 authorization参数不能为空
+                    if self.viewModel.addressSetDefaultModel?.msgCode == NetDataAuthorizationNull {
+                        let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                            let popoverView = TRWLoginViewController()
+                            popoverView.modalPresentationStyle = .custom
+                            popoverView.isTypeShowFromTokenNull = true
+                            popoverView.loginReloadBlock = {[unowned self] in
+                                self.cellEditingStyleSetDefaultCell(UserAddrID: UserAddrID)
+                            }
+                            self.present(popoverView, animated: true, completion: nil)
+                        }
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                    
+                    return
+                }
+
+                
                 self.NetworkDataInfo()
             }
             self.viewModel.refreshDataSource_AddressSetDefault(UserAddrID: UserAddrID)
@@ -209,6 +253,28 @@ extension TRAddressViewController {
         let confirmaction = UIAlertAction.init(title: "确定", style: .default) { (UIAlertAction) in
             self.viewModel.updateBlock = {[unowned self] in
                 MBProgressHUD.showWithText(text: self.viewModel.addressDeleteModel?.msg ?? "", view: self.view)
+                
+                if self.viewModel.addressDeleteModel?.ret == false {
+                    MBProgressHUD.showWithText(text: self.viewModel.addressDeleteModel?.msg ?? "", view: self.view)
+                    
+                    // 3000 authorization参数不能为空
+                    if self.viewModel.addressDeleteModel?.msgCode == NetDataAuthorizationNull {
+                        let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                            let popoverView = TRWLoginViewController()
+                            popoverView.modalPresentationStyle = .custom
+                            popoverView.isTypeShowFromTokenNull = true
+                            popoverView.loginReloadBlock = {[unowned self] in
+                                self.cellEditingStyleDeleteCell(UserAddrID: UserAddrID)
+                            }
+                            self.present(popoverView, animated: true, completion: nil)
+                        }
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                    
+                    return
+                }
+
+                
                 self.NetworkDataInfo()
             }
             self.viewModel.refreshDataSource_AddressDelete(UserAddrID: UserAddrID)

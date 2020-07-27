@@ -10,7 +10,7 @@ import UIKit
 import HandyJSON
 
 struct TRFavorFindModel: HandyJSON {
-    var ret: Int = 0
+    var ret: Bool? = false
     var msgCode: Int = 0
     var msg: String?
     var data: [TRFavorFindDataModel]?

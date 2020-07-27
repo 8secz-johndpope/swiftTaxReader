@@ -204,6 +204,28 @@ extension TRSetAddressViewController {
     func NetworkDataAddressAdd() {
         viewModel.updateBlock = {[unowned self] in
             MBProgressHUD.showWithText(text: self.viewModel.addressAddModel?.msg ?? "", view: self.view)
+            
+            if self.viewModel.addressAddModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.viewModel.addressAddModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.viewModel.addressAddModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkDataAddressAdd()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 if self.viewModel.addressAddModel?.msgCode == 200 {
                     self.navigationController?.popViewController(animated: true)
@@ -256,6 +278,28 @@ extension TRSetAddressViewController {
     func NetworkDataAddressEdit() {
         viewModel.updateBlock = {[unowned self] in
             MBProgressHUD.showWithText(text: self.viewModel.addressEditModel?.msg ?? "", view: self.view)
+            
+            if self.viewModel.addressEditModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.viewModel.addressEditModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.viewModel.addressEditModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkDataAddressEdit()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 if self.viewModel.addressEditModel?.msgCode == 200 {
                     self.navigationController?.popViewController(animated: true)

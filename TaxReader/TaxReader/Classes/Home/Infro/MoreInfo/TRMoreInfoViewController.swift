@@ -68,11 +68,33 @@ class TRMoreInfoViewController: TRBaseViewController {
 extension TRMoreInfoViewController {
     func NetworkHomeArticleGetTopNews() {
         networkViewModel.homeArticleGetTopNewsBlock = {[unowned self] in
+            
+            if self.networkViewModel.articleGetTopNewsModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.networkViewModel.articleGetTopNewsModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.articleGetTopNewsModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkHomeArticleGetTopNews()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             self.dataArray = self.networkViewModel.articleGetTopNewsModel?.data
             self.tableView.reloadData()
         }
         
-        networkViewModel.refreshDataSource_articleGetTopNews(NewsID: "", Number: "")
+        networkViewModel.refreshDataSource_ArticleGetTopNews(NewsID: "", Number: "")
     }
 }
 

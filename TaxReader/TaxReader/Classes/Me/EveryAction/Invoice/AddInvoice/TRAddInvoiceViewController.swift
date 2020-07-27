@@ -284,7 +284,29 @@ extension TRAddInvoiceViewController: TRAddInvoicePersonViewDelegate {
             viewModel.updateBlock = {[unowned self] in
                 MBProgressHUD.showWithText(text: self.viewModel.invoiceAddModel?.msg ?? "", view: self.view)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    if self.viewModel.invoiceAddModel?.msgCode == 200 {
+                    if self.viewModel.invoiceAddModel?.ret == false {
+                        
+                        if self.viewModel.invoiceAddModel?.ret == false {
+                            MBProgressHUD.showWithText(text: self.viewModel.invoiceAddModel?.msg ?? "", view: self.view)
+                            
+                            // 3000 authorization参数不能为空
+                            if self.viewModel.invoiceAddModel?.msgCode == NetDataAuthorizationNull {
+                                let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                                    let popoverView = TRWLoginViewController()
+                                    popoverView.modalPresentationStyle = .custom
+                                    popoverView.isTypeShowFromTokenNull = true
+                                    popoverView.loginReloadBlock = {[unowned self] in
+                                        self.footerViewCommitButtonAction(button: button, view: TRAddInvoicePersonView.init())
+                                    }
+                                    self.present(popoverView, animated: true, completion: nil)
+                                }
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                            
+                            return
+                        }
+
+                        
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
@@ -306,7 +328,29 @@ extension TRAddInvoiceViewController: TRAddInvoicePersonViewDelegate {
             viewModel.updateBlock = {[unowned self] in
                 MBProgressHUD.showWithText(text: self.viewModel.invoiceAddModel?.msg ?? "", view: self.view)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    if self.viewModel.invoiceAddModel?.msgCode == 200 {
+                    if self.viewModel.invoiceAddModel?.ret == false {
+                        
+                        if self.viewModel.invoiceAddModel?.ret == false {
+                            MBProgressHUD.showWithText(text: self.viewModel.invoiceAddModel?.msg ?? "", view: self.view)
+                            
+                            // 3000 authorization参数不能为空
+                            if self.viewModel.invoiceAddModel?.msgCode == NetDataAuthorizationNull {
+                                let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                                    let popoverView = TRWLoginViewController()
+                                    popoverView.modalPresentationStyle = .custom
+                                    popoverView.isTypeShowFromTokenNull = true
+                                    popoverView.loginReloadBlock = {[unowned self] in
+                                        self.footerViewCommitButtonAction(button: button, view: TRAddInvoicePersonView.init())
+                                    }
+                                    self.present(popoverView, animated: true, completion: nil)
+                                }
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                            
+                            return
+                        }
+
+                        
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
@@ -365,7 +409,29 @@ extension TRAddInvoiceViewController: TRAddVoiceCompanyViewDelegate {
             viewModel.updateBlock = {[unowned self] in
                 MBProgressHUD.showWithText(text: self.viewModel.invoiceAddModel?.msg ?? "", view: self.view)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    if self.viewModel.invoiceAddModel?.msgCode == 200 {
+                    if self.viewModel.invoiceAddModel?.ret == false {
+                        
+                        if self.viewModel.invoiceAddModel?.ret == false {
+                            MBProgressHUD.showWithText(text: self.viewModel.invoiceAddModel?.msg ?? "", view: self.view)
+                            
+                            // 3000 authorization参数不能为空
+                            if self.viewModel.invoiceAddModel?.msgCode == NetDataAuthorizationNull {
+                                let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                                    let popoverView = TRWLoginViewController()
+                                    popoverView.modalPresentationStyle = .custom
+                                    popoverView.isTypeShowFromTokenNull = true
+                                    popoverView.loginReloadBlock = {[unowned self] in
+                                        self.footerViewCommitButtonAction(button: button, view: TRAddInvoicePersonView.init())
+                                    }
+                                    self.present(popoverView, animated: true, completion: nil)
+                                }
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                            
+                            return
+                        }
+
+                        
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
@@ -388,7 +454,29 @@ extension TRAddInvoiceViewController: TRAddVoiceCompanyViewDelegate {
             viewModel.updateBlock = {[unowned self] in
                 MBProgressHUD.showWithText(text: self.viewModel.invoiceAddModel?.msg ?? "", view: self.view)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    if self.viewModel.invoiceAddModel?.msgCode == 200 {
+                    if self.viewModel.invoiceAddModel?.ret == false {
+                        
+                        if self.viewModel.invoiceAddModel?.ret == false {
+                            MBProgressHUD.showWithText(text: self.viewModel.invoiceAddModel?.msg ?? "", view: self.view)
+                            
+                            // 3000 authorization参数不能为空
+                            if self.viewModel.invoiceAddModel?.msgCode == NetDataAuthorizationNull {
+                                let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                                    let popoverView = TRWLoginViewController()
+                                    popoverView.modalPresentationStyle = .custom
+                                    popoverView.isTypeShowFromTokenNull = true
+                                    popoverView.loginReloadBlock = {[unowned self] in
+                                        self.footerViewCommitButtonAction(button: button, view: TRAddInvoicePersonView.init())
+                                    }
+                                    self.present(popoverView, animated: true, completion: nil)
+                                }
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                            
+                            return
+                        }
+
+                        
                         self.navigationController?.popViewController(animated: true)
                     }
                 }

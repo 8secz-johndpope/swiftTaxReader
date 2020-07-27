@@ -98,6 +98,21 @@ extension TRNewsPubIssueViewController {
         networkViewModel.updateBlock = {[unowned self] in
             if self.networkViewModel.productGetPubYearIssueModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.productGetPubYearIssueModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.productGetPubYearIssueModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkHomeProductGetYearPubIssue()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
                 return
             }
             
@@ -105,7 +120,7 @@ extension TRNewsPubIssueViewController {
         }
         
         let pubID = "\(self.productDetailDataModel?.PubID ?? 0)"
-        networkViewModel.refreshDataSource_productGetYearPubIssue(PubIssueID: "", PubID: pubID, Year: "")
+        networkViewModel.refreshDataSource_ProductGetYearPubIssue(PubIssueID: "", PubID: pubID, Year: "")
     }
 }
 
@@ -118,6 +133,21 @@ extension TRNewsPubIssueViewController: TRNewsYearViewDelegate {
         networkViewModel.updateBlock = {[unowned self] in
             if self.networkViewModel.productGetPubIssueByYearModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.productGetPubIssueByYearModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.productGetPubIssueByYearModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkHomeProductGetPubIssueByYear(selectedModelYear: selectedModelYear)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
                 return
             }
             
@@ -125,7 +155,7 @@ extension TRNewsPubIssueViewController: TRNewsYearViewDelegate {
         }
         
         let pubID = "\(self.productDetailDataModel?.PubID ?? 0)"
-        networkViewModel.refreshDataSource_productGetPubIssueByYear(PubIssueID: "", PubID: pubID, Year: selectedModelYear)
+        networkViewModel.refreshDataSource_ProductGetPubIssueByYear(PubIssueID: "", PubID: pubID, Year: selectedModelYear)
     }
 }
 

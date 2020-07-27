@@ -54,6 +54,28 @@ class TRInvoiceAllViewController: UIViewController {
 extension TRInvoiceAllViewController {
     func NetWorkInvoiceInfo() {
         viewModel.updateBlock = {[unowned self] in
+            
+            if self.viewModel.invoiceInfoModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.viewModel.invoiceInfoModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.viewModel.invoiceInfoModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetWorkInvoiceInfo()
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             self.dataArray = self.viewModel.invoiceInfoModel?.data
             self.tableView.reloadData()
         }
@@ -153,6 +175,27 @@ extension TRInvoiceAllViewController {
         let confirmaction = UIAlertAction.init(title: "确定", style: .default) { (UIAlertAction) in
             self.viewModel.updateBlock = {[unowned self] in
                 MBProgressHUD.showWithText(text: self.viewModel.invoiceDeleteModel?.msg ?? "", view: self.view)
+                
+                if self.viewModel.invoiceDeleteModel?.ret == false {
+                    MBProgressHUD.showWithText(text: self.viewModel.invoiceDeleteModel?.msg ?? "", view: self.view)
+                    
+                    // 3000 authorization参数不能为空
+                    if self.viewModel.invoiceDeleteModel?.msgCode == NetDataAuthorizationNull {
+                        let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                            let popoverView = TRWLoginViewController()
+                            popoverView.modalPresentationStyle = .custom
+                            popoverView.isTypeShowFromTokenNull = true
+                            popoverView.loginReloadBlock = {[unowned self] in
+                                self.editingStyleDeleteCell(UserInvoiceID: UserInvoiceID)
+                            }
+                            self.present(popoverView, animated: true, completion: nil)
+                        }
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                    
+                    return
+                }
+
                 self.NetWorkInvoiceInfo()
             }
             self.viewModel.refreshDataSource_InvoiceDelete(UserInvoiceID: UserInvoiceID)
@@ -172,6 +215,28 @@ extension TRInvoiceAllViewController {
         let confirmaction = UIAlertAction.init(title: "确定", style: .default) { (UIAlertAction) in
             self.viewModel.updateBlock = {[unowned self] in
                 MBProgressHUD.showWithText(text: self.viewModel.invoiceDeleteModel?.msg ?? "", view: self.view)
+                
+                if self.viewModel.invoiceDeleteModel?.ret == false {
+                    MBProgressHUD.showWithText(text: self.viewModel.invoiceDeleteModel?.msg ?? "", view: self.view)
+                    
+                    // 3000 authorization参数不能为空
+                    if self.viewModel.invoiceDeleteModel?.msgCode == NetDataAuthorizationNull {
+                        let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                            let popoverView = TRWLoginViewController()
+                            popoverView.modalPresentationStyle = .custom
+                            popoverView.isTypeShowFromTokenNull = true
+                            popoverView.loginReloadBlock = {[unowned self] in
+                                self.blockCellButtonSetDefault(UserInvoiceID: UserInvoiceID)
+                            }
+                            self.present(popoverView, animated: true, completion: nil)
+                        }
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                    
+                    return
+                }
+
+                
                 self.NetWorkInvoiceInfo()
             }
             self.viewModel.refreshDataSource_InvoiceSetDefault(UserInvoiceID: UserInvoiceID)

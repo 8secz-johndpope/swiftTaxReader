@@ -92,6 +92,28 @@ class TRArticleSearchViewController: UIViewController {
 extension TRArticleSearchViewController {
     func NetworkArticleSearch(more: Bool) {
         networkViewModel.updateBlock = {[unowned self] in
+            
+            if self.networkViewModel.articleSearchModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.networkViewModel.articleSearchModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.articleSearchModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkArticleSearch(more: more)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             self.tableView.uHead.endRefreshing()
             if self.dataArr?.count == self.networkViewModel.articleSearchModel?.data?.TotalCount {
                 self.tableView.uFoot.endRefreshingWithNoMoreData()
@@ -110,7 +132,7 @@ extension TRArticleSearchViewController {
         }
         
         page = (more ? ( page + 1) : 1)
-        networkViewModel.refreshDataSource_ArticleSearch(KeyWord: searchText ?? "税", PageIndex: "\(page)", PageSize: "10")
+        networkViewModel.refreshDataSource_ArticleSearch(KeyWord: searchText ?? "", PageIndex: "\(page)", PageSize: "10")
     }
     
     /*
@@ -131,6 +153,28 @@ extension TRArticleSearchViewController {
      */
     func NetworkGetArticleAdvSearch(more: Bool) {
         networkViewModel.articleAdvSearchBlock = {[unowned self] in
+            
+            if self.networkViewModel.articleSearchModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.networkViewModel.articleSearchModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.articleSearchModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkGetArticleAdvSearch(more: more)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             self.tableView.uHead.endRefreshing()
             if self.dataArr?.count == self.networkViewModel.articleSearchModel?.data?.TotalCount {
                 self.tableView.uFoot.endRefreshingWithNoMoreData()
@@ -149,7 +193,7 @@ extension TRArticleSearchViewController {
         }
         
         page = (more ? ( page + 1) : 1)
-        networkViewModel.refreshDataSource_articleAdvSearch(CataName: self.seniorModel?.CataName ?? "",
+        networkViewModel.refreshDataSource_ArticleAdvSearch(CataName: self.seniorModel?.CataName ?? "",
                                                             TitleName: self.seniorModel?.CataName ?? "",
                                                             AuthorName: self.seniorModel?.CataName ?? "",
                                                             KeyWord: self.seniorModel?.CataName ?? "",

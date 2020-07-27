@@ -85,6 +85,22 @@ extension TROrderDetailViewController {
         networkViewModel.updateBlock = {[unowned self] in
             if self.networkViewModel.orderFindDetailModel?.ret == false {
                 MBProgressHUD.showWithText(text: self.networkViewModel.orderFindDetailModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.orderFindDetailModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkOrderFindDetail(more: more)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
+                
                 return
             }
             self.orderFindDetailModel = self.networkViewModel.orderFindDetailModel
@@ -226,6 +242,22 @@ extension TROrderDetailViewController {
         networkViewModel.updateBlock = {[unowned self] in
             MBProgressHUD.showWithText(text: self.networkViewModel.orderRebuildInvoiceModel?.msg ?? "", view: self.view)
             if self.networkViewModel.orderRebuildInvoiceModel?.ret == false {
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.orderRebuildInvoiceModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkOrderRebuildInvoice(OrderID: OrderID, UserInvoiceID: UserInvoiceID)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+
+                
                 return
             }
         }
@@ -240,6 +272,28 @@ extension TROrderDetailViewController {
     // 去支付
     func NetworkOrderSecpay(payModel: String, orderID: String) {
         networkViewModel.updateBlock = {[unowned self] in
+            
+            if self.networkViewModel.orderCreateModel?.ret == false {
+                MBProgressHUD.showWithText(text: self.networkViewModel.orderCreateModel?.msg ?? "", view: self.view)
+                
+                // 3000 authorization参数不能为空
+                if self.networkViewModel.orderCreateModel?.msgCode == NetDataAuthorizationNull {
+                    let alertController = LXAlertController.alertAlert(title: TokenNullTitle, message: TokenNullDetailTitle, okTitle: TokenNullActionDefault, cancelTitle: TokenNullActionCancel) {
+                        let popoverView = TRWLoginViewController()
+                        popoverView.modalPresentationStyle = .custom
+                        popoverView.isTypeShowFromTokenNull = true
+                        popoverView.loginReloadBlock = {[unowned self] in
+                            self.NetworkOrderSecpay(payModel: payModel, orderID: orderID)
+                        }
+                        self.present(popoverView, animated: true, completion: nil)
+                    }
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
+            
             if payModel == PayModelAliLKL {
                 self.payAliLKL(orderCreateData: self.networkViewModel.orderCreateModel?.data ?? TROrderCreateDataModel.init())
             }

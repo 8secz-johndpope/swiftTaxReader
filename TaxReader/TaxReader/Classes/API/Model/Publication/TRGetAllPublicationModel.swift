@@ -10,8 +10,8 @@ import UIKit
 import HandyJSON
 
 struct TRGetAllPublicationModel: HandyJSON {
-    var msgCode: String?
-    var ret: Bool = false
+    var msgCode: Int = 0
+    var ret: Bool? = false
     var data: [TRGetAllPublicationDataModel]?
     var msg: String?
 }

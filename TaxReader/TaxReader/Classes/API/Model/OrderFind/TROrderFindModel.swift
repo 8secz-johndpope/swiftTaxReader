@@ -52,7 +52,7 @@ struct TROrderFindModel: HandyJSON {
     var msg: String?
     var totalCount: Int = 0
     var ret: Bool = false
-    var msgCode: String?
+    var msgCode: Int = 0
 }
 
 struct TROrderFindDataModel: HandyJSON {

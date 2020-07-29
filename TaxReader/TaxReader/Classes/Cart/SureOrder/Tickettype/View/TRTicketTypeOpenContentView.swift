@@ -23,7 +23,7 @@ class TRTicketTypeOpenContentView: UIView {
         
     var footerButton1:UIButton = {
         let button = UIButton.init(type: UIButton.ButtonType.custom)
-        button.setTitle("个人", for: UIControl.State.normal)
+        button.setTitle("个人发票", for: UIControl.State.normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
         button.layer.cornerRadius = 22.0
         
@@ -67,7 +67,7 @@ class TRTicketTypeOpenContentView: UIView {
         
     var footerButton2:UIButton = {
         let button = UIButton.init(type: UIButton.ButtonType.custom)
-        button.setTitle("企业", for: UIControl.State.normal)
+        button.setTitle("企业发票", for: UIControl.State.normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
         button.layer.cornerRadius = 22.0
         

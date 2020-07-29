@@ -114,7 +114,7 @@ extension TRTicketTypeListPersonView: UITableViewDataSource, UITableViewDelegate
         cell.cellIndexPath = indexPath
         
         let model: TRInvoiceInfoDataModel = self.dataArray?[indexPath.row] ?? TRInvoiceInfoDataModel.init()
-        cell.trTypeLabel.text = "个人"
+        cell.trTypeLabel.text = model.UserInvoiceTitle
         cell.trNumberLabel.text = model.UserInvoicePhone
         
         // 单选操作

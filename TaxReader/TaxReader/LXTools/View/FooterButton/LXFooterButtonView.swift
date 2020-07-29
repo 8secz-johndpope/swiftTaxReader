@@ -15,7 +15,7 @@ class LXFooterButtonView: UIView {
     
     var footerButtonClick: LXFooterButtonClick?
         
-    var footerButton:UIButton = {
+    lazy var footerButton:UIButton = {
         let button = UIButton.init(type: UIButton.ButtonType.custom)
         button.backgroundColor = TRThemeColor
         button.setTitleColor(UIColor.white, for: UIControl.State.normal)

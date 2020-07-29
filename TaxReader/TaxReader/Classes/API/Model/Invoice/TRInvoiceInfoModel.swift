@@ -19,6 +19,7 @@ struct TRInvoiceInfoModel: HandyJSON {
 struct TRInvoiceInfoDataModel: HandyJSON {
     var UserID: Int = 0
     var UserInvoiceID: Int = 0
+    var UserInvoiceDefault: Int = 0
     
     /// 收票方类型(1-个人；2-企业)
     var UserInvoiceReceiveType: Int = 0

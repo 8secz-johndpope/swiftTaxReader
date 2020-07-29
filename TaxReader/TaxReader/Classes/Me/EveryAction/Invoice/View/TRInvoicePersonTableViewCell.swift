@@ -100,6 +100,19 @@ class TRInvoicePersonTableViewCell: UITableViewCell {
         guard let defaultButtonBlock = defaultButtonBlock else { return }
         defaultButtonBlock(button)
     }
+    
+    lazy var trDefaultLabel: UILabel = {
+        let view = UILabel.init()
+        view.backgroundColor = UIColor.white
+        view.text = "默认开票"
+        view.textAlignment = .center
+        view.textColor = UIColor.red
+        view.layer.borderWidth = 1.0
+        view.layer.borderColor = UIColor.red.cgColor
+        view.layer.cornerRadius = 15
+        
+        return view
+    }()
 
     func setupLayout() {
         self.contentView.addSubview(self.trContentView)
@@ -156,6 +169,15 @@ class TRInvoicePersonTableViewCell: UITableViewCell {
             make.width.equalTo(90)
             make.height.equalTo(30)
         }
+        
+        // 显示
+        self.trContentView.addSubview(self.trDefaultLabel)
+        self.trDefaultLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.trTipCompanyNameLabel.snp.top)
+            make.right.equalTo(-5)
+            make.width.equalTo(90)
+            make.height.equalTo(30)
+        }
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -177,6 +199,8 @@ class TRInvoicePersonTableViewCell: UITableViewCell {
             self.trCompanyNameLabel.text = model.UserInvoiceTitle
             self.trNumberLabel.text = model.UserInvoicePhone
             self.trAddressLabel.text = model.UserInvoiceEmail
+            self.trDefaultButton.isHidden = model.UserInvoiceDefault == 1 ? true : false
+            self.trDefaultLabel.isHidden = model.UserInvoiceDefault == 1 ? false : true
         }
     }
     

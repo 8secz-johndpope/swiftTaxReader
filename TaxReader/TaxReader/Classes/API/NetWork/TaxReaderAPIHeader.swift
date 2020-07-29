@@ -69,7 +69,8 @@ func TRAPIHeader(isHasToken: Bool) -> Dictionary<String, Any> {
     dictionary.updateValue(changeTimestampString, forKey: "timestamp")
     dictionary.updateValue("", forKey: "authorization")
     
-    let headerToken: String = UserDefaults.LoginInfo.string(forKey: .access_token) ?? ""
+    //let headerToken: String = UserDefaults.LoginInfo.string(forKey: .access_token) ?? ""
+    let headerToken: String = publicAuthorizationToken ?? ""
     if isHasToken && !headerToken.isBlank {
         dictionary.updateValue(headerToken, forKey: "authorization")
     }

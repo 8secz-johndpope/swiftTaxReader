@@ -44,7 +44,7 @@ class TRInvoiceViewController: UIViewController {
         let pageView = DNSPageView(frame: CGRect(x: 0,
                                                  y: LXNavBarHeight,
                                                  width: LXScreenWidth,
-                                                 height: LXScreenHeight - LXNavBarHeight - LXTabBarHeight - 40),
+                                                 height: LXScreenHeight - LXNavBarHeight - 64 - 49),
                                    style: style,
                                    titles: titles,
                                    childViewControllers: viewControllers)
@@ -76,17 +76,22 @@ class TRInvoiceViewController: UIViewController {
             make.height.equalTo(LXNavBarHeight)
         }
         
-        self.view.addSubview(self.pageView)
-        
         self.view.addSubview(self.backViewForFooterButton)
         self.backViewForFooterButton.snp.makeConstraints { (make) in
-            make.top.equalTo(self.pageView.snp.bottom)
             make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(64)
         }
         
         self.backViewForFooterButton.addSubview(self.footerView)
         self.footerView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalToSuperview()
+        }
+        
+        self.view.addSubview(self.pageView)
+        self.pageView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.navView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(self.backViewForFooterButton.snp.top)
         }
     }
     

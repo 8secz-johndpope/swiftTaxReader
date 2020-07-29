@@ -9,6 +9,9 @@
 import UIKit
 import SwiftDate
 
+// authorization 全局变量
+var publicAuthorizationToken: String?
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate{
 
     var window: UIWindow?
@@ -23,7 +26,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate{
         
         // 转交给 SceneDelegate 的willConnectTo Session:方法进行根控制器设置
         self.window?.backgroundColor = UIColor.white
-        self.window?.rootViewController = LXTabbarProvider.TRsystemStyle()
+        let remLoginText = UserDefaults.LoginInfo.string(forKey: .rem_login)
+        self.window?.rootViewController = (remLoginText == "1") ? TRWLoginViewController() : LXTabbarProvider.TRsystemStyle()
+        
+        //self.window?.rootViewController = LXTabbarProvider.TRsystemStyle()
         self.window?.makeKeyAndVisible()
     }
 

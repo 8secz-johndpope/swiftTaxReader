@@ -100,6 +100,7 @@
 		4F267D0E24CAD26900F5569A /* TRCartFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F267D0D24CAD26900F5569A /* TRCartFooterView.swift */; };
 		4F267D1024CAD29E00F5569A /* TRCartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F267D0F24CAD29E00F5569A /* TRCartHeaderView.swift */; };
 		4F2907F224AECE7300AC08DA /* TROrderSecpayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2907F124AECE7300AC08DA /* TROrderSecpayModel.swift */; };
+		4F34334124D1704D001A536D /* TRTicketTypeElectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F34334024D1704D001A536D /* TRTicketTypeElectView.swift */; };
 		4F39756A24763ED500F67AEA /* TRLAreaInlandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39756924763ED500F67AEA /* TRLAreaInlandViewController.swift */; };
 		4F3975722476402B00F67AEA /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39756C2476402A00F67AEA /* NetworkTools.swift */; };
 		4F3975732476402B00F67AEA /* test1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4F39756D2476402A00F67AEA /* test1.txt */; };
@@ -561,6 +562,7 @@
 		4F267D0D24CAD26900F5569A /* TRCartFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRCartFooterView.swift; sourceTree = "<group>"; };
 		4F267D0F24CAD29E00F5569A /* TRCartHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TRCartHeaderView.swift; sourceTree = "<group>"; };
 		4F2907F124AECE7300AC08DA /* TROrderSecpayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TROrderSecpayModel.swift; sourceTree = "<group>"; };
+		4F34334024D1704D001A536D /* TRTicketTypeElectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRTicketTypeElectView.swift; sourceTree = "<group>"; };
 		4F39756924763ED500F67AEA /* TRLAreaInlandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRLAreaInlandViewController.swift; sourceTree = "<group>"; };
 		4F39756C2476402A00F67AEA /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
 		4F39756D2476402A00F67AEA /* test1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.txt; sourceTree = "<group>"; };
@@ -1665,6 +1667,7 @@
 				4F81C0442490CE880070727A /* TRTicketTypeHeaderView.swift */,
 				4F81C0462490D6240070727A /* TRTicketTypeSelectOpenView.swift */,
 				4F81C04A2490D8EC0070727A /* TRTicketTypeOpenContentView.swift */,
+				4F34334024D1704D001A536D /* TRTicketTypeElectView.swift */,
 				4F81C04E2490D9D80070727A /* TRTicketTypeHeaderTypeView.swift */,
 				4F81C0502490DA730070727A /* TRTicketTypeListView.swift */,
 				4F81C05D2491CAC30070727A /* TRTicketTypeListPersonView.swift */,
@@ -3365,6 +3368,7 @@
 				4F3EF5D024348A870017C803 /* TRHomeBannerTableViewCell.swift in Sources */,
 				4FFC4879247DFD41005B5D84 /* TRConnectUSViewController.swift in Sources */,
 				4FFC4895247E11C1005B5D84 /* TRNoPayViewController.swift in Sources */,
+				4F34334124D1704D001A536D /* TRTicketTypeElectView.swift in Sources */,
 				4F3EF640243F0F5A0017C803 /* TRNewsDetailDropView.swift in Sources */,
 				4F4D4C8B24C825CB000B72EB /* TROwnSeniorSearchModel.swift in Sources */,
 				4F62146A24A2E25100020082 /* PDFThumbnailCollectionViewController.swift in Sources */,

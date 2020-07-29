@@ -168,7 +168,24 @@ extension TRHomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return viewModel.heightForRowAt(indexPath: indexPath)
+        switch indexPath.section {
+        case TRHomeSectionBanner:
+            return CGFloat(TRHomeSectionBannerHeight)
+        case TRHomeSectionNews:
+            return CGFloat(TRHomeSectionNewseHeight)
+        case TRHomeSectionInfro:
+            return CGFloat(TRHomeSectionInfroHeight)
+        case TRHomeSectionArticle:
+            return CGFloat(TRHomeSectionArticleHeight)
+        case TRHomeSectionRank:
+            let cellHeight = self.dataArrayRecd?.count ?? 0 < 4 ? TRHomeSectionRankHeight * 0.5 : TRHomeSectionRankHeight
+            return CGFloat(cellHeight)
+
+        default:
+            return 120
+        }
+        
+        //return viewModel.heightForRowAt(indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

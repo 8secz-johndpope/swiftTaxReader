@@ -37,6 +37,13 @@ class TROrderTicketTypeViewController: UIViewController {
         return view
     }()
     
+    lazy var typeView: TRTicketTypeElectView = {
+        let view = TRTicketTypeElectView.init(frame: .zero)
+        view.backgroundColor = UIColor.red
+        
+        return view
+    }()
+    
     lazy var openContentView: TRTicketTypeOpenContentView = {
         let view = TRTicketTypeOpenContentView.init(frame: .zero)
         
@@ -94,9 +101,16 @@ class TROrderTicketTypeViewController: UIViewController {
             make.height.equalTo(64)
         }
         
+        self.view.addSubview(self.typeView)
+        self.typeView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.selectOpenView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(44)
+        }
+        
         self.view.addSubview(self.openContentView)
         self.openContentView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.selectOpenView.snp.bottom)
+            make.top.equalTo(self.typeView.snp.bottom)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(self.bottomView.snp.top)
         }

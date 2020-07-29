@@ -109,22 +109,32 @@ class TRInvoiceCompanyTableViewCell: UITableViewCell {
 
     lazy var trDefaultButton: UIButton = {
         let view = UIButton.init(type: .custom)
-        view.backgroundColor = UIColor.white
-        view.setTitle("默认开票", for: .normal)
-        view.setTitleColor(UIColor.red, for: .normal)
-        view.layer.borderWidth = 1.0
-        view.layer.borderColor = UIColor.red.cgColor
-        view.layer.cornerRadius = 15
-        
+        view.setTitle("设置默认开票", for: .normal)
+        view.setTitleColor(TRThemeColor, for: .normal)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
+
         view.addTarget(self, action: #selector(defaultButtonClick(button:)), for: .touchUpInside)
-        
+
         return view
     }()
-    
+
     @objc func defaultButtonClick(button:GSCaptchaButton) {
         guard let defaultButtonBlock = defaultButtonBlock else { return }
         defaultButtonBlock(button)
     }
+    
+    lazy var trDefaultLabel: UILabel = {
+        let view = UILabel.init()
+        view.backgroundColor = UIColor.white
+        view.text = "默认开票"
+        view.textAlignment = .center
+        view.textColor = UIColor.red
+        view.layer.borderWidth = 1.0
+        view.layer.borderColor = UIColor.red.cgColor
+        view.layer.cornerRadius = 15
+        
+        return view
+    }()
     
     func setupLayout() {
         self.contentView.addSubview(self.trContentView)
@@ -195,6 +205,15 @@ class TRInvoiceCompanyTableViewCell: UITableViewCell {
             make.width.equalTo(90)
             make.height.equalTo(30)
         }
+        
+        // 显示
+        self.trContentView.addSubview(self.trDefaultLabel)
+        self.trDefaultLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.trTipCompanyNameLabel.snp.top)
+            make.right.equalTo(-5)
+            make.width.equalTo(90)
+            make.height.equalTo(30)
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -217,7 +236,8 @@ class TRInvoiceCompanyTableViewCell: UITableViewCell {
             self.trNumberLabel.text = model.UserInvoiceTaxpayerNo
             self.trAddressLabel.text = "\(model.UserInvoiceorAddress ?? "") \(model.UserInvoicePhone ?? "")"
             self.trBankLabel.text = "\(model.UserInvoiceBuyerBankName ?? "") \(model.UserInvoiceBankAcount ?? "")"
-            
+            self.trDefaultButton.isHidden = model.UserInvoiceDefault == 1 ? true : false
+            self.trDefaultLabel.isHidden = model.UserInvoiceDefault == 1 ? false : true
         }
     }
 }

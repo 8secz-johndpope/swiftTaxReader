@@ -114,7 +114,7 @@ extension TRTicketTypeListCompanyView: UITableViewDataSource, UITableViewDelegat
         cell.cellIndexPath = indexPath
         
         let model: TRInvoiceInfoDataModel = self.dataArray?[indexPath.row] ?? TRInvoiceInfoDataModel.init()
-        cell.trTypeLabel.text = "企业"
+        cell.trTypeLabel.text = model.UserInvoiceTitle
         cell.trNumberLabel.text = model.UserInvoiceTaxpayerNo
         
         // 单选操作

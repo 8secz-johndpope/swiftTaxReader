@@ -31,6 +31,8 @@ class TRArticleReadViewController: TRBaseViewController {
                 self?.blockFavorButtonAction()
             case .buttonBuy:
                 self?.blockBuyButtonAction()
+            case .buttonShare:
+                self?.blockBuyButtonAction()
             }
         }
         
@@ -366,6 +368,26 @@ extension TRArticleReadViewController{
         guard let nextVc = TRBuyActionSheetViewController(model: self.productIssueNumberDataModel) else { return }
         nextVc.delegate = self
         present(nextVc, animated: false, completion:  nil)
+    }
+    
+    func blockShareButtonAction() {
+//        AllShareView *view = [[AllShareView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([[UIScreen mainScreen] bounds]), 0) ShowMore:YES ShowReport:YES];
+//
+//        view.openShareBlock = ^(ShareType type) {
+//
+//            NSLog(@"%d" , type);
+//        };
+        
+        let view = AllShareView.init(frame: CGRect.init(x: 0, y: 0, width: LXScreenWidth, height: 0), showMore: false)
+        view?.openShareBlock = {(shareType) in
+            print("type = \(shareType)")
+        }
+        LEEAlert.actionsheet().config
+        .leeHeaderInsets(UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0))
+        .leeActionSheetBottomMargin(0.0)
+        .leeActionSheetBackgroundColor(UIColor.white)
+        .leeCornerRadius(0.0)
+        .leeShow()
     }
 }
 

@@ -12,6 +12,7 @@ enum TRReadNavigationViewButtonType {
     case buttonBack
     case buttonFavor
     case buttonBuy
+    case buttonShare
 }
 
 typealias TRReadNavigationViewBackButtonClickBlock = (_ button: UIButton, _ buttonType: TRReadNavigationViewButtonType) ->Void
@@ -81,18 +82,18 @@ class TRReadNavigationView: UIView {
     }
 
     
-//    private lazy var downloadButton: UIButton = {
-//        let button = UIButton.init(type: .custom)
-//        button.setImage(UIImage.init(named: "期刊下载01"), for: .normal)
-//        button.addTarget(self, action: #selector(downloadButtonClick(button:)), for: .touchUpInside)
-//
-//        return button
-//    }()
-//
-//    @objc func downloadButtonClick(button:UIButton) {
-//        guard let navBackButtonClick = navBackButtonClick else { return }
-//        navBackButtonClick()
-//    }
+    private lazy var downloadButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setImage(UIImage.init(named: "期刊下载01"), for: .normal)
+        button.addTarget(self, action: #selector(downloadButtonClick(button:)), for: .touchUpInside)
+
+        return button
+    }()
+
+    @objc func downloadButtonClick(button:UIButton) {
+        guard let navBackButtonClick = navBackButtonClick else { return }
+        navBackButtonClick(backButton, .buttonShare)
+    }
 
     
     override init(frame: CGRect) {
@@ -134,12 +135,12 @@ class TRReadNavigationView: UIView {
             make.width.equalTo(44)
         }
 
-//        self.trActionBackgroundView.addSubview(self.downloadButton)
-//        self.downloadButton.snp.makeConstraints { (make) in
-//            make.top.bottom.equalTo(0)
-//            make.left.equalTo(self.buyButton.snp.right)
-//            make.width.equalTo(44)
-//        }
+        self.trActionBackgroundView.addSubview(self.downloadButton)
+        self.downloadButton.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(0)
+            make.left.equalTo(self.buyButton.snp.right)
+            make.width.equalTo(44)
+        }
     }
     
     required init?(coder: NSCoder) {

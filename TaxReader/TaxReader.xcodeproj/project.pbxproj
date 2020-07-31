@@ -193,6 +193,32 @@
 		4F6214AD24A5649E00020082 /* TRBuyActionContentNianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6214AC24A5649E00020082 /* TRBuyActionContentNianView.swift */; };
 		4F6214B224A56F3700020082 /* TRBuyActionDanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6214B024A56F3700020082 /* TRBuyActionDanCollectionViewCell.swift */; };
 		4F6214B324A56F3700020082 /* TRBuyActionDanCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F6214B124A56F3700020082 /* TRBuyActionDanCollectionViewCell.xib */; };
+		4F639C2B24D3BDF000E5D326 /* Interview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C2A24D3BDF000E5D326 /* Interview.swift */; };
+		4F639C4924D3EBE500E5D326 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F639C4524D3EBE500E5D326 /* libWeChatSDK.a */; };
+		4F639C4A24D3EBE500E5D326 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4F639C4624D3EBE500E5D326 /* README.txt */; };
+		4F639C4F24D3F85600E5D326 /* LEEAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C4D24D3F85600E5D326 /* LEEAlert.m */; };
+		4F639C6A24D3F87400E5D326 /* NibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F639C5224D3F87300E5D326 /* NibView.xib */; };
+		4F639C6B24D3F87400E5D326 /* NibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C5424D3F87300E5D326 /* NibView.m */; };
+		4F639C6C24D3F87400E5D326 /* FontSizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C5724D3F87400E5D326 /* FontSizeView.m */; };
+		4F639C6D24D3F87400E5D326 /* ShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C5924D3F87400E5D326 /* ShareButton.m */; };
+		4F639C6E24D3F87400E5D326 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C5A24D3F87400E5D326 /* ShareView.m */; };
+		4F639C6F24D3F87400E5D326 /* AllShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C5B24D3F87400E5D326 /* AllShareView.m */; };
+		4F639C7024D3F87400E5D326 /* OpenPushView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C6124D3F87400E5D326 /* OpenPushView.m */; };
+		4F639C7124D3F87400E5D326 /* SelectedListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C6324D3F87400E5D326 /* SelectedListModel.m */; };
+		4F639C7224D3F87400E5D326 /* SelectedListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C6424D3F87400E5D326 /* SelectedListView.m */; };
+		4F639C7324D3F87400E5D326 /* SignFinishView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C6824D3F87400E5D326 /* SignFinishView.m */; };
+		4F639C9524D3F89700E5D326 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C7724D3F89600E5D326 /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		4F639C9624D3F89700E5D326 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C8024D3F89600E5D326 /* ViewController+MASAdditions.m */; };
+		4F639C9724D3F89700E5D326 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C8424D3F89600E5D326 /* MASCompositeConstraint.m */; };
+		4F639C9824D3F89700E5D326 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C8524D3F89600E5D326 /* MASConstraintMaker.m */; };
+		4F639C9924D3F89700E5D326 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C8624D3F89600E5D326 /* MASLayoutConstraint.m */; };
+		4F639C9A24D3F89700E5D326 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C8724D3F89600E5D326 /* NSArray+MASAdditions.m */; };
+		4F639C9B24D3F89700E5D326 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C8824D3F89600E5D326 /* View+MASAdditions.m */; };
+		4F639C9C24D3F89700E5D326 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C8B24D3F89600E5D326 /* MASConstraint.m */; };
+		4F639C9D24D3F89700E5D326 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C8D24D3F89600E5D326 /* MASViewConstraint.m */; };
+		4F639C9E24D3F89700E5D326 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C8E24D3F89600E5D326 /* MASViewAttribute.m */; };
+		4F639C9F24D3F89700E5D326 /* UIView+SDAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C9024D3F89600E5D326 /* UIView+SDAutoLayout.m */; };
+		4F639CA024D3F89700E5D326 /* UITableView+SDAutoTableViewCellHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F639C9324D3F89600E5D326 /* UITableView+SDAutoTableViewCellHeight.m */; };
 		4F81C037249074E40070727A /* Cart2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F81C036249074E40070727A /* Cart2.json */; };
 		4F81C03A2490AD1E0070727A /* TROrderFindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81C0392490AD1E0070727A /* TROrderFindModel.swift */; };
 		4F81C03C2490B78E0070727A /* LBFMAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F81C03B2490B78E0070727A /* LBFMAssets.xcassets */; };
@@ -275,8 +301,6 @@
 		4FD8F74E24AB403A0079784A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F62147F24A3484200020082 /* WebKit.framework */; };
 		4FD8F75424AB41810079784A /* depositorySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4FD8F75124AB41800079784A /* depositorySDK.bundle */; };
 		4FD8F75524AB41810079784A /* libPaymaxSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD8F75324AB41810079784A /* libPaymaxSDK.a */; };
-		4FD8F75D24AB42220079784A /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4FD8F75A24AB42220079784A /* README.txt */; };
-		4FD8F75E24AB42220079784A /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD8F75C24AB42220079784A /* libWeChatSDK.a */; };
 		4FD8F76624AB43480079784A /* WXApiResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD8F76124AB43480079784A /* WXApiResponseHandler.m */; };
 		4FD8F76724AB43480079784A /* WXApiRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD8F76224AB43480079784A /* WXApiRequestHandler.m */; };
 		4FD8F76824AB43480079784A /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD8F76524AB43480079784A /* WXApiManager.m */; };
@@ -655,6 +679,64 @@
 		4F6214AC24A5649E00020082 /* TRBuyActionContentNianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRBuyActionContentNianView.swift; sourceTree = "<group>"; };
 		4F6214B024A56F3700020082 /* TRBuyActionDanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TRBuyActionDanCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F6214B124A56F3700020082 /* TRBuyActionDanCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TRBuyActionDanCollectionViewCell.xib; sourceTree = "<group>"; };
+		4F639C2A24D3BDF000E5D326 /* Interview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interview.swift; sourceTree = "<group>"; };
+		4F639C4424D3EBE400E5D326 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		4F639C4524D3EBE500E5D326 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		4F639C4624D3EBE500E5D326 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		4F639C4724D3EBE500E5D326 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		4F639C4824D3EBE500E5D326 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		4F639C4C24D3F85600E5D326 /* LEEAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEEAlertHelper.h; sourceTree = "<group>"; };
+		4F639C4D24D3F85600E5D326 /* LEEAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEEAlert.m; sourceTree = "<group>"; };
+		4F639C4E24D3F85600E5D326 /* LEEAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEEAlert.h; sourceTree = "<group>"; };
+		4F639C5224D3F87300E5D326 /* NibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibView.xib; sourceTree = "<group>"; };
+		4F639C5324D3F87300E5D326 /* NibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibView.h; sourceTree = "<group>"; };
+		4F639C5424D3F87300E5D326 /* NibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibView.m; sourceTree = "<group>"; };
+		4F639C5624D3F87400E5D326 /* FontSizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontSizeView.h; sourceTree = "<group>"; };
+		4F639C5724D3F87400E5D326 /* FontSizeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontSizeView.m; sourceTree = "<group>"; };
+		4F639C5924D3F87400E5D326 /* ShareButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareButton.m; sourceTree = "<group>"; };
+		4F639C5A24D3F87400E5D326 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		4F639C5B24D3F87400E5D326 /* AllShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllShareView.m; sourceTree = "<group>"; };
+		4F639C5C24D3F87400E5D326 /* ShareButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareButton.h; sourceTree = "<group>"; };
+		4F639C5D24D3F87400E5D326 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		4F639C5E24D3F87400E5D326 /* AllShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllShareView.h; sourceTree = "<group>"; };
+		4F639C6024D3F87400E5D326 /* OpenPushView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenPushView.h; sourceTree = "<group>"; };
+		4F639C6124D3F87400E5D326 /* OpenPushView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenPushView.m; sourceTree = "<group>"; };
+		4F639C6324D3F87400E5D326 /* SelectedListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedListModel.m; sourceTree = "<group>"; };
+		4F639C6424D3F87400E5D326 /* SelectedListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedListView.m; sourceTree = "<group>"; };
+		4F639C6524D3F87400E5D326 /* SelectedListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedListModel.h; sourceTree = "<group>"; };
+		4F639C6624D3F87400E5D326 /* SelectedListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedListView.h; sourceTree = "<group>"; };
+		4F639C6824D3F87400E5D326 /* SignFinishView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignFinishView.m; sourceTree = "<group>"; };
+		4F639C6924D3F87400E5D326 /* SignFinishView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignFinishView.h; sourceTree = "<group>"; };
+		4F639C7624D3F89600E5D326 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
+		4F639C7724D3F89600E5D326 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		4F639C7824D3F89600E5D326 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
+		4F639C7924D3F89600E5D326 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
+		4F639C7A24D3F89600E5D326 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		4F639C7B24D3F89600E5D326 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
+		4F639C7C24D3F89600E5D326 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
+		4F639C7D24D3F89600E5D326 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		4F639C7E24D3F89600E5D326 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
+		4F639C7F24D3F89600E5D326 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
+		4F639C8024D3F89600E5D326 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		4F639C8124D3F89600E5D326 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
+		4F639C8224D3F89600E5D326 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
+		4F639C8324D3F89600E5D326 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		4F639C8424D3F89600E5D326 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
+		4F639C8524D3F89600E5D326 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
+		4F639C8624D3F89600E5D326 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
+		4F639C8724D3F89600E5D326 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		4F639C8824D3F89600E5D326 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
+		4F639C8924D3F89600E5D326 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		4F639C8A24D3F89600E5D326 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
+		4F639C8B24D3F89600E5D326 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
+		4F639C8C24D3F89600E5D326 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
+		4F639C8D24D3F89600E5D326 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
+		4F639C8E24D3F89600E5D326 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		4F639C9024D3F89600E5D326 /* UIView+SDAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDAutoLayout.m"; sourceTree = "<group>"; };
+		4F639C9124D3F89600E5D326 /* UITableView+SDAutoTableViewCellHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+SDAutoTableViewCellHeight.h"; sourceTree = "<group>"; };
+		4F639C9224D3F89600E5D326 /* SDAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAutoLayout.h; sourceTree = "<group>"; };
+		4F639C9324D3F89600E5D326 /* UITableView+SDAutoTableViewCellHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SDAutoTableViewCellHeight.m"; sourceTree = "<group>"; };
+		4F639C9424D3F89600E5D326 /* UIView+SDAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDAutoLayout.h"; sourceTree = "<group>"; };
 		4F81C036249074E40070727A /* Cart2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Cart2.json; sourceTree = "<group>"; };
 		4F81C0392490AD1E0070727A /* TROrderFindModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TROrderFindModel.swift; sourceTree = "<group>"; };
 		4F81C03B2490B78E0070727A /* LBFMAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LBFMAssets.xcassets; sourceTree = "<group>"; };
@@ -737,11 +819,6 @@
 		4FD8F75124AB41800079784A /* depositorySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = depositorySDK.bundle; sourceTree = "<group>"; };
 		4FD8F75224AB41800079784A /* PaymaxSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymaxSDK.h; sourceTree = "<group>"; };
 		4FD8F75324AB41810079784A /* libPaymaxSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymaxSDK.a; sourceTree = "<group>"; };
-		4FD8F75824AB42220079784A /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		4FD8F75924AB42220079784A /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		4FD8F75A24AB42220079784A /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		4FD8F75B24AB42220079784A /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		4FD8F75C24AB42220079784A /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		4FD8F76024AB43480079784A /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
 		4FD8F76124AB43480079784A /* WXApiResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiResponseHandler.m; sourceTree = "<group>"; };
 		4FD8F76224AB43480079784A /* WXApiRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiRequestHandler.m; sourceTree = "<group>"; };
@@ -924,7 +1001,7 @@
 				4F62148224A3484C00020082 /* CoreGraphics.framework in Frameworks */,
 				4F051FFE249E81A600676780 /* libc++.tbd in Frameworks */,
 				4F052000249E81BB00676780 /* libz.tbd in Frameworks */,
-				4FD8F75E24AB42220079784A /* libWeChatSDK.a in Frameworks */,
+				4F639C4924D3EBE500E5D326 /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1636,6 +1713,145 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4F639C4B24D3F85600E5D326 /* LEEAlert */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C7424D3F89600E5D326 /* Librarys */,
+				4F639C5024D3F87300E5D326 /* Views */,
+				4F639C4C24D3F85600E5D326 /* LEEAlertHelper.h */,
+				4F639C4D24D3F85600E5D326 /* LEEAlert.m */,
+				4F639C4E24D3F85600E5D326 /* LEEAlert.h */,
+			);
+			path = LEEAlert;
+			sourceTree = "<group>";
+		};
+		4F639C5024D3F87300E5D326 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C5124D3F87300E5D326 /* NibView */,
+				4F639C5524D3F87300E5D326 /* FontSizeView */,
+				4F639C5824D3F87400E5D326 /* ShareView */,
+				4F639C5F24D3F87400E5D326 /* OpenPushView */,
+				4F639C6224D3F87400E5D326 /* SelectedListView */,
+				4F639C6724D3F87400E5D326 /* SignFinishView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4F639C5124D3F87300E5D326 /* NibView */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C5224D3F87300E5D326 /* NibView.xib */,
+				4F639C5324D3F87300E5D326 /* NibView.h */,
+				4F639C5424D3F87300E5D326 /* NibView.m */,
+			);
+			path = NibView;
+			sourceTree = "<group>";
+		};
+		4F639C5524D3F87300E5D326 /* FontSizeView */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C5624D3F87400E5D326 /* FontSizeView.h */,
+				4F639C5724D3F87400E5D326 /* FontSizeView.m */,
+			);
+			path = FontSizeView;
+			sourceTree = "<group>";
+		};
+		4F639C5824D3F87400E5D326 /* ShareView */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C5924D3F87400E5D326 /* ShareButton.m */,
+				4F639C5A24D3F87400E5D326 /* ShareView.m */,
+				4F639C5B24D3F87400E5D326 /* AllShareView.m */,
+				4F639C5C24D3F87400E5D326 /* ShareButton.h */,
+				4F639C5D24D3F87400E5D326 /* ShareView.h */,
+				4F639C5E24D3F87400E5D326 /* AllShareView.h */,
+			);
+			path = ShareView;
+			sourceTree = "<group>";
+		};
+		4F639C5F24D3F87400E5D326 /* OpenPushView */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C6024D3F87400E5D326 /* OpenPushView.h */,
+				4F639C6124D3F87400E5D326 /* OpenPushView.m */,
+			);
+			path = OpenPushView;
+			sourceTree = "<group>";
+		};
+		4F639C6224D3F87400E5D326 /* SelectedListView */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C6324D3F87400E5D326 /* SelectedListModel.m */,
+				4F639C6424D3F87400E5D326 /* SelectedListView.m */,
+				4F639C6524D3F87400E5D326 /* SelectedListModel.h */,
+				4F639C6624D3F87400E5D326 /* SelectedListView.h */,
+			);
+			path = SelectedListView;
+			sourceTree = "<group>";
+		};
+		4F639C6724D3F87400E5D326 /* SignFinishView */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C6824D3F87400E5D326 /* SignFinishView.m */,
+				4F639C6924D3F87400E5D326 /* SignFinishView.h */,
+			);
+			path = SignFinishView;
+			sourceTree = "<group>";
+		};
+		4F639C7424D3F89600E5D326 /* Librarys */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C7524D3F89600E5D326 /* Masonry */,
+				4F639C8F24D3F89600E5D326 /* SDAutoLayout */,
+			);
+			path = Librarys;
+			sourceTree = "<group>";
+		};
+		4F639C7524D3F89600E5D326 /* Masonry */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C7624D3F89600E5D326 /* MASCompositeConstraint.h */,
+				4F639C7724D3F89600E5D326 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				4F639C7824D3F89600E5D326 /* MASConstraint+Private.h */,
+				4F639C7924D3F89600E5D326 /* MASLayoutConstraint.h */,
+				4F639C7A24D3F89600E5D326 /* NSArray+MASShorthandAdditions.h */,
+				4F639C7B24D3F89600E5D326 /* MASConstraintMaker.h */,
+				4F639C7C24D3F89600E5D326 /* View+MASAdditions.h */,
+				4F639C7D24D3F89600E5D326 /* NSArray+MASAdditions.h */,
+				4F639C7E24D3F89600E5D326 /* MASUtilities.h */,
+				4F639C7F24D3F89600E5D326 /* MASViewAttribute.h */,
+				4F639C8024D3F89600E5D326 /* ViewController+MASAdditions.m */,
+				4F639C8124D3F89600E5D326 /* MASViewConstraint.h */,
+				4F639C8224D3F89600E5D326 /* MASConstraint.h */,
+				4F639C8324D3F89600E5D326 /* NSLayoutConstraint+MASDebugAdditions.h */,
+				4F639C8424D3F89600E5D326 /* MASCompositeConstraint.m */,
+				4F639C8524D3F89600E5D326 /* MASConstraintMaker.m */,
+				4F639C8624D3F89600E5D326 /* MASLayoutConstraint.m */,
+				4F639C8724D3F89600E5D326 /* NSArray+MASAdditions.m */,
+				4F639C8824D3F89600E5D326 /* View+MASAdditions.m */,
+				4F639C8924D3F89600E5D326 /* View+MASShorthandAdditions.h */,
+				4F639C8A24D3F89600E5D326 /* Masonry.h */,
+				4F639C8B24D3F89600E5D326 /* MASConstraint.m */,
+				4F639C8C24D3F89600E5D326 /* ViewController+MASAdditions.h */,
+				4F639C8D24D3F89600E5D326 /* MASViewConstraint.m */,
+				4F639C8E24D3F89600E5D326 /* MASViewAttribute.m */,
+			);
+			path = Masonry;
+			sourceTree = "<group>";
+		};
+		4F639C8F24D3F89600E5D326 /* SDAutoLayout */ = {
+			isa = PBXGroup;
+			children = (
+				4F639C9024D3F89600E5D326 /* UIView+SDAutoLayout.m */,
+				4F639C9124D3F89600E5D326 /* UITableView+SDAutoTableViewCellHeight.h */,
+				4F639C9224D3F89600E5D326 /* SDAutoLayout.h */,
+				4F639C9324D3F89600E5D326 /* UITableView+SDAutoTableViewCellHeight.m */,
+				4F639C9424D3F89600E5D326 /* UIView+SDAutoLayout.h */,
+			);
+			path = SDAutoLayout;
+			sourceTree = "<group>";
+		};
 		4F81C0382490ACF00070727A /* OrderFind */ = {
 			isa = PBXGroup;
 			children = (
@@ -1822,6 +2038,7 @@
 			isa = PBXGroup;
 			children = (
 				4FAB151A24CEB73B00156655 /* LXAlertController.swift */,
+				4F639C2A24D3BDF000E5D326 /* Interview.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -2002,12 +2219,12 @@
 		4FD8F75724AB42220079784A /* WechtSDK1.8.2 */ = {
 			isa = PBXGroup;
 			children = (
+				4F639C4524D3EBE500E5D326 /* libWeChatSDK.a */,
+				4F639C4624D3EBE500E5D326 /* README.txt */,
+				4F639C4724D3EBE500E5D326 /* WechatAuthSDK.h */,
+				4F639C4424D3EBE400E5D326 /* WXApi.h */,
+				4F639C4824D3EBE500E5D326 /* WXApiObject.h */,
 				4FD8F75F24AB43480079784A /* Control */,
-				4FD8F75824AB42220079784A /* WXApi.h */,
-				4FD8F75924AB42220079784A /* WXApiObject.h */,
-				4FD8F75A24AB42220079784A /* README.txt */,
-				4FD8F75B24AB42220079784A /* WechatAuthSDK.h */,
-				4FD8F75C24AB42220079784A /* libWeChatSDK.a */,
 			);
 			path = WechtSDK1.8.2;
 			sourceTree = "<group>";
@@ -2396,6 +2613,7 @@
 		4FF873D7242DA86A00524AF5 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				4F639C4B24D3F85600E5D326 /* LEEAlert */,
 				4FD8F75724AB42220079784A /* WechtSDK1.8.2 */,
 				4FD8F74F24AB41730079784A /* LKLPay */,
 				4F62145A24A2E25100020082 /* Sources */,
@@ -3136,6 +3354,7 @@
 				4F051FC8249E1E2600676780 /* GKPhotoBrowser.bundle in Resources */,
 				4FFC48D1247F8D6C005B5D84 /* xqq_shop.plist in Resources */,
 				4F0E3F1B249B59F5005FC4B5 /* TROrderCodeTableViewCell.xib in Resources */,
+				4F639C4A24D3EBE500E5D326 /* README.txt in Resources */,
 				4F6214B324A56F3700020082 /* TRBuyActionDanCollectionViewCell.xib in Resources */,
 				4F81C037249074E40070727A /* Cart2.json in Resources */,
 				4F62147424A2E35300020082 /* mongodb.pdf in Resources */,
@@ -3179,7 +3398,7 @@
 				4FC0538224750E24000D5CD0 /* success@2x.png in Resources */,
 				4F0E3F0E249A1849005FC4B5 /* TRNewsYearTableViewCell.xib in Resources */,
 				4FC0538724750E24000D5CD0 /* bwm_hud_success@2x.png in Resources */,
-				4FD8F75D24AB42220079784A /* README.txt in Resources */,
+				4F639C6A24D3F87400E5D326 /* NibView.xib in Resources */,
 				4F05201124A06D3600676780 /* homeDetail.json in Resources */,
 				4F81C0642491D4710070727A /* TRTicketTypeTableViewCell.xib in Resources */,
 				4FC0538124750E24000D5CD0 /* bwm_hud_error@2x.png in Resources */,
@@ -3269,6 +3488,7 @@
 				4F43BC02246695530010E746 /* GSCaptchaButton.swift in Sources */,
 				4F1912D52484EBDA00BA7C3D /* TaxReaderUserAPI.swift in Sources */,
 				4F3EF63D243F0B3D0017C803 /* LXNavigationBarView.swift in Sources */,
+				4F639C4F24D3F85600E5D326 /* LEEAlert.m in Sources */,
 				4F3EF63B243F07510017C803 /* TRNewsDetailViewController.swift in Sources */,
 				4FFC4848247BBE88005B5D84 /* TRInvoiceCompanyViewController.swift in Sources */,
 				4F0E3F16249B590D005FC4B5 /* TROrderCodeViewController.swift in Sources */,
@@ -3278,12 +3498,14 @@
 				4FF873F5242DA86A00524AF5 /* LXMBProgressHUD.swift in Sources */,
 				4FC78C3624862A33000DD086 /* TRInvoiceInfoModel.swift in Sources */,
 				4FFC4811247B6CBE005B5D84 /* LXFooterButtonWidthView.swift in Sources */,
+				4F639C6B24D3F87400E5D326 /* NibView.m in Sources */,
 				4F3EF5D624358EB10017C803 /* TRHomeHeaderView.swift in Sources */,
 				4FDE6F6B2463EC9F00D8EF9A /* TRRegisterAreaView.swift in Sources */,
 				4FC053692475086B000D5CD0 /* TRCommonModel.swift in Sources */,
 				4F3EF646243F115A0017C803 /* TRNewsDetailCatalogView.swift in Sources */,
 				4FFCE0FD24A89F7E00AC5033 /* TROrderDetailHeaderView.swift in Sources */,
 				4F81C0492490D6FA0070727A /* TRTicketTypeBottomView.swift in Sources */,
+				4F639C9824D3F89700E5D326 /* MASConstraintMaker.m in Sources */,
 				4F051FCD249E1E2600676780 /* UIImage+FastKit.swift in Sources */,
 				4FFC486B247D0004005B5D84 /* LXHeaderLabelView.swift in Sources */,
 				4FC053452474B997000D5CD0 /* TRForeignAddressPickView.swift in Sources */,
@@ -3311,7 +3533,9 @@
 				4F84A7CB2487A37800B34BB9 /* TRProductRecdModel.swift in Sources */,
 				4FFC4807247B63BD005B5D84 /* TRLoginOutTableViewCell.swift in Sources */,
 				4FFC4825247B8FA0005B5D84 /* LXFooterButtonCenterView.swift in Sources */,
+				4F639C6C24D3F87400E5D326 /* FontSizeView.m in Sources */,
 				4FFC48E0247F9227005B5D84 /* ZYCCartTableViewCell.swift in Sources */,
+				4F639C7324D3F87400E5D326 /* SignFinishView.m in Sources */,
 				4FFC4881247E0844005B5D84 /* TRActiveCodeViewController.swift in Sources */,
 				4F0E3F32249CB16F005FC4B5 /* TRArticleGetHtmlContentModel.swift in Sources */,
 				4F62146824A2E25100020082 /* PDFPageView.swift in Sources */,
@@ -3320,6 +3544,7 @@
 				4FFCE0F624A8860400AC5033 /* TRCartGetCartByIDModel.swift in Sources */,
 				4F81C0602491CADA0070727A /* TRTicketTypeListCompanyView.swift in Sources */,
 				4FFC483E247BB605005B5D84 /* LXFooterButtonTwoView.swift in Sources */,
+				4F639C9A24D3F89700E5D326 /* NSArray+MASAdditions.m in Sources */,
 				4F051FC2249E1E2600676780 /* GKLoadingView.m in Sources */,
 				4F3EF5CD243485AC0017C803 /* TRHomeViewController.swift in Sources */,
 				4F051FCE249E1E2600676780 /* RichTextHeaderView.swift in Sources */,
@@ -3336,12 +3561,14 @@
 				4FAB151B24CEB73B00156655 /* LXAlertController.swift in Sources */,
 				4F0E3F1A249B59F5005FC4B5 /* TROrderCodeTableViewCell.swift in Sources */,
 				4F3EF5DB2435931C0017C803 /* TRHomeRankTableViewCell.swift in Sources */,
+				4F639C6F24D3F87400E5D326 /* AllShareView.m in Sources */,
 				4FE277C42445A76A00E60E09 /* TRAddressTableViewCell.swift in Sources */,
 				4F0E3F2E249C98ED005FC4B5 /* TRFavorBatchAddModel.swift in Sources */,
 				4FE277BA24459F7A00E60E09 /* TRFavorArticleViewController.swift in Sources */,
 				4FFC4814247B819D005B5D84 /* LXExampleViewController.swift in Sources */,
 				4F5F665E248A34E900443388 /* TROrderModel.swift in Sources */,
 				4F62146524A2E25100020082 /* PDFPageCollectionViewCell.swift in Sources */,
+				4F639C6E24D3F87400E5D326 /* ShareView.m in Sources */,
 				4F3975722476402B00F67AEA /* NetworkTools.swift in Sources */,
 				4FF873E7242DA86A00524AF5 /* ExampleBackgroundContentView.swift in Sources */,
 				4F81C04B2490D8EC0070727A /* TRTicketTypeOpenContentView.swift in Sources */,
@@ -3352,8 +3579,11 @@
 				4FFC48DA247F8DF8005B5D84 /* UIView+YCAdd.swift in Sources */,
 				4F81C0472490D6240070727A /* TRTicketTypeSelectOpenView.swift in Sources */,
 				4FC0534F2474C537000D5CD0 /* TRAreaModel.swift in Sources */,
+				4F639C7124D3F87400E5D326 /* SelectedListModel.m in Sources */,
 				4F051FD3249E1E2600676780 /* UIView+FastKit.swift in Sources */,
 				4FFC4828247B9500005B5D84 /* TRMeInfoViewController.swift in Sources */,
+				4F639C9C24D3F89700E5D326 /* MASConstraint.m in Sources */,
+				4F639C9924D3F89700E5D326 /* MASLayoutConstraint.m in Sources */,
 				4FC78C30248623CB000DD086 /* TRGetCodeModel.swift in Sources */,
 				4F4D4C5D244ED25A0004FD13 /* TRAddressNameSwitchTableViewCell.swift in Sources */,
 				4F3EF5F0243723F50017C803 /* TRMoreNewsViewController.swift in Sources */,
@@ -3365,8 +3595,10 @@
 				4F62149324A354A900020082 /* TRBuyActionSheetViewController.swift in Sources */,
 				4FC78C3A24865209000DD086 /* TRInvoiceAddModel.swift in Sources */,
 				4F0E3F28249C988E005FC4B5 /* TRCartDeleteModel.swift in Sources */,
+				4F639C6D24D3F87400E5D326 /* ShareButton.m in Sources */,
 				4F3EF5D024348A870017C803 /* TRHomeBannerTableViewCell.swift in Sources */,
 				4FFC4879247DFD41005B5D84 /* TRConnectUSViewController.swift in Sources */,
+				4F639C7024D3F87400E5D326 /* OpenPushView.m in Sources */,
 				4FFC4895247E11C1005B5D84 /* TRNoPayViewController.swift in Sources */,
 				4F34334124D1704D001A536D /* TRTicketTypeElectView.swift in Sources */,
 				4F3EF640243F0F5A0017C803 /* TRNewsDetailDropView.swift in Sources */,
@@ -3386,6 +3618,7 @@
 				4FDDCCEF248F6F170062A630 /* TRFavorFindModel.swift in Sources */,
 				4F05200A249F06D200676780 /* TRAddressGetDefaultModel.swift in Sources */,
 				4F0E3F37249CC2C9005FC4B5 /* TRNewsDetailModel.swift in Sources */,
+				4F639C7224D3F87400E5D326 /* SelectedListView.m in Sources */,
 				4FFC486E247D16FF005B5D84 /* TRInvoiceDetailViewController.swift in Sources */,
 				4F1912CC2484DB5500BA7C3D /* UserDefaultsSettable.swift in Sources */,
 				4FE277BC2445A10D00E60E09 /* TRSearchDetailTableViewCell.swift in Sources */,
@@ -3401,6 +3634,7 @@
 				4F051FF7249E757800676780 /* AFNetworkReachabilityManager.m in Sources */,
 				4FFCE0F924A897BA00AC5033 /* TROrderDetailViewController.swift in Sources */,
 				4FB5F2E224B85A60008C2C8A /* TRCatalogTableViewCell.swift in Sources */,
+				4F639C9D24D3F89700E5D326 /* MASViewConstraint.m in Sources */,
 				4F81C05E2491CAC30070727A /* TRTicketTypeListPersonView.swift in Sources */,
 				4F051FC9249E1E2600676780 /* UIImage+GKDecoder.m in Sources */,
 				4FE277CC244702C000E60E09 /* TRSetAddressViewController.swift in Sources */,
@@ -3425,6 +3659,7 @@
 				4F62146724A2E25100020082 /* PDFViewController.swift in Sources */,
 				4FFC48A5247E2AF2005B5D84 /* TRCartpayItemView.swift in Sources */,
 				4FFC48A9247E327F005B5D84 /* TROrderTicketTypeViewController.swift in Sources */,
+				4F639C9624D3F89700E5D326 /* ViewController+MASAdditions.m in Sources */,
 				4F3EF5E224359C2D0017C803 /* TRHomeArticleCollectionViewCell.swift in Sources */,
 				4F3ACF552468227000A9FC1D /* TRLoginSideView.swift in Sources */,
 				4FFCE10124A977BE00AC5033 /* TROrderFindDetailModel.swift in Sources */,
@@ -3437,6 +3672,7 @@
 				4F5F665B248A1E2000443388 /* TROrderFooterView.swift in Sources */,
 				4F9CA04D249E0BF200B55FE1 /* TRReadTypeDetailView.swift in Sources */,
 				4F5103DC24BEDC4D00A16EA7 /* LXInsetsLabel.swift in Sources */,
+				4F639CA024D3F89700E5D326 /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				4FFC48A7247E3267005B5D84 /* TROrderPaytypeViewController.swift in Sources */,
 				4FE2779724405A6D00E60E09 /* TRMeViewController.swift in Sources */,
 				4FF873F3242DA86A00524AF5 /* WRCycleScrollView.swift in Sources */,
@@ -3509,6 +3745,7 @@
 				4F051FF6249E757800676780 /* AFURLRequestSerialization.m in Sources */,
 				4FF8739A242D97C200524AF5 /* AppDelegate.swift in Sources */,
 				4F62146B24A2E25100020082 /* PDFThumbnailCell.swift in Sources */,
+				4F639C9F24D3F89700E5D326 /* UIView+SDAutoLayout.m in Sources */,
 				4FE277A02440640500E60E09 /* LXExample.swift in Sources */,
 				4FFC487E247E0584005B5D84 /* TRForgetNewPwdViewController.swift in Sources */,
 				4F62149B24A54D6300020082 /* TRBuyActionToolView.swift in Sources */,
@@ -3528,14 +3765,17 @@
 				4F3EF5E024359A500017C803 /* TRHomeArticleTableViewCell.swift in Sources */,
 				4F62146924A2E25100020082 /* PDFDocument.swift in Sources */,
 				4FFC482E247B9936005B5D84 /* TRInfoNickNameView.swift in Sources */,
+				4F639C2B24D3BDF000E5D326 /* Interview.swift in Sources */,
 				4FFC48A1247E2758005B5D84 /* TRCartDingAddressView.swift in Sources */,
 				4F81C0512490DA730070727A /* TRTicketTypeListView.swift in Sources */,
 				4FFC4834247B99A6005B5D84 /* TRInfoBirthdayView.swift in Sources */,
 				4FE277C22445A66300E60E09 /* TRAddressViewController.swift in Sources */,
+				4F639C9B24D3F89700E5D326 /* View+MASAdditions.m in Sources */,
 				4FFC4818247B8327005B5D84 /* LXExampleXibTableViewCell.swift in Sources */,
 				4FC78C4B24878D48000DD086 /* TRProductRotchartModel.swift in Sources */,
 				4FD8F76724AB43480079784A /* WXApiRequestHandler.m in Sources */,
 				4FF873F4242DA86A00524AF5 /* WRCycleCell.swift in Sources */,
+				4F639C9E24D3F89700E5D326 /* MASViewAttribute.m in Sources */,
 				4F39756A24763ED500F67AEA /* TRLAreaInlandViewController.swift in Sources */,
 				4FE277A524440EA500E60E09 /* TRFavorViewController.swift in Sources */,
 				4FFC4866247CFDA5005B5D84 /* TRInvoiceCompanyTableViewCell.swift in Sources */,
@@ -3551,6 +3791,7 @@
 				4FDDCCFC248F85CA0062A630 /* CustomTableViewCell.swift in Sources */,
 				4FFC4822247B8599005B5D84 /* LXTextFieldTableViewCell.swift in Sources */,
 				4FD8F76824AB43480079784A /* WXApiManager.m in Sources */,
+				4F639C9724D3F89700E5D326 /* MASCompositeConstraint.m in Sources */,
 				4F0E3F2C249C98DC005FC4B5 /* TRFavorAddModel.swift in Sources */,
 				4FF873EC242DA86A00524AF5 /* ExampleTipsContentView.swift in Sources */,
 				4FADEC00246A394100AC76D8 /* FMHomeVipViewModel.swift in Sources */,
@@ -3584,6 +3825,7 @@
 				4F39757A2476570000F67AEA /* TRPrefixPhoneViewController.swift in Sources */,
 				4F051FF4249E757800676780 /* AFHTTPSessionManager.m in Sources */,
 				4F3EF5DD243594FB0017C803 /* TRHomeRankCollectionViewCell.swift in Sources */,
+				4F639C9524D3F89700E5D326 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				4F62146624A2E25100020082 /* TiledView.swift in Sources */,
 				4FF873ED242DA86A00524AF5 /* ExampleIrregularityContentView.swift in Sources */,
 				4F0206492477A2220082773E /* LXGetIPAddressTool.m in Sources */,

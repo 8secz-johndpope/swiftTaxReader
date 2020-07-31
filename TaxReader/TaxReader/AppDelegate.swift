@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        WXApi.registerApp(wxPayAppId)
+        WXApi.registerApp(wxPayAppId, universalLink: "https://help.wechat.com/sdksample/")
         
         return true
     }

@@ -491,9 +491,9 @@ extension TRCartSureOrderViewController {
         
         //调起微信支付
         let req = PayReq.init()
-        req.partnerId = orderCreateData.mch_id
-        req.prepayId = orderCreateData.prepay_id
-        req.nonceStr = orderCreateData.nonce_str
+        req.partnerId = orderCreateData.mch_id ?? ""
+        req.prepayId = orderCreateData.prepay_id ?? ""
+        req.nonceStr = orderCreateData.nonce_str ?? ""
         req.timeStamp = UInt32(Date().timeStamp) ?? 0
         req.package = "Sign=WXPay"
         

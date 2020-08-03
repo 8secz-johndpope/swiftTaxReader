@@ -12,7 +12,7 @@ import SwiftDate
 // authorization 全局变量
 var publicAuthorizationToken: String?
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate{
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, WXApiDelegate{
 
     var window: UIWindow?
 
@@ -31,6 +31,45 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate{
         
         //self.window?.rootViewController = LXTabbarProvider.TRsystemStyle()
         self.window?.makeKeyAndVisible()
+        
+        WXApi.startLog(by: .detail) { (log) in
+            print("log = \(log)")
+        }
+        WXApi.registerApp(wxPayAppId, universalLink: "https://210.12.84.109/")
+    }
+    
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        return WXApi.handleOpen(url, delegate: WXApiManager.shared())
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return WXApi.handleOpen(url, delegate: WXApiManager.shared())
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        return WXApi.handleOpenUniversalLink(userActivity, delegate: WXApiManager.shared())
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return WXApi.handleOpen(url, delegate: WXApiManager.shared())
+    }
+    
+    func onResp(_ resp: BaseResp) {
+        switch resp.errCode {
+        case 0:
+            print("支付成功")
+        default:
+            print("支付失败")
+        }
+    }
+    
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        WXApi.handleOpenUniversalLink(userActivity, delegate: self)
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        let context = URLContexts.first;
+        WXApi.handleOpen(context!.url, delegate: self)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

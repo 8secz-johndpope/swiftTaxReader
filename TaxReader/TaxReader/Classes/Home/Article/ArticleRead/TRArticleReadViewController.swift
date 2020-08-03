@@ -32,7 +32,7 @@ class TRArticleReadViewController: TRBaseViewController {
             case .buttonBuy:
                 self?.blockBuyButtonAction()
             case .buttonShare:
-                self?.blockBuyButtonAction()
+                self?.blockShareButtonAction()
             }
         }
         
@@ -371,27 +371,29 @@ extension TRArticleReadViewController{
     }
     
     func blockShareButtonAction() {
-//        AllShareView *view = [[AllShareView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([[UIScreen mainScreen] bounds]), 0) ShowMore:YES ShowReport:YES];
-//
-//        view.openShareBlock = ^(ShareType type) {
-//
-//            NSLog(@"%d" , type);
-//        };
-        
-        let view = AllShareView.init(frame: CGRect.init(x: 0, y: 0, width: LXScreenWidth, height: 0), showMore: false)
-        view?.openShareBlock = {(shareType) in
-            print("type = \(shareType)")
-        }
-        LEEAlert.actionsheet().config
-        .leeHeaderInsets(UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0))
-        .leeActionSheetBottomMargin(0.0)
-        .leeActionSheetBackgroundColor(UIColor.white)
-        .leeCornerRadius(0.0)
-        .leeShow()
+        self.sheetViewShareButtonDidSelected()
+    }
+}
+
+extension TRArticleReadViewController {
+    func sheetViewShareButtonDidSelected() {
+        guard let thumbImage = UIImage.init(named: "DefaultH.png") else { return }
+        let kLinkURL = "http://tech.qq.com/zt2012/tmtdecode/252.htm"
+        let kLinkTagName = "WECHAT_TAG_JUMP_SHOWRANK"
+        let kLinkTitle = "专访张小龙：产品之上的世界观"
+        let kLinkDescription = "微信的平台化发展方向是否真的会让这个原本简洁的产品变得臃肿？在国际化发展方向上，微信面临的问题真的是文化差异壁垒吗"
+        let currentScene = WXSceneSession
+        print("调起微信支付")
+        WXApiRequestHandler.sendLinkURL(kLinkURL, tagName: kLinkTagName, title: kLinkTitle, description: kLinkDescription, thumbImage: thumbImage, in: currentScene)
     }
 }
 
 extension TRArticleReadViewController: TRBuyActionSheetViewControllerDelegate {
+    
+//    guard let nextVc = LXAlertShareViewController(dataArray: ["123","456"])else { return }
+//    //nextVc.delegate = self
+//    present(nextVc, animated: false, completion:  nil)
+    
     func sheetViewBuyButtonDidSelected(dataArrayShopModel: [YCOrderShopModel]?) {
         let nextVc = TRCartSureOrderViewController(dataArrayShopModel: dataArrayShopModel)
         self.navigationController?.pushViewController(nextVc, animated: true)

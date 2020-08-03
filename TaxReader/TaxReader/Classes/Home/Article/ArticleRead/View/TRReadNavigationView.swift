@@ -118,7 +118,7 @@ class TRReadNavigationView: UIView {
         self.addSubview(self.trActionBackgroundView)
         self.trActionBackgroundView.snp.makeConstraints { (make) in
             make.bottom.right.equalTo(0)
-            make.width.equalTo(88)
+            make.width.equalTo(44*3)
             make.height.equalTo(44)
         }
         

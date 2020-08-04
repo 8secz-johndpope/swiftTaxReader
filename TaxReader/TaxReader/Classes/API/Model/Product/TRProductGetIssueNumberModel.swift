@@ -40,6 +40,7 @@ struct TRProductGetIssueNumberDataModel: HandyJSON {
     
     var PubIssueYear: String?
     var PubIssueNum: String?
+    var ProdIssue: Int = 0
     var PubID: Int = 0
     var ProID: Int = 0
     var PubIssueID: Int = 0

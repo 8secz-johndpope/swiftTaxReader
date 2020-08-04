@@ -377,14 +377,52 @@ extension TRArticleReadViewController{
 
 extension TRArticleReadViewController {
     func sheetViewShareButtonDidSelected() {
+        let shareAlert = LXShareSheetAlert.init()
+        shareAlert.showLEEAlertShareSheet()
+        shareAlert.openShareTypeBlock = {(shareType) in
+            print("shareType = \(shareType)")
+            switch (shareType)
+            {
+                case 0:
+                    self.shareWeixin(wxSceneType: WXSceneTimeline)
+                    break;
+                case 1:
+                    self.shareWeixin(wxSceneType: WXSceneSession)
+                    break;
+                case 2:
+                    self.shareQQ()
+                    break;
+                case 3:
+                    self.shareWB()
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
+    func shareWeixin(wxSceneType: WXScene) {
         guard let thumbImage = UIImage.init(named: "DefaultH.png") else { return }
         let kLinkURL = "http://tech.qq.com/zt2012/tmtdecode/252.htm"
         let kLinkTagName = "WECHAT_TAG_JUMP_SHOWRANK"
         let kLinkTitle = "专访张小龙：产品之上的世界观"
         let kLinkDescription = "微信的平台化发展方向是否真的会让这个原本简洁的产品变得臃肿？在国际化发展方向上，微信面临的问题真的是文化差异壁垒吗"
-        let currentScene = WXSceneSession
+        let currentScene = wxSceneType
         print("调起微信支付")
-        WXApiRequestHandler.sendLinkURL(kLinkURL, tagName: kLinkTagName, title: kLinkTitle, description: kLinkDescription, thumbImage: thumbImage, in: currentScene)
+        WXApiRequestHandler.sendLinkURL(kLinkURL,
+                                        tagName: kLinkTagName,
+                                        title: kLinkTitle,
+                                        description: kLinkDescription,
+                                        thumbImage: thumbImage,
+                                        in: currentScene)
+    }
+    
+    func shareQQ() {
+        MBProgressHUD.showWithText(text: "待完成", view: self.view!)
+    }
+
+    func shareWB() {
+        MBProgressHUD.showWithText(text: "待完成", view: self.view!)
     }
 }
 

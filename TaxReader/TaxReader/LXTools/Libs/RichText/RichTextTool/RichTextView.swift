@@ -85,7 +85,7 @@ class RichTextView: UIView {
         webView.uiDelegate = self
         webView.navigationDelegate = self
         
-        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.isScrollEnabled = true
         webView.scrollView.delegate = self
         
 //        // 添加的左右翻页手势
@@ -161,26 +161,26 @@ class RichTextView: UIView {
     
     private func setupUI(){
         
-//        //设置约束
-//        self.addSubview(webView)
-//        webView.snp.makeConstraints { (make) in
-//            make.edges.equalToSuperview()
-//            make.height.equalTo(0)
-//        }
-        
-        self.addSubview(pageContentView)
-        pageContentView.snp.makeConstraints { (make) in
-            make.left.bottom.right.equalToSuperview()
-            make.height.equalTo(LXPhoneLHBarHeight + 44)
-        }
-        
+        //设置约束
         self.addSubview(webView)
         webView.snp.makeConstraints { (make) in
-            make.top.left.right.equalToSuperview()
-            //make.bottom.equalToSuperview()
-            make.bottom.equalTo(self.pageContentView.snp.top)
+            make.edges.equalToSuperview()
             make.height.equalTo(0)
         }
+        
+//        self.addSubview(pageContentView)
+//        pageContentView.snp.makeConstraints { (make) in
+//            make.left.bottom.right.equalToSuperview()
+//            make.height.equalTo(LXPhoneLHBarHeight + 44)
+//        }
+//
+//        self.addSubview(webView)
+//        webView.snp.makeConstraints { (make) in
+//            make.top.left.right.equalToSuperview()
+//            //make.bottom.equalToSuperview()
+//            make.bottom.equalTo(self.pageContentView.snp.top)
+//            make.height.equalTo(0)
+//        }
     }
     
     private func loadHtml(_ html: String) {

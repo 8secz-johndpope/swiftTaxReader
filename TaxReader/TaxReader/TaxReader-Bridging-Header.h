@@ -23,3 +23,10 @@
 #import "WXApiManager.h"
 #import "WechatAuthSDK.h"
 #import "WXApiRequestHandler.h"
+
+// LEEAlert
+#import "LEEAlert.h"
+#import "ShareView.h"
+#import "AllShareView.h"
+#import "LXShareSheetAlert.h"
+

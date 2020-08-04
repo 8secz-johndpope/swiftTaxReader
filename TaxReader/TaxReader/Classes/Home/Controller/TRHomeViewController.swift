@@ -174,7 +174,8 @@ extension TRHomeViewController: UITableViewDataSource, UITableViewDelegate {
         case TRHomeSectionNews:
             return CGFloat(TRHomeSectionNewseHeight)
         case TRHomeSectionInfro:
-            return CGFloat(TRHomeSectionInfroHeight)
+            let cellHeight = self.dataArrayArticleGetTopNews?.count ?? 0 < 2 ? TRHomeSectionInfroHeight * 0.5 : TRHomeSectionInfroHeight
+            return CGFloat(cellHeight)
         case TRHomeSectionArticle:
             return CGFloat(TRHomeSectionArticleHeight)
         case TRHomeSectionRank:

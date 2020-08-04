@@ -88,7 +88,7 @@ class TRBuyActionContentPianView: UIView {
             }
             
             self.trTitleLabel.text = model.ArticleTitle
-            self.trDetailTitleLabel.text = "\(model.PubIssueYear ?? "")年第\(model.PubIssueNum ?? "")期"
+            self.trDetailTitleLabel.text = "\(model.PubIssueYear ?? "")年第\(model.ProdIssue)期"
             self.trPriceLabel.text = "￥ \(model.ArticleIOSPrice ?? "")"
         }
     }
